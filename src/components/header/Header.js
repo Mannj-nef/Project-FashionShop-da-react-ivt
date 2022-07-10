@@ -18,12 +18,12 @@ const Header = () => {
           </Link>
         </li>
         <li className="navigation_item">
-          <Link to={ROUTER_PATH.DETAIL.path} className="navigation_link">
+          <Link to={ROUTER_PATH.SHOP.path} className="navigation_link">
             Shop
           </Link>
         </li>
         <li className="navigation_item">
-          <Link to={ROUTER_PATH.DETAIL.path} className="navigation_link">
+          <Link to={ROUTER_PATH.PRODUCT.path} className="navigation_link">
             Products
           </Link>
         </li>

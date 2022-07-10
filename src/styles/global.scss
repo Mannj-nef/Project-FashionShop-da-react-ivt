@@ -55,8 +55,8 @@ h6 {
 .container {
     margin: 0 auto;
     max-width: 1600px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
 }
 .btn {
 }
