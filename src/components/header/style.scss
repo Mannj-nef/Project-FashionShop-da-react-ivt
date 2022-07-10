@@ -1,0 +1,37 @@
+.header {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.549);
+    padding: 20px 0;
+}
+.logo-wrapp {
+    .logo_title {
+        font-weight: 800;
+        font-size: 2rem;
+    }
+}
+.navigation {
+    font-size: 1.6rem;
+    .navigation_link {
+        padding: 10px 20px;
+        display: block;
+        color: var(--color-light-gray);
+        font-weight: 600;
+    }
+    .active,
+    .navigation_link:hover {
+        color: var(--text-color);
+    }
+}
+.btn-nav {
+    font-size: 1.6rem;
+    padding: 8px 15px;
+    color: var(--color-light-gray);
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.active_btn,
+.btn-nav:hover {
+    color: var(--text-color);
+    border: 1px solid var(--black-color);
+}

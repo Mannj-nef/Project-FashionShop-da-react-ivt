@@ -1,12 +1,11 @@
 import { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { addminRouter, userRouter } from "./common/router";
-import Header from "./components/header/Header";
+import LayoutUser from "./layout/user/LayoutUser";
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
       <Suspense>
         <Switch>
           {userRouter.map((page, index) => (
@@ -14,7 +13,11 @@ function App() {
               key={index}
               exact={page.isExact}
               path={page.path}
-              component={page.component}
+              render={() => (
+                <LayoutUser>
+                  <page.component />
+                </LayoutUser>
+              )}
             />
           ))}
           {addminRouter.map((page, index) => (
