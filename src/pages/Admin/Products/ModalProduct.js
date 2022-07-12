@@ -7,9 +7,11 @@ import { actGetAllProduct } from "../../../redux/actions/productAction";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 
 export default function ModalProduct(props) {
-  const { isModalVisible,setIsModalVisible,modalTitle } = props;
+  const { isModalVisible, setIsModalVisible, modalTitle, productEdit } = props;
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+    form.setFieldsValue({ productName: productEdit.productName });  
+
   const layout = {
     labelCol: {
       span: 4,
@@ -19,11 +21,15 @@ export default function ModalProduct(props) {
     },
   };
   const handleSubmit = (product) => {
-    addProduct(product);
-    toast.success(SUCCESS_MESSAGE.STATUS_200);
-    dispatch(actGetAllProduct());
-    form.resetFields();
-    setIsModalVisible(false)
+    if (modalTitle === "Add") {
+      addProduct(product);
+      toast.success(SUCCESS_MESSAGE.STATUS_200);
+      dispatch(actGetAllProduct());
+      form.resetFields();
+      setIsModalVisible(false);
+    } else {
+      console.log(product);
+    }
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -35,12 +41,8 @@ export default function ModalProduct(props) {
       onOk={() => form.submit()}
       onCancel={handleCancel}
     >
-      <Form
-        {...layout}
-        form={form}
-        onFinish={handleSubmit}
-      >
-        <Form.Item label="Name" name={["productName"]}>
+      <Form {...layout} form={form} onFinish={handleSubmit} >
+        <Form.Item label="Name" name={["productName"]} >
           <Input />
         </Form.Item>
         <Form.Item label="Quantity" name={["quantity"]}>
@@ -55,7 +57,6 @@ export default function ModalProduct(props) {
         <Form.Item label="Sales" name={["sales"]}>
           <Input />
         </Form.Item>
-
       </Form>
     </Modal>
   );

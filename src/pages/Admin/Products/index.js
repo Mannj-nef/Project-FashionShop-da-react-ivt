@@ -14,13 +14,14 @@ export default function Products() {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
+  const [productEdit, setProductEdit] = useState("");
 
   const showModalAdd = () => {
     setModalTitle("Add");
     setIsModalVisible(true);
   };
   const showModalEdit = (product) => {
-    console.log(product);
+    setProductEdit(product)
     setModalTitle("Edit");
     setIsModalVisible(true);
   };
@@ -62,7 +63,7 @@ export default function Products() {
             className="btn btn-primary"
             onClick={() => showModalEdit(record)}
           >
-            View
+            Edit
           </button>
           <button
             className="btn btn-danger"
@@ -96,6 +97,7 @@ export default function Products() {
           modalTitle={modalTitle}
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
+          productEdit={productEdit}
         />
       </div>
       <Table

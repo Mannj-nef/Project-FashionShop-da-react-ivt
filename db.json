@@ -15,6 +15,14 @@
       "price": "asdasd",
       "sales": "asdas",
       "id": 6
+    },
+    {
+      "productName": "123123",
+      "quantity": 1,
+      "description": "asdasd",
+      "price": "2000",
+      "sales": "10",
+      "id": 7
     }
   ],
   "users": [
