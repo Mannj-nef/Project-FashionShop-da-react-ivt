@@ -62,11 +62,41 @@ export const userRouter = [
 
 //addmin
 const Admin = lazy(() => import("../pages/Admin/Admin"));
+const Analytics = lazy(() => import("../pages/Admin/Analytics"));
+const Products = lazy(() => import("../pages/Admin/Products"));
+const Users = lazy(() => import("../pages/Admin/Users"));
+const Categories = lazy(() => import("../pages/Admin/Categories"));
+const Orders = lazy(() => import("../pages/Admin/Orders"));
 
-export const addminRouter = [
+export const adminRouter = [
   {
     path: ROUTER_PATH.ADMIN.path,
     isExact: true,
     component: Admin,
+  },
+  {
+    path: ROUTER_PATH.ANALYTICS.path,
+    isExact: true,
+    component: Analytics,
+  },
+  {
+    path: ROUTER_PATH.PRODUCTS.path,
+    isExact: true,
+    component: Products,
+  },
+  {
+    path: ROUTER_PATH.USERS.path,
+    isExact: true,
+    component: Users,
+  },
+  {
+    path: ROUTER_PATH.CATEGORIES.path,
+    isExact: true,
+    component: Categories,
+  },
+  {
+    path: ROUTER_PATH.ORDERS.path,
+    isExact: true,
+    component: Orders,
   },
 ];

@@ -1,5 +1,30 @@
 {
-  "product": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "products": [
+    {
+      "productName": "123123",
+      "quantity": 2,
+      "description": "dasd",
+      "price": "12323ads",
+      "sales": "111",
+      "id": 4
+    },
+    {
+      "productName": "asdasdasd",
+      "quantity": 2,
+      "description": "asdasd",
+      "price": "asdasd",
+      "sales": "asdas",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "some comment",
+      "role": "admin"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }
