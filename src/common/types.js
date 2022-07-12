@@ -11,5 +11,6 @@ export const ModalTypes = {
 };
 
 export const ProductTypes = {
-  GET_PRODUCT: "GET_PRODUCT",
+  GET_All_PRODUCT: "GET_All_PRODUCT",
+  GET_PRODUCT_SUCCESS: "GET_PRODUCT_SUCCESS",
 };

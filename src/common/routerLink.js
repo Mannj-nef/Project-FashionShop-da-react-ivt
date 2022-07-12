@@ -31,4 +31,19 @@ export const ROUTER_PATH = {
   ADMIN: {
     path: "/admin",
   },
+  ANALYTICS: {
+    path: "/admin/analytics",
+  },
+  PRODUCTS: {
+    path: "/admin/products",
+  },
+  USERS: {
+    path: "/admin/users",
+  },
+  CATEGORIES: {
+    path: "/admin/categories",
+  },
+  ORDERS: {
+    path: "/admin/orders",
+  },
 };
