@@ -1,11 +1,11 @@
 import {} from "react-redux";
 import { createStore } from "redux";
-import userReducer from "./reducers/userReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./reducers/rootReducer";
 
 const store =
   process.env.NODE_ENV === "production"
-    ? createStore(userReducer)
-    : createStore(userReducer, composeWithDevTools());
+    ? createStore(rootReducer)
+    : createStore(rootReducer, composeWithDevTools());
 
 export default store;

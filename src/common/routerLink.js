@@ -3,7 +3,7 @@ export const ROUTER_PATH = {
     path: "/",
   },
   DETAIL: {
-    path: "/detail:id",
+    path: "/detail/:id",
   },
   SHOP: {
     path: "/shopstore",
@@ -19,6 +19,12 @@ export const ROUTER_PATH = {
   },
   LOGIN: {
     path: "/login",
+  },
+  REGISTER: {
+    path: "/Register",
+  },
+  COLLECTION: {
+    path: "/collection",
   },
 
   // admin

@@ -5,6 +5,11 @@ export const UserTypes = {
   LOGIN_FAIL: "LOGIN_FAIL",
 };
 
+export const ModalTypes = {
+  SHOW: "ISSHOW",
+  HIDE: "HIDE",
+};
+
 export const ProductTypes = {
   GET_PRODUCT: "GET_PRODUCT",
 };

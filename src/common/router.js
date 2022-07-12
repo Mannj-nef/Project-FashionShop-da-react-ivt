@@ -5,10 +5,12 @@ import { ROUTER_PATH } from "./routerLink";
 const Home = lazy(() => import("../pages/HomePage/Home"));
 const Detail = lazy(() => import("../pages/Detail/Detail"));
 const Login = lazy(() => import("../pages/Login/Login"));
+const Register = lazy(() => import("../pages/Login/SignUp"));
 const Shop = lazy(() => import("../pages/Shop/ShopStore"));
 const maleShop = lazy(() => import("../pages/Shop/ShopMan"));
 const femaleShop = lazy(() => import("../pages/Shop/ShopWoman"));
 const product = lazy(() => import("../pages/Product/Product"));
+const collection = lazy(() => import("../pages/Collection/Collection"));
 
 export const userRouter = [
   {
@@ -45,6 +47,16 @@ export const userRouter = [
     path: ROUTER_PATH.LOGIN.path,
     isExact: true,
     component: Login,
+  },
+  {
+    path: ROUTER_PATH.REGISTER.path,
+    isExact: true,
+    component: Register,
+  },
+  {
+    path: ROUTER_PATH.COLLECTION.path,
+    isExact: true,
+    component: collection,
   },
 ];
 

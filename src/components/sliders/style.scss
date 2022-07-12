@@ -1,19 +1,20 @@
 .slider_home {
-    background-image: url("../../assets/image/banner.jpg");
     background-repeat: no-repeat;
     background-position: center bottom 30%;
     background-size: cover;
     height: 600px;
 
-    display: flex;
-    align-items: center;
-    justify-content: start;
     .silder-slogan__wrapp {
         padding: 50px;
         margin: 0;
         max-width: 650px;
         width: 100%;
         font-size: 1.6rem;
+
+        position: relative;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
 
         .slogan-title {
             font-weight: 500;

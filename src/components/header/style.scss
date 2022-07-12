@@ -1,5 +1,8 @@
 .header {
     position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: rgba(255, 255, 255, 0.549);
     padding: 20px 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -7,6 +10,9 @@
     transition: all 0.2s linear;
 
     z-index: 999;
+}
+.bg-white {
+    background-color: #fff;
 }
 .logo-wrapp {
     .logo_title {

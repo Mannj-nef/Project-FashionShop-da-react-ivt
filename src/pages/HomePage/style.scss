@@ -5,29 +5,6 @@
         object-fit: cover;
         cursor: pointer;
     }
-
-    .card-product-wrapper {
-        --gap: 10px;
-
-        flex-wrap: wrap;
-        display: flex;
-        gap: var(--gap);
-        .card-product {
-            // margin: 20px;
-            width: calc((100% / 4) - var(--gap));
-            display: flex;
-            margin-bottom: 30px;
-            flex-direction: column;
-            box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
-            .card-wrapp_image {
-            }
-            .cart-info {
-                padding: 20px;
-                text-align: center;
-                font-size: 1.6rem;
-            }
-        }
-    }
     .collection {
         margin: 100px 0;
         .collection-image {
@@ -66,15 +43,16 @@
             position: absolute;
             top: 50%;
             width: 100%;
-            padding: 20px;
             transform: translateY(-50%);
             background-color: var(--color-light-white);
 
             & a {
+                padding: 20px;
                 display: block;
                 font-size: 3rem;
                 color: var(--text-color);
                 text-align: center;
+                cursor: pointer;
             }
         }
     }
@@ -83,6 +61,7 @@
         position: relative;
         padding: 40px 0;
         margin-bottom: 100px;
+        overflow: hidden;
         .title {
             font-size: 4rem;
             text-align: center;
@@ -104,11 +83,10 @@
             left: 0;
             content: "";
             height: 100%;
-            min-width: 200px;
             position: absolute;
-            background-image: linear-gradient(to right, var(--color-pink) 40%, #f7f3f3a8);
-            border-radius: 50px;
-            box-shadow: rgba(247, 243, 243, 0.741) 20px 0px 24px;
+            background-image: linear-gradient(to right, var(--color-pink) 60%, #f7f3f3d1);
+            border-radius: 20px;
+            box-shadow: rgba(247, 243, 243, 0.91) 80px 0px 100px 200px;
             z-index: 1;
         }
         &::after {
@@ -116,11 +94,9 @@
             right: 0;
             content: "";
             height: 100%;
-            min-width: 200px;
             position: absolute;
-            background-image: linear-gradient(to left, var(--color-pink) 40%, #f7f3f3a8);
-            border-radius: 50px;
-            box-shadow: rgba(247, 243, 243, 0.741) -20px 0px 24px;
+            background-image: linear-gradient(to left, var(--color-pink) 60%, #f7f3f3a8);
+            box-shadow: rgba(247, 243, 243, 0.91) -80px 0px 100px 200px;
             z-index: 1;
         }
         .btn-experts {
