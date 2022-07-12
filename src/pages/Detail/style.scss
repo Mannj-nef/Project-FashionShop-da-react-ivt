@@ -1,0 +1,103 @@
+.detail-main {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    .detail-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+
+        .title {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .detail_mail-btns {
+            --p-y: 7px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            .btn-to_cart {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                text-transform: uppercase;
+                border: 1px solid var(--black-color);
+                padding: var(--p-y) 20px;
+            }
+            .btn-hear {
+                padding: var(--p-y);
+                border-radius: 100rem;
+                transition: 0.3s linear;
+            }
+            .active-hear {
+                color: var(--white-color);
+                background-color: var(--color-red);
+            }
+        }
+    }
+
+    .detail-content {
+        display: flex;
+        gap: 40px;
+
+        .detail-image {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+        }
+        .detail-main-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            .reviews {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .title-name {
+                margin-top: 10px;
+                font-size: 2.5rem;
+                font-weight: 500;
+            }
+            .price {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                position: relative;
+                & span {
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    font-weight: 500;
+                }
+            }
+            .desc-product {
+                margin: 20px 0;
+            }
+            .btn {
+                text-transform: uppercase;
+                border: 1px solid var(--black-color);
+            }
+            .btn-guide {
+                margin-right: 20px;
+                padding: 2px 15px;
+            }
+            .btn-guide.active,
+            .btn-guide:hover {
+                color: var(--white-color);
+                background-color: var(--black-color);
+            }
+            .btn-add-cart {
+                color: var(--white-color);
+                background-color: var(--black-color);
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

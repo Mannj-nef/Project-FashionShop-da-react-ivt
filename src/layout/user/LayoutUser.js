@@ -1,15 +1,14 @@
 import React from "react";
+import BackTop from "../../components/backTop/BackTop";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
-import Sliders from "../../components/sliders/Sliders";
 
 const LayoutUser = ({ children }) => {
-  console.log(children);
   return (
     <div>
       <Header></Header>
-      <Sliders></Sliders>
       {children}
+      <BackTop></BackTop>
       <Footer></Footer>
     </div>
   );

@@ -1,0 +1,22 @@
+.paging {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 30px;
+    gap: 20px;
+
+    font-size: 1.6rem;
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--black-coler);
+        padding: 10px;
+        color: var(--black-coler);
+    }
+    .active {
+        color: var(--while-color);
+        border: none;
+    }
+}
