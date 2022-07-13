@@ -3,12 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
 import { PrivateRouter } from "./components/Router/PrivateRouter";
-import Header from "./components/header/Header";
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
       <Suspense>
         <Switch>
           {userRouter.map((page, index) => (

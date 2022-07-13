@@ -9,20 +9,12 @@
       "id": 4
     },
     {
-      "productName": "asdasdasd",
-      "quantity": 2,
-      "description": "asdasd",
-      "price": "asdasd",
-      "sales": "asdas",
-      "id": 6
-    },
-    {
       "productName": "123123",
-      "quantity": 1,
-      "description": "asdasd",
-      "price": "2000",
-      "sales": "10",
-      "id": 7
+      "quantity": -4,
+      "description": "12312",
+      "price": "123",
+      "sales": "123",
+      "id": 5
     }
   ],
   "users": [
