@@ -16,7 +16,7 @@ const Sliders = ({ isHome, bgImg }) => {
           </p>
           <p className="text-center">- Unlock your style -</p>
 
-          <Link to={ROUTER_PATH.SHOP.path} className="btn btn-toShop">
+          <Link to={ROUTER_PATH.SHOP.path} className="btn-toShop">
             Shop now
           </Link>
         </div>

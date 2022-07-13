@@ -21,6 +21,7 @@ import image7 from "../../assets/image/banner9.jpg";
 import image8 from "../../assets/clothes-Image/product-t-shirt7.jpg";
 import image9 from "../../assets/clothes-Image/product-t-shirt4.2.jpg";
 import image10 from "../../assets/clothes-Image/product-t-shirt5.3.jpg";
+import useCheckDisplay from "../../hooks/useCheckDisplay";
 
 const arrImage = [image1, image2, image3, image3];
 
@@ -76,16 +77,8 @@ const product = [
 ];
 
 const Home = () => {
-  const [cardProduct, setCardPrduct] = useState([]);
+  const cardProduct = useCheckDisplay(8, product);
   const history = useHistory();
-
-  useEffect(() => {
-    let newCardProduct = [];
-    for (let index = 0; index < 8; index++) {
-      newCardProduct.push(product[index]);
-    }
-    setCardPrduct(newCardProduct);
-  }, []);
 
   const handleToColection = () => {
     history.push(ROUTER_PATH.COLLECTION.path);
@@ -102,7 +95,7 @@ const Home = () => {
           </h2>
         </div>
         <div className="slide_nav_wrapp">
-          <button className="btn btn-slider_nav btn-left">
+          <button className="btn-slider_nav btn-left">
             <BsArrowLeft className="icon"></BsArrowLeft>
           </button>
 
@@ -116,7 +109,7 @@ const Home = () => {
               ))}
           </div>
 
-          <button className="btn btn-slider_nav btn-right">
+          <button className="btn-slider_nav btn-right">
             <BsArrowRight className="icon"></BsArrowRight>
           </button>
         </div>
@@ -134,7 +127,7 @@ const Home = () => {
               A collection of fashions that are diverse in brand styles and
               trends of the year, So you can choose what you want
             </p>
-            <button className="btn btn-collection" onClick={handleToColection}>
+            <button className="btn-collection" onClick={handleToColection}>
               Explore Collection
             </button>
           </div>
@@ -158,7 +151,7 @@ const Home = () => {
         <div className="container">
           <h2 className="title">Experts Story</h2>
           <div className="slide_nav_wrapp">
-            <button className="btn btn-slider_nav btn-experts btn-left">
+            <button className="btn-slider_nav btn-experts btn-left">
               <BsArrowLeft className="icon"></BsArrowLeft>
             </button>
 
@@ -170,7 +163,7 @@ const Home = () => {
                 ))}
             </div>
 
-            <button className="btn btn-slider_nav btn-experts btn-right">
+            <button className=" btn-slider_nav btn-experts btn-right">
               <BsArrowRight className="icon"></BsArrowRight>
             </button>
           </div>

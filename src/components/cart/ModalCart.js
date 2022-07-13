@@ -1,6 +1,9 @@
 import React from "react";
 import { FaOpencart } from "react-icons/fa";
 import ModalLayout from "../modalLayout/ModalLayout";
+import CartItem from "./CartItem";
+
+import { cartDetailItem } from "./MookData";
 
 const ModalCart = () => {
   return (
@@ -11,6 +14,9 @@ const ModalCart = () => {
             <FaOpencart className=""></FaOpencart>
             Cart
           </h2>
+          {cartDetailItem.map((cartDetail) => (
+            <CartItem key={cartDetail.id} cartDetail={cartDetail}></CartItem>
+          ))}
           <div className="pay-cart">
             <div className="cart-total">
               <span>Cart Total: 10</span>

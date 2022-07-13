@@ -17,7 +17,7 @@ export const ProductTypes = {
   GET_All_PRODUCT: "GET_All_PRODUCT",
   GET_PRODUCT_SUCCESS: "GET_PRODUCT_SUCCESS",
   SET_LOADING: "SET_LOADING",
-  GET_PRODUCT_BY_CAT: "GET_PRODUCT_BY_CAT"
+  GET_PRODUCT_BY_CAT: "GET_PRODUCT_BY_CAT",
 };
 
 export const CategoryTypes = {
@@ -32,5 +32,3 @@ export const OrderTypes = {
   GET_ORDER_BY_ID: "GET_ORDER_BY_ID",
   SET_LOADING: "SET_LOADING",
 };
-
-

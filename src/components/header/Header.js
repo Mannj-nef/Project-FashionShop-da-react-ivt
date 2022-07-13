@@ -3,14 +3,11 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link, useHistory, useLocation, matchPath } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
-import useClickActive from "../../hooks/useClickActive";
 import "./style.scss";
 
 const Header = () => {
   const headerRef = useRef(null);
   const { pathname } = useLocation();
-  // console.log(location);
-  // useClickActive(".navigation_link");
   const history = useHistory();
 
   useEffect(() => {
@@ -34,15 +31,18 @@ const Header = () => {
   const handleToSignUp = () => {
     history.push(ROUTER_PATH.REGISTER.path);
   };
-  console.log(
-    matchPath(pathname, {
-      path: ROUTER_PATH.HOME.path,
+
+  const handleCheckActive = (path) => {
+    const active = !!matchPath(pathname, {
+      path,
       exact: true,
-      strict: false,
-    }),
-    "asdasd",
-    pathname
-  );
+    })
+      ? "navigation_link active"
+      : "navigation_link";
+    return active;
+  };
+
+  console.log();
   return (
     <div ref={headerRef} className="header ">
       <div className="container flex justify-between items-center">
@@ -55,14 +55,7 @@ const Header = () => {
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.HOME.path}
-              className={
-                !!matchPath(pathname, {
-                  path: ROUTER_PATH.HOME.path,
-                  exact: true,
-                })
-                  ? "navigation_link active"
-                  : "navigation_link"
-              }
+              className={handleCheckActive(ROUTER_PATH.HOME.path)}
             >
               Home
             </Link>
@@ -70,14 +63,7 @@ const Header = () => {
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.SHOP.path}
-              className={
-                !!matchPath(pathname, {
-                  path: ROUTER_PATH.SHOP.path,
-                  exact: true,
-                })
-                  ? "navigation_link active"
-                  : "navigation_link"
-              }
+              className={handleCheckActive(ROUTER_PATH.SHOP.path)}
             >
               Shop
             </Link>
@@ -85,14 +71,7 @@ const Header = () => {
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.PRODUCT.path}
-              className={
-                !!matchPath(pathname, {
-                  path: ROUTER_PATH.PRODUCT.path,
-                  exact: true,
-                })
-                  ? "navigation_link active"
-                  : "navigation_link"
-              }
+              className={handleCheckActive(ROUTER_PATH.PRODUCT.path)}
             >
               Products
             </Link>
@@ -100,14 +79,7 @@ const Header = () => {
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.DETAIL.path}
-              className={
-                !!matchPath(pathname, {
-                  path: ROUTER_PATH.DETAIL.path,
-                  exact: true,
-                })
-                  ? "navigation_link active"
-                  : "navigation_link"
-              }
+              className={handleCheckActive(ROUTER_PATH.DETAIL.path)}
             >
               detail
             </Link>
@@ -115,25 +87,18 @@ const Header = () => {
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.ADMIN.path}
-              className={
-                !!matchPath(pathname, {
-                  path: ROUTER_PATH.ADMIN.path,
-                  exact: true,
-                })
-                  ? "navigation_link active"
-                  : "navigation_link"
-              }
+              className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
             >
               admin
             </Link>
           </li>
         </ul>
         <div className="flex  justify-between items-center gap-5">
-          <button className="btn btn-nav btn-login" onClick={handleToLogin}>
+          <button className="btn-nav btn-login" onClick={handleToLogin}>
             Login
           </button>
           <button
-            className="btn btn-nav btn-sing active_btn"
+            className="btn-nav btn-sing active_btn"
             onClick={handleToSignUp}
           >
             Sign up

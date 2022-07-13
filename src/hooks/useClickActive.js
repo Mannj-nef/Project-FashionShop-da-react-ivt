@@ -10,8 +10,6 @@ export default function useClickActive(element) {
         item.classList.remove("active");
       });
       target.classList.add("active");
-
-      console.log(target);
     };
 
     [...nodeDome].forEach((item) => {

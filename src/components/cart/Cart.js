@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ModalLayout from "../modalLayout/ModalLayout";
 import { useDispatch } from "react-redux";
 import { FaOpencart } from "react-icons/fa";
 
@@ -22,9 +21,7 @@ const Cart = () => {
         <FaOpencart className=""></FaOpencart>
         <span className="text-lg font-semibold">Buy now</span>
       </div>
-      <div className="cart-wrapp">
-        <ModalCart></ModalCart>
-      </div>
+      <ModalCart></ModalCart>
     </>
   );
 };
