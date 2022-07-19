@@ -2,14 +2,7 @@ import { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
-<<<<<<< HEAD
 import AdminLayout from "./layout/AdminLayout";
-=======
-import { PrivateRouter } from "./components/Router/PrivateRouter";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
->>>>>>> 2ebbd5e (use-detail)
 
 function App() {
   return (

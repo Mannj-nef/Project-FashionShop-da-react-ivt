@@ -71,7 +71,6 @@
       "id": 2
     }
   ],
-<<<<<<< HEAD
   "orders": [
     {
       "id": 1,
@@ -110,9 +109,4 @@
       ]
     }
   ]
-=======
-  "profile": {
-    "name": "typicode"
-  }
->>>>>>> 2ebbd5e (use-detail)
 }
