@@ -1,38 +1,112 @@
 {
   "products": [
     {
-      "productName": "123123",
-      "quantity": 2,
+      "productName": "ádadas",
+      "price": 123,
+      "sales": 2,
+      "quantity": 3,
+      "categoryId": 2,
+      "description": "3121221",
+      "image": "https://ghiencongnghe.info/wp-content/uploads/2021/07/GG-la-gi-000.jpg",
+      "id": 10
+    },
+    {
+      "productName": "Áo gì đó",
+      "price": 130,
+      "sales": 2,
+      "quantity": 3,
+      "categoryId": 2,
+      "description": "zzzzz",
+      "image": "https://static.dosi-in.com/file/detailed/403/dosiin-gamble-worldwide-aos-hoodie-ao-ni-hoodie-aos-gamble-worldwide-403621403621.jpg?w=1000&h=1000&fit=fill&fm=webp",
+      "id": 11
+    },
+    {
+      "productName": "Quần gì đó",
+      "price": "3000",
+      "sales": 4,
+      "quantity": 3,
+      "categoryId": 2,
       "description": "dasd",
-      "price": "12323ads",
-      "sales": "111",
-      "id": 4
+      "image": "data:image/jpeg;base64,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",
+      "id": 12
     },
     {
-      "productName": "asdasdasd",
-      "quantity": 2,
-      "description": "asdasd",
-      "price": "asdasd",
-      "sales": "asdas",
-      "id": 6
+      "productName": "Giày gì đó",
+      "price": "1000",
+      "sales": 3,
+      "quantity": 3,
+      "categoryId": 1,
+      "description": "cccc",
+      "image": "data:image/jpeg;base64,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",
+      "id": 14
+    }
+  ],
+  "categories": [
+    {
+      "categoryName": "ShoeABC",
+      "id": 1
     },
     {
-      "productName": "123123",
-      "quantity": 1,
-      "description": "asdasd",
-      "price": "2000",
-      "sales": "10",
-      "id": 7
+      "categoryName": "Clothes",
+      "id": 2
+    },
+    {
+      "categoryName": "hats",
+      "id": 3
     }
   ],
   "users": [
     {
-      "id": 1,
-      "name": "some comment",
-      "role": "admin"
+      "email": "nquanghuy999@gmail.com",
+      "fullName": "HuyGT",
+      "password": "abcxyz",
+      "role": "user",
+      "id": 1
+    },
+    {
+      "email": "admin@gmail.com",
+      "fullName": "HUYGT",
+      "password": "123123",
+      "role": "admin",
+      "id": 2
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "orders": [
+    {
+      "id": 1,
+      "customer": "HuyGT",
+      "total": 6650,
+      "address": "76 Quang Trung",
+      "cart": [
+        {
+          "id": 1,
+          "productName": "Áo gì đó",
+          "price": 130,
+          "quantity": 5,
+          "totalAmount": 650
+        },
+        {
+          "id": 2,
+          "productName": "Quần gì đó",
+          "price": "3000",
+          "quantity": 2,
+          "totalAmount": 6000
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "customer": "VipPro",
+      "total": 3500,
+      "address": "92 Abc",
+      "cart": [
+        {
+          "id": 1,
+          "productName": "Quần gì đó",
+          "price": "3000",
+          "quantity": 2
+        }
+      ]
+    }
+  ]
 }

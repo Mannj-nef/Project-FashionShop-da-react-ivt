@@ -2,14 +2,12 @@ import { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
-import { PrivateRouter } from "./components/Router/PrivateRouter";
-import Header from "./components/header/Header";
+import AdminLayout from "./layout/AdminLayout";
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <Suspense>
+      <Suspense fallback={<div>Loading page...</div>}>
         <Switch>
           {userRouter.map((page, index) => (
             <Route
@@ -31,9 +29,9 @@ function App() {
                 exact={c.isExact}
                 path={c.path}
                 render={() => (
-                  <PrivateRouter>
+                  <AdminLayout>
                     <Component />
-                  </PrivateRouter>
+                  </AdminLayout>
                 )}
               ></Route>
             );

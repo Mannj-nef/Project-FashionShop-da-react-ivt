@@ -3,6 +3,9 @@ export const UserTypes = {
   LOGOUT: "LOGOUT",
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAIL: "LOGIN_FAIL",
+  GET_All_USER: "GET_All_USER",
+  GET_USER_SUCCESS: "GET_USER_SUCCESS",
+  SET_LOADING: "SET_LOADING",
 };
 
 export const ModalTypes = {
@@ -13,4 +16,21 @@ export const ModalTypes = {
 export const ProductTypes = {
   GET_All_PRODUCT: "GET_All_PRODUCT",
   GET_PRODUCT_SUCCESS: "GET_PRODUCT_SUCCESS",
+  SET_LOADING: "SET_LOADING",
+  GET_PRODUCT_BY_CAT: "GET_PRODUCT_BY_CAT"
 };
+
+export const CategoryTypes = {
+  GET_All_CATEGORY: "GET_All_CATEGORY",
+  GET_CATEGORY_SUCCESS: "GET_CATEGORY_SUCCESS",
+  SET_LOADING: "SET_LOADING",
+};
+
+export const OrderTypes = {
+  GET_All_ORDER: "GET_All_ORDER",
+  GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS",
+  GET_ORDER_BY_ID: "GET_ORDER_BY_ID",
+  SET_LOADING: "SET_LOADING",
+};
+
+

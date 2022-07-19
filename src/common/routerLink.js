@@ -46,4 +46,7 @@ export const ROUTER_PATH = {
   ORDERS: {
     path: "/admin/orders",
   },
+  DETAIL_ORDER: {
+    path: "/admin/orders/detail/:id",
+  },
 };
