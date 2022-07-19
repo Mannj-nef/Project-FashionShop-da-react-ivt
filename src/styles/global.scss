@@ -28,6 +28,23 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+    height: 100px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll-bar);
+    border-radius: 100rem;
+}
+body::-webkit-scrollbar-track {
+    border-radius: 100rem;
+    background-color: var(--color-pink);
+}
+
+a:hover {
+    color: inherit;
+}
+
 img,
 picture,
 video,
@@ -58,8 +75,6 @@ h6 {
     max-width: 1600px;
     padding-left: 50px !important;
     padding-right: 50px !important;
-}
-.btn {
 }
 
 .text-line-2 {

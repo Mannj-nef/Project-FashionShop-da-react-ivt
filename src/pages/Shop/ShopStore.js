@@ -50,7 +50,7 @@ const ShopStore = () => {
               Man
             </p>
             <p className="cursor-pointer" onClick={handleClick}>
-              Woment
+              Women
             </p>
             <p className="cursor-pointer" onClick={handleClick}>
               Kids

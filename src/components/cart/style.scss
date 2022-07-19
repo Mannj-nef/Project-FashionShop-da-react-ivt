@@ -62,4 +62,22 @@
             text-transform: uppercase;
         }
     }
+
+    .cart-item {
+        font-size: 1.4rem;
+        .cart-item_title {
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+        .amount {
+            background-color: var(--white-color);
+            display: inline-block;
+            padding: 2px;
+        }
+        .amount-quantity {
+            width: 12px;
+            padding: 0;
+            text-align: center;
+        }
+    }
 }

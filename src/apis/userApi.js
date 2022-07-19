@@ -20,11 +20,11 @@ export const getUsers = async () => {
 };
 
 export const deleteUserById = (id) => {
-	return axiosClient.delete(`users/${id}`);
+  return axiosClient.delete(`users/${id}`);
 };
 export const addUser = (user) => {
-	return axiosClient.post(`users`,{...user});
+  return axiosClient.post(`users`, { ...user });
 };
-export const editUser = (user,id) => {
-	return axiosClient.put(`users/${id}`,{...user});
+export const editUser = (user, id) => {
+  return axiosClient.put(`users/${id}`, { ...user });
 };
