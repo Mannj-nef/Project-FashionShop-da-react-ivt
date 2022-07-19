@@ -10,8 +10,15 @@ export const VALIDATE_YUP = {
     .required()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      " passWord minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special characte"
+      "PassWord minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special characte"
     ),
+  PASSWORDCONFIRMATION: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+  TERM: Yup.boolean()
+    .oneOf([true], "At least one needs to be checked")
+    .required(),
   DESCRIPTION: Yup.string()
     .required()
     .min(2, "Must be 2 characters or more")

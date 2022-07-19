@@ -13,6 +13,9 @@ const CardProduct = ({ cardProduct }) => {
 
     return () => clearTimeout(timmer);
   }, []);
+
+  console.log(cardProduct);
+
   return (
     <div className="card-product-wrapper">
       {!isLoading &&

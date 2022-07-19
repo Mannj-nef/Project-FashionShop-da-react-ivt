@@ -14,17 +14,17 @@ export const ROUTER_PATH = {
   SHOP_WOMAN: {
     path: "/shopwoman",
   },
-  PRODUCT: {
-    path: "/product",
+  BLOG: {
+    path: "/blog",
   },
   LOGIN: {
     path: "/login",
   },
-  REGISTER: {
-    path: "/Register",
-  },
   COLLECTION: {
     path: "/collection",
+  },
+  CONTACT: {
+    path: "/contact",
   },
 
   // admin

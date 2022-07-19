@@ -1,7 +1,16 @@
 export const UserTypes = {
+  CREATE: "CREATE_USER",
+  CREATE_FAIL: "CREATE_USER_FAIL",
+  CREATE_SUCCESS: "CREATE_USER_SUCCESS",
+  SET_IS_LOADING: "SET_IS_LOADING_USER",
+  CLEAR_NOTIFICATION: "CLEAR_NOTIFICATION_USER",
+  UPDATE_USER: "UPDATE_USER",
+  UPDATE_USER_SUCCESS: "UPDATE_USER_SUCCESS",
+  UPDATE_USER_FAIL: "UPDATE_USER_FAIL",
+};
+
+export const AuthTypes = {
   LOGIN: "LOGIN",
-  LOGOUT: "LOGOUT",
-  LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAIL: "LOGIN_FAIL",
   GET_All_USER: "GET_All_USER",
   GET_USER_SUCCESS: "GET_USER_SUCCESS",
@@ -11,6 +20,10 @@ export const UserTypes = {
 export const ModalTypes = {
   SHOW: "ISSHOW",
   HIDE: "HIDE",
+};
+
+export const HeaderType = {
+  GET_HEIGHT: "GET_HEIGHT",
 };
 
 export const ProductTypes = {

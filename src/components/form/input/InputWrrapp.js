@@ -2,7 +2,7 @@ import React from "react";
 import { useController } from "react-hook-form";
 import "./style.scss";
 
-const Input = ({ label, control, error, ...props }) => {
+const Input = ({ label, control, type, ...props }) => {
   const { field } = useController({
     name: props.name,
     control,
@@ -10,16 +10,20 @@ const Input = ({ label, control, error, ...props }) => {
   });
 
   return (
-    <div className="input-wrapper mb-4">
+    <div className="input-wrapper relative">
       {label ? (
-        <label htmlFor={props.id || props.name} className="label">
+        <label htmlFor={props.id || props.name} className="lable">
           {label}
         </label>
       ) : (
         ""
       )}
-      <input type="text" className="input-control" {...props} {...field} />
-      {error ? <p className="text-red-500 pt-4 ">{error}</p> : ""}
+      <input
+        type={type || "text"}
+        className="input-control"
+        {...props}
+        {...field}
+      />
     </div>
   );
 };

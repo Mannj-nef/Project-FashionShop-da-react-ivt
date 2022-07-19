@@ -24,7 +24,7 @@ const CardItem = ({ card }) => {
         />
       </div>
       <div className="cart-info">
-        <h3 className="product-name">{card.name}</h3>
+        <h3 className="product-name">{card.productName}</h3>
         <span className="product-price">{card.price}</span>
       </div>
     </div>

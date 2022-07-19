@@ -1,14 +1,18 @@
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory, useLocation, matchPath } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
+import { actHeader } from "../../redux/actions/header/headerAction";
 import "./style.scss";
 
 const Header = () => {
   const headerRef = useRef(null);
   const { pathname } = useLocation();
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const header = headerRef.current;
@@ -25,11 +29,14 @@ const Header = () => {
     return () => document.removeEventListener("scroll", handleBackColorHeader);
   }, []);
 
+  useEffect(() => {
+    const header = headerRef.current;
+    const headerHeight = header.scrollHeight;
+    dispatch(actHeader(headerHeight));
+  }, [dispatch]);
+
   const handleToLogin = () => {
     history.push(ROUTER_PATH.LOGIN.path);
-  };
-  const handleToSignUp = () => {
-    history.push(ROUTER_PATH.REGISTER.path);
   };
 
   const handleCheckActive = (path) => {
@@ -70,20 +77,20 @@ const Header = () => {
           </li>
           <li className="navigation_item">
             <Link
-              to={ROUTER_PATH.PRODUCT.path}
-              className={handleCheckActive(ROUTER_PATH.PRODUCT.path)}
+              to={ROUTER_PATH.BLOG.path}
+              className={handleCheckActive(ROUTER_PATH.BLOG.path)}
             >
-              Products
+              Blog
             </Link>
           </li>
-          <li className="navigation_item">
+          {/* <li className="navigation_item">
             <Link
               to={ROUTER_PATH.DETAIL.path}
               className={handleCheckActive(ROUTER_PATH.DETAIL.path)}
             >
-              detail
+              Detail
             </Link>
-          </li>
+          </li> */}
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.ADMIN.path}
@@ -92,16 +99,21 @@ const Header = () => {
               admin
             </Link>
           </li>
+          <li className="navigation_item">
+            <Link
+              to={ROUTER_PATH.CONTACT.path}
+              className={handleCheckActive(ROUTER_PATH.CONTACT.path)}
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
-        <div className="flex  justify-between items-center gap-5">
-          <button className="btn-nav btn-login" onClick={handleToLogin}>
-            Login
-          </button>
+        <div className="flex  justify-between items-center gap-5 ">
           <button
-            className="btn-nav btn-sing active_btn"
-            onClick={handleToSignUp}
+            className="btn-nav btn-login active_btn"
+            onClick={handleToLogin}
           >
-            Sign up
+            Login
           </button>
         </div>
       </div>

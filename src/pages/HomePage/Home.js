@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 import { ROUTER_PATH } from "../../common/routerLink";
 import Sliders from "../../components/sliders/Sliders";
 import CardProduct from "../../components/cardProduct/CardProduct";
 import ImageSlider from "./ImageSlider";
 import Experts from "./Experts";
+import useCheckDisplay from "../../hooks/useCheckDisplay";
+import HighlightSlogan from "../../components/highlightSlogan/HighlightSlogan";
+import SlickSlider from "../../components/slickSlider/SlickSlider";
+import { useSelector, useDispatch } from "react-redux";
 import "./style.scss";
-import "./base.scss";
 
 import image1 from "../../assets/image/slider_nav4.jpg";
 import image2 from "../../assets/image/slider_nav2.jpg";
@@ -21,7 +23,9 @@ import image7 from "../../assets/image/banner9.jpg";
 import image8 from "../../assets/clothes-Image/product-t-shirt7.jpg";
 import image9 from "../../assets/clothes-Image/product-t-shirt4.2.jpg";
 import image10 from "../../assets/clothes-Image/product-t-shirt5.3.jpg";
-import useCheckDisplay from "../../hooks/useCheckDisplay";
+
+import { expertsData } from "./mookData";
+import { actGetAllProduct } from "../../redux/actions/productAction";
 
 const arrImage = [image1, image2, image3, image3];
 
@@ -30,53 +34,60 @@ const product = [
     id: 1,
     img: image8,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 2,
     img: image9,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 3,
     img: image8,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 4,
     img: image10,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 5,
     img: image9,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 6,
     img: image8,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 7,
     img: image10,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
   {
     id: 8,
     img: image9,
     price: "$ 70",
-    name: "Beige V neck button cardigan",
+    productName: "Beige V neck button cardigan",
   },
 ];
 
 const Home = () => {
+  const { listProducts } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actGetAllProduct());
+  }, [dispatch]);
+
   const cardProduct = useCheckDisplay(8, product);
   const history = useHistory();
 
@@ -86,37 +97,43 @@ const Home = () => {
 
   return (
     <div className="home_page">
-      <Sliders isHome bgImg="bg-slider-home"></Sliders>
+      <Sliders isHome bgImg="bg-slider-home">
+        <div className="container silder-slogan__wrapp">
+          <h1 className="slogan-title">Color your days and make your story</h1>
+          <p className="slogan_sub">
+            Don't wory abount your appearance today, we are here for you to
+            provider what you need to color your day and let's make a beatiful
+            story today
+          </p>
+          <p className="text-center">- Unlock your style -</p>
+
+          <Link to={ROUTER_PATH.SHOP.path} className="btn-toShop">
+            Shop now
+          </Link>
+        </div>
+      </Sliders>
       <div className="container">
-        <div className="highlight-wrapp ">
-          <h2 className="title">
-            "Your appearance today is a reflection of your condition today, So
-            choose your the best outfit your best day today"
-          </h2>
-        </div>
+        <HighlightSlogan
+          title={`"Your appearance today is a reflection of your condition today, So
+            choose your the best outfit your best day today"`}
+        ></HighlightSlogan>
         <div className="slide_nav_wrapp">
-          <button className="btn-slider_nav btn-left">
-            <BsArrowLeft className="icon"></BsArrowLeft>
-          </button>
-
-          <div className="slide_nav">
-            {arrImage.length > 0 &&
-              arrImage.map((imageSlider, index) => (
-                <ImageSlider
-                  key={index}
-                  imageSlider={imageSlider}
-                ></ImageSlider>
-              ))}
+          <div className="slide_nav ">
+            <SlickSlider slidesToShow={3} style={`marginRight: '-8px'`}>
+              {arrImage.length > 0 &&
+                arrImage.map((imageSlider, index) => (
+                  <ImageSlider
+                    key={index}
+                    imageSlider={imageSlider}
+                  ></ImageSlider>
+                ))}
+            </SlickSlider>
           </div>
+        </div>
 
-          <button className="btn-slider_nav btn-right">
-            <BsArrowRight className="icon"></BsArrowRight>
-          </button>
-        </div>
-        <div className="highlight-wrapp ">
-          <h2 className="title">Popular Collection</h2>
-        </div>
+        <HighlightSlogan title="Popular Collection"></HighlightSlogan>
         <CardProduct cardProduct={cardProduct}></CardProduct>
+        {/*  Explore Collection */}
         <div className="flex items-center collection">
           <div className="flex-1">
             <img className="collection-image" src={image5} alt="" />
@@ -151,21 +168,19 @@ const Home = () => {
         <div className="container">
           <h2 className="title">Experts Story</h2>
           <div className="slide_nav_wrapp">
-            <button className="btn-slider_nav btn-experts btn-left">
-              <BsArrowLeft className="icon"></BsArrowLeft>
-            </button>
+            <div className="slide_nav  experts-story">
+              <SlickSlider slidesToShow={3} clWhite>
+                {expertsData.length &&
+                  expertsData.map((item) => (
+                    <Experts key={item.id} image={image2}></Experts>
+                  ))}
 
-            <div className="slide_nav justify-center experts-story">
-              {Array(3)
-                .fill(null)
-                .map((item, index) => (
-                  <Experts key={index} image={image2}></Experts>
-                ))}
+                {/* {arrImage2.length > 0 &&
+                  arrImage2.map((item, index) => (
+                    <Experts key={index} image={image2}></Experts>
+                  ))} */}
+              </SlickSlider>
             </div>
-
-            <button className=" btn-slider_nav btn-experts btn-right">
-              <BsArrowRight className="icon"></BsArrowRight>
-            </button>
           </div>
         </div>
       </div>

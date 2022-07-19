@@ -30,18 +30,30 @@ const FormReview = ({ setShowFormReview }) => {
     <div className="p-[50px]">
       <h2 className="buyreName mb-3 text-4xl">{"Manh Quan"}</h2>
       <Form handleSubmit={handleSubmit(onSubmitFormReviews)}>
-        <Input
-          name="title"
-          placeholder="Give your review a title"
-          control={control}
-          error={errors?.title?.message}
-        ></Input>
-        <TextArea
-          name="description"
-          placeholder="Give us your review"
-          control={control}
-          error={errors?.description?.message}
-        ></TextArea>
+        <div className="relative pb-5">
+          <Input
+            name="title"
+            placeholder="Give your review a title"
+            control={control}
+          ></Input>
+          {errors?.title?.message && (
+            <p className="text-red-500 bottom-0  absolute">
+              {errors?.title?.message}
+            </p>
+          )}
+        </div>
+        <div className="relative pb-5">
+          <TextArea
+            name="description"
+            placeholder="Give us your review"
+            control={control}
+          ></TextArea>
+          {errors?.description?.message && (
+            <p className="text-red-500 absolute">
+              {errors?.description?.message}
+            </p>
+          )}
+        </div>
         <div className="text-end">
           <button className="submitRating py-[15px] px-[30px] rounded-md mt-5">
             Submit

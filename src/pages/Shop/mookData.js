@@ -131,3 +131,105 @@ export const product = [
     name: "Beige V neck button cardigan",
   },
 ];
+
+export const productWoman = [
+  {
+    id: 1,
+    img: image1,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 2,
+    img: image2,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 3,
+    img: image3,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 4,
+    img: image4,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 5,
+    img: image5,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 6,
+    img: image1,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 7,
+    img: image2,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 8,
+    img: image3,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+];
+
+export const productMan = [
+  {
+    id: 1,
+    img: image1,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 2,
+    img: image2,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 3,
+    img: image3,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 4,
+    img: image4,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 5,
+    img: image5,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 6,
+    img: image1,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 7,
+    img: image2,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+  {
+    id: 8,
+    img: image3,
+    price: "$ 70",
+    name: "Beige V neck button cardigan",
+  },
+];

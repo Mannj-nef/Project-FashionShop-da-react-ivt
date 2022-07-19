@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { BiCommentEdit } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FaOpencart } from "react-icons/fa";
 import ChooseColor from "./ChooseColor";
@@ -20,6 +20,7 @@ import useTotop from "../../hooks/useTotop";
 import { buyerRatings, productDetail, productRelateds } from "./DataMock";
 import useClickActive from "../../hooks/useClickActive";
 import FormReview from "./FormReviews";
+import Socials from "./Socials";
 
 const Stars5 = ({ size }) => {
   return (
@@ -73,6 +74,8 @@ const Detail = () => {
   const [valueSize, setValueSize] = useState("s");
   const [formReviewHeight, setFormReviewHeight] = useState(0);
 
+  const headerHeight = useSelector((state) => state.headerReducer.height);
+
   const FormReviewRef = useRef();
 
   useEffect(() => {
@@ -116,7 +119,10 @@ const Detail = () => {
 
   return (
     <>
-      <div className="detail-main container">
+      <div
+        className="detail-main container"
+        style={{ marginTop: headerHeight + 20 }}
+      >
         <div className="detail-top">
           <h2 className="title">style theory</h2>
           <div className="detail_mail-btns">
@@ -322,21 +328,7 @@ const Detail = () => {
           <CardProduct cardProduct={cardProduct}></CardProduct>
         </div>
       </div>
-      <div className="detail-footer flex gap-4 p-4 items-center justify-between ">
-        {btnLinkSocials.map((social) => (
-          <button className="button-link" key={social.id}>
-            <a
-              className="detail-link-social"
-              rel="noreferrer"
-              target="_blank"
-              href={social.urlLink}
-            >
-              {social.name}
-            </a>
-            <p> {social.name}</p>
-          </button>
-        ))}
-      </div>
+      <Socials btnLinkSocials={btnLinkSocials}></Socials>
     </>
   );
 };

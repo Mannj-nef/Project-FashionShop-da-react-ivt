@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useController } from "react-hook-form";
 
 const TextArea = ({ label, control, error, ...props }) => {
@@ -19,7 +19,6 @@ const TextArea = ({ label, control, error, ...props }) => {
       )}
 
       <textarea className="textArea-control" {...props} {...field} />
-      {error ? <p className="text-red-500 pt-4">{error}</p> : ""}
     </div>
   );
 };
