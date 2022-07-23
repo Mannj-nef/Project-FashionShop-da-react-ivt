@@ -14,6 +14,11 @@ export const actGetOrderSuccess = (payload) => ({
   payload: payload,
 });
 
+export const actGetOrderByIdSuccess = (payload) => ({
+  type: OrderTypes.GET_ORDER_BY_ID_SUCCESS,
+  payload: payload,
+});
+
 export const actSetLoading = () => ({
   type: OrderTypes.SET_LOADING,
 });

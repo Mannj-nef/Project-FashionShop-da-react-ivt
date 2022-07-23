@@ -3,11 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
 import AdminLayout from "./layout/AdminLayout";
+import Skeleton from "./components/skeleton/Skeleton";
 
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense fallback={<Skeleton height={"100vh"}/>}>
         <Switch>
           {userRouter.map((page, index) => (
             <Route

@@ -6,15 +6,17 @@ const initialValue = {
   detailOrder: {},
 };
 
-const categoryReducer = (state = initialValue, action) => {
+const orderReducer = (state = initialValue, action) => {
   switch (action.type) {
     case OrderTypes.GET_ORDER_SUCCESS: {
       return {
         ...state,
         listOrder: action.payload,
-        detailOrder: action.payload,
         isLoading: false,
       };
+    }
+    case OrderTypes.GET_ORDER_BY_ID_SUCCESS: {
+      return { ...state, isLoading: false, detailOrder: action.payload };
     }
     case OrderTypes.SET_LOADING: {
       return { ...state, isLoading: true };
@@ -24,4 +26,4 @@ const categoryReducer = (state = initialValue, action) => {
   }
 };
 
-export default categoryReducer;
+export default orderReducer;

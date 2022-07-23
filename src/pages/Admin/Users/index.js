@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { Table, Space, Spin } from "antd";
+import { Table, Space, Spin, Popconfirm } from "antd";
 import { actGetAllUser } from "../../../redux/actions/userAction";
 import "antd/dist/antd.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +11,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { sharinganIcon } from "../../../components/Loading";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import ModalUser from "./ModalUser";
-
+import { cancel, columnsAll } from "../../../common/table";
+import "../style.scss";
 export default function Users() {
   const { listUser, isLoading } = useSelector((state) => state?.userReducer);
 
@@ -37,21 +38,7 @@ export default function Users() {
   };
 
   const columns = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Role",
-      key: "role",
-      dataIndex: "role",
-    },
+    ...columnsAll.columnUser,
     {
       title: "Actions",
       key: "actions",
@@ -61,17 +48,18 @@ export default function Users() {
           <button
             className="btn btn-primary"
             onClick={() => showModalEdit(record)}
-            style={{ fontSize: "1.6rem" }}
           >
             Edit
           </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => handleDeleteUser(record)}
-            style={{ fontSize: "1.6rem" }}
+          <Popconfirm
+            title="Are you sure to delete this user?"
+            onConfirm={() => handleDeleteUser(record)}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
           >
-            Delete
-          </button>
+            <button className="btn btn-danger">Delete</button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -84,31 +72,15 @@ export default function Users() {
     <>
       <ToastContainer />
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="loading-display">
           <Spin indicator={sharinganIcon} />
         </div>
       ) : (
-        <div style={{ paddingTop: "30px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "10px",
-            }}
-          >
-            <h1 style={{ fontSize: "30px", fontWeight: "500" }}>Users</h1>
+        <div className="container-fluid mt-5">
+          <div className="title">
+            <h1>Users</h1>
 
-            <button
-              className="btn btn-success"
-              onClick={() => showModalAdd()}
-              style={{ fontSize: "1.6rem" }}
-            >
+            <button className="btn btn-success" onClick={() => showModalAdd()}>
               Add User
             </button>
             <ModalUser

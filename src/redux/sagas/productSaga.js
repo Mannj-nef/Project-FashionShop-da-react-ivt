@@ -14,7 +14,7 @@ function* fetchProducts(action) {
 function* fetchProductsByCat(action) {
   yield put(actSetLoading());
   try {
-    const products = yield call(getProducts,{...action.payload}[0]);
+    const products = yield call(getProducts, action.payload);
     yield put({ type: ProductTypes.GET_PRODUCT_SUCCESS, payload: products });
   } catch (e) {
     yield put({ message: e.message });
