@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaOpencart } from "react-icons/fa";
 
 import { modalAction } from "../../redux/actions/modal";
@@ -8,6 +8,7 @@ import ModalCart from "./ModalCart";
 
 const Cart = () => {
   const [isShoeCart, setIsshowCart] = useState(false);
+  const { listCart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
 
   const handleShowCart = () => {
@@ -21,7 +22,7 @@ const Cart = () => {
         <FaOpencart className=""></FaOpencart>
         <span className="text-lg font-semibold">Buy now</span>
       </div>
-      <ModalCart></ModalCart>
+      <ModalCart listCart={listCart}></ModalCart>
     </>
   );
 };

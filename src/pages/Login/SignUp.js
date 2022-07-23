@@ -7,6 +7,8 @@ import { VALIDATE_YUP } from "../../common/validateYup";
 import Form from "../../components/form/Form";
 import CheckBoxWrapp from "../../components/form/input/CheckBoxWrapp";
 import Input from "../../components/form/input/InputWrrapp";
+import { useDispatch } from "react-redux";
+import { actRegiter } from "../../redux/actions/userAction";
 
 const schema = Yup.object({
   email: VALIDATE_YUP.EMAIL,
@@ -16,16 +18,32 @@ const schema = Yup.object({
 });
 
 const FormSingUp = () => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (values) => {
-    console.log("sing up", values);
+  const onSubmit = async (values) => {
+    const index = values.email.indexOf("@");
+    const fullName = values.email.slice(0, index);
+
+    const valuesRegister = {
+      ...values,
+      fullName,
+    };
+
+    return new Promise((resolver) => {
+      setTimeout(() => {
+        resolver();
+        dispatch(actRegiter(valuesRegister));
+        reset();
+      }, 2000);
+    });
   };
 
   return (
@@ -85,8 +103,15 @@ const FormSingUp = () => {
             {errors?.term?.message}
           </p>
         </div>
-        <button type="submit" className="btn-submit ">
-          Sing up
+        <button type="submit" className="btn-submit relative">
+          <div
+            className={`w-9 h-9 rounded-full left-1/2 translate-x-[-1/2]  border-3 animate-spin border-t-transparent absolute  ${
+              isSubmitting ? "opacity-100" : "opacity-0"
+            }`}
+          ></div>
+          <span className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
+            Sing up
+          </span>
         </button>
       </Form>
     </>

@@ -1,8 +1,10 @@
+import { REGISTER_MESSAGE } from "../../common/message";
 import { UserTypes } from "../../common/types";
 
 const initialValue = {
   isLoading: false,
   listUser: [],
+  status: "",
 };
 
 const userReducer = (state = initialValue, action) => {
@@ -12,6 +14,20 @@ const userReducer = (state = initialValue, action) => {
     }
     case UserTypes.SET_LOADING: {
       return { ...state, isLoading: true };
+    }
+    case UserTypes.CREATE: {
+      return {
+        ...state,
+        isLoading: false,
+        status: REGISTER_MESSAGE.REGISTER_SUCCESS,
+      };
+    }
+    case UserTypes.CREATE_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        status: REGISTER_MESSAGE.REGISTER_FAIL,
+      };
     }
     default:
       return state;

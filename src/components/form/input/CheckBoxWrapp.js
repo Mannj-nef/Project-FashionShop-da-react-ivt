@@ -7,11 +7,14 @@ const CheckBoxWrapp = ({ control, children, ...props }) => {
     name: props.name,
     control,
   });
+
+  console.log(field?.value);
   return (
     <label className="checkbox-wrapper flex gap-3 items-center cursor-pointer">
       <input
         className="checkbox-control hidden"
         type="checkbox"
+        checked={field?.value}
         {...field}
         {...props}
       />

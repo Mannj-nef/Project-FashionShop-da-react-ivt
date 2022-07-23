@@ -21,6 +21,10 @@
         background-color: var(--black-color);
     }
 }
+.listCart::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+}
 
 .cart {
     position: fixed;

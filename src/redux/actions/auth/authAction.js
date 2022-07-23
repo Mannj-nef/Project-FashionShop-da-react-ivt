@@ -13,7 +13,7 @@ export const actLoginFail = () => {
 
 export const actSetLoadingSuccess = () => {
   return {
-    type: AuthTypes.SET_IS_LOADING,
+    type: AuthTypes.SET_LOADING,
   };
 };
 

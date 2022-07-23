@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HighlightSlogan from "../../components/highlightSlogan/HighlightSlogan";
 import Sliders from "../../components/sliders/Sliders";
+import { useSelector, useDispatch } from "react-redux";
 import "./womanStyle.scss";
 
-import { productWoman as dataProduct } from "./mookData";
+// import { productWoman as dataProduct } from "./mookData";
 
 import image1 from "../../assets/image/banner13.jpg";
 import image2 from "../../assets/image/banner14.jpg";
@@ -13,8 +14,17 @@ import image5 from "../../assets/image/slider_nav9.jpg";
 
 import CardProduct from "../../components/cardProduct/CardProduct";
 import Paging from "../../components/paging/Paging";
+import { actGetProductByGender } from "../../redux/actions/productAction";
+import Cart from "../../components/cart/Cart";
 
 const ShopWoman = () => {
+  const { listProducts } = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actGetProductByGender("woman"));
+  }, [dispatch]);
+
   return (
     <div className="shop-woman">
       <Sliders bgImg="bg-slider-shop4">
@@ -70,7 +80,8 @@ const ShopWoman = () => {
       </div>
       {/* product */}
       <div className="container product-top ">
-        <CardProduct cardProduct={dataProduct}></CardProduct>
+        <CardProduct cardProduct={listProducts}></CardProduct>
+        <Cart></Cart>
         <Paging></Paging>
       </div>
     </div>

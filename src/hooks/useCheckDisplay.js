@@ -4,7 +4,7 @@ export default function useCheckDisplay(number, listDataProduct) {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    if (listDataProduct.length < number) {
+    if (listDataProduct && listDataProduct.length < number) {
       setProductList(listDataProduct);
       return;
     }

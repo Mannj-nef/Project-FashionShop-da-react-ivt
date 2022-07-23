@@ -3,7 +3,6 @@ import { AuthTypes } from "../../common/types";
 const initialState = {
   profile: {},
   isLoggIn: false,
-  isAuthenticated: false,
   isLoading: false,
   notif: "",
 };
@@ -11,24 +10,40 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case AuthTypes.LOGIN: {
-      //   console.log(action.payload);
       return {
         ...state,
-        profile: action.payload,
-        notif: AuthTypes.LOGIN_SUCCESS,
+        isLoading: false,
+        notif: "",
       };
     }
     case AuthTypes.LOGIN_SUCCESS: {
-      console.log(action.payload);
       return {
         ...state,
+        isLoading: false,
+        isLoggIn: true,
         profile: action.payload,
-        notif: AuthTypes.LOGIN_SUCCESS,
+      };
+    }
+    case AuthTypes.SET_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
       };
     }
     case AuthTypes.LOGIN_FAIL: {
+      console.log("tai khoan k ton tai");
       return {
         ...state,
+        isLoggIn: false,
+        isLoading: false,
+        notif: "tai khoan k ton tai",
+      };
+    }
+    case AuthTypes.LOGOUT: {
+      return {
+        ...state,
+        isLoggIn: false,
+        profile: {},
       };
     }
 
