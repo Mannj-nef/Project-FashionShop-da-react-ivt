@@ -1,5 +1,5 @@
 import { call, put, takeLeading } from "redux-saga/effects";
-import { getUser, logIn } from "../../apis/authApi";
+import { getUser } from "../../apis/authApi";
 import { AuthTypes } from "../../common/types";
 
 import {
@@ -9,13 +9,21 @@ import {
 } from "../actions/auth/authAction";
 
 function* login(action) {
-  console.log(action);
   yield put(actSetLoadingSuccess());
   try {
-    const accounts = yield call(logIn);
-    // const profile = yield call(getUser, account);
-    // console.log(profile);
-    // yield put(actLoginSuccess({ profile }));
+    const userAll = yield call(getUser);
+
+    const email = action.payload.email;
+    const passWord = action.payload.password;
+
+    const account = userAll.filter(
+      (item) => item.email === email && item.password === passWord
+    );
+    if (account.length > 0) {
+      yield put(actLoginSuccess(...account));
+    } else {
+      yield put(actLoginFail(...account));
+    }
   } catch (error) {
     yield put(actLoginFail());
   }

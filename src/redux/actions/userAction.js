@@ -12,3 +12,13 @@ export const actGetUserSuccess = (payload) => ({
 export const actSetLoading = () => ({
   type: UserTypes.SET_LOADING,
 });
+
+export const actRegiter = (payload) => ({
+  type: UserTypes.CREATE,
+  payload,
+});
+
+export const actCreateFail = (payload) => ({
+  type: UserTypes.CREATE_FAIL,
+  payload,
+});

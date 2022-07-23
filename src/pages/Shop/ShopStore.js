@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
+import { useSelector, useDispatch } from "react-redux";
 import Cart from "../../components/cart/Cart";
 
 import Paging from "../../components/paging/Paging";
 import Sliders from "../../components/sliders/Sliders";
+import { actGetAllProduct } from "../../redux/actions/productAction";
 import CardProduct from "./../../components/cardProduct/CardProduct";
-import { product as dataProduct } from "./mookData";
+// import { product as dataProduct } from "./mookData";
 import "./storeStyle.scss";
 
 const sliders = [
@@ -19,6 +21,13 @@ const sliders = [
 const ShopStore = () => {
   const [bgImg, setBgImg] = useState("bg-slider-shop");
   const [valueInput, setValueInput] = useState("");
+
+  const { listProducts } = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actGetAllProduct());
+  }, [dispatch]);
 
   useEffect(() => {
     let img;
@@ -76,7 +85,7 @@ const ShopStore = () => {
       </div>
       <div className="container shop-content ">
         <div className="shop-wrapp-right">
-          <CardProduct cardProduct={dataProduct}></CardProduct>
+          <CardProduct cardProduct={listProducts}></CardProduct>
           <Cart></Cart>
           <Paging></Paging>
         </div>

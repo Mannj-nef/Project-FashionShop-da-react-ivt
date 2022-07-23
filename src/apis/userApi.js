@@ -1,18 +1,18 @@
 import axiosClient from "../untils/axiosClient";
 
-export const register = async (action) => {
-  const { data } = await axiosClient.post("login", {
-    action,
-  });
-  return data;
-};
+// export const register = async (action) => {
+//   const { data } = await axiosClient.post("users", {
+//     action,
+//   });
+//   return data;
+// };
 
-export const login = async (action) => {
-  const { data } = await axiosClient.post("login", {
-    action,
-  });
-  return data;
-};
+// export const login = async (action) => {
+//   const { data } = await axiosClient.post("login", {
+//     action,
+//   });
+//   return data;
+// };
 
 export const getUsers = async () => {
   const { data } = await axiosClient.get("users");

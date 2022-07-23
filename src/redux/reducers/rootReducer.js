@@ -5,6 +5,7 @@ import modalReducer from "./modalReducer";
 import categoryReducer from "./categoryReducer";
 import orderReducer from "./orderReducer";
 import headerReducer from "./headerReducer";
+import cartReducer from "./cartReducer";
 import authReducer from "./authReducer";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,8 @@ const rootReducer = combineReducers({
   productReducer,
   categoryReducer,
   orderReducer,
+  cartReducer,
+  authReducer,
 });
 
 export default rootReducer;

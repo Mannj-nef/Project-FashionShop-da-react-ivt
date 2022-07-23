@@ -1,20 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import CardItem from "./CardItem";
 import CardItemLoading from "./CardItemLoading";
 import "./style.scss";
 
 const CardProduct = ({ cardProduct }) => {
-  const [isLoading, setIsloading] = useState(true);
-
-  useState(() => {
-    const timmer = setTimeout(() => {
-      setIsloading(false);
-    }, 2000);
-
-    return () => clearTimeout(timmer);
-  }, []);
-
-  console.log(cardProduct);
+  const { isLoading } = useSelector((state) => state.productReducer);
 
   return (
     <div className="card-product-wrapper">

@@ -8,6 +8,11 @@ export const getProducts = async (params) => {
   return data;
 };
 
+export const getProductsById = async (id) => {
+  const { data } = await axiosClient.get(`products/${id}`);
+  return data;
+};
+
 export const deleteProductById = (id) => {
   return axiosClient.delete(`products/${id}`);
 };

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Sliders from "../../components/sliders/Sliders";
 import HighlightSlogan from "../../components/highlightSlogan/HighlightSlogan";
+import { useSelector, useDispatch } from "react-redux";
 import "./manStyle.scss";
 
 import { productMan } from "./mookData";
@@ -10,11 +11,19 @@ import image from "../../assets/image/banner9.jpg";
 import CardProduct from "../../components/cardProduct/CardProduct";
 import useCheckDisplay from "../../hooks/useCheckDisplay";
 import Paging from "../../components/paging/Paging";
+import { actGetProductByGender } from "../../redux/actions/productAction";
+import Cart from "../../components/cart/Cart";
 
 const ShopMan = () => {
-  const productMain = useCheckDisplay(4, productMan);
+  const { listProducts } = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
 
-  console.log(productMain);
+  useEffect(() => {
+    dispatch(actGetProductByGender("man"));
+  }, [dispatch]);
+
+  const productMain = useCheckDisplay(4, listProducts);
+
   return (
     <div className="shop-man">
       <Sliders bgImg="bg-slider-shop5">
@@ -70,7 +79,8 @@ const ShopMan = () => {
         </div>
       </div>
       <div className="container">
-        <CardProduct cardProduct={productMan}></CardProduct>
+        <CardProduct cardProduct={listProducts}></CardProduct>
+        <Cart></Cart>
         <Paging></Paging>
       </div>
     </div>

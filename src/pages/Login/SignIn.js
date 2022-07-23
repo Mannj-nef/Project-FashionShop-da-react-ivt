@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -9,46 +9,42 @@ import Form from "../../components/form/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { VALIDATE_YUP } from "../../common/validateYup";
 import { actLogin } from "../../redux/actions/auth/authAction";
-import { actGetAllUser } from "../../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
-import { ROUTER_PATH } from "../../common/routerLink";
 
 const schema = Yup.object({
   // email: VALIDATE_YUP.EMAIL,
   // password: VALIDATE_YUP.PASSWORD,
 });
 const FormSignIng = () => {
-  const { listUser } = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
+  const { isLoggIn } = useSelector((state) => state.authReducer);
   const history = useHistory();
+
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (values) => {
-    console.log("sing in", values);
-    listUser.map((user) => {
-      if (values.email === user.email && values.password === user.password) {
-        localStorage.setItem("Email", user.email);
-        localStorage.setItem("Role", user.role);
-        localStorage.setItem("Avatar", user.avatar);
-
-        history.push(ROUTER_PATH.HOME.path);
-        console.log("login success");
-      } else {
-        console.log("login fail");
-      }
+    return new Promise((resolver) => {
+      setTimeout(() => {
+        resolver();
+        console.log(values);
+        dispatch(actLogin(values));
+        reset();
+      }, 2000);
     });
-    // await dispatch(actLogin(values));
   };
 
   useEffect(() => {
-    dispatch(actGetAllUser());
-  }, []);
+    if (isLoggIn) {
+      history.goBack();
+    }
+  }, [history, isLoggIn]);
 
   return (
     <>
@@ -85,13 +81,20 @@ const FormSignIng = () => {
           )}
         </div>
         <div className="flex items-center mt-[50px] justify-between">
-          <CheckBoxWrapp name="remember" control={control} type="password">
+          <CheckBoxWrapp name="remember" control={control}>
             <span className="sub_checkbox">Remember me </span>
           </CheckBoxWrapp>
           <span className="font-semibold cursor-pointer">Forgot password</span>
         </div>
-        <button type="submit" className="btn-submit">
-          Sign in
+        <button type="submit" className="btn-submit relative">
+          <div
+            className={`w-9 h-9 rounded-full left-1/2 translate-x-[-1/2]  border-3 animate-spin border-t-transparent absolute  ${
+              isSubmitting ? "opacity-100" : "opacity-0"
+            }`}
+          ></div>
+          <span className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
+            Sign in
+          </span>
         </button>
       </Form>
     </>

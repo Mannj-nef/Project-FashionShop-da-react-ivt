@@ -22,3 +22,8 @@ export const actGetOrderByIdSuccess = (payload) => ({
 export const actSetLoading = () => ({
   type: OrderTypes.SET_LOADING,
 });
+
+export const actAddOrder = (payload) => ({
+  type: OrderTypes.ADD_ORDER,
+  payload,
+});

@@ -8,6 +8,22 @@ export const actGetProductByCat = (payload) => ({
   payload: payload,
 });
 
+export const actGetProductById = (payload) => ({
+  type: ProductTypes.GET_PRODUCT_BY_ID,
+  payload: payload,
+});
+export const actGetProductByIdSuccess = (payload) => ({
+  type: ProductTypes.GET_PRODUCT_BY_ID_SUCCESS,
+  payload: payload,
+});
+
+export const actGetProductByGender = (payload) => {
+  return {
+    type: ProductTypes.GET_PRODUCT_BY_GENDER,
+    payload: payload,
+  };
+};
+
 export const actGetProductSuccess = (payload) => ({
   type: ProductTypes.GET_PRODUCT_SUCCESS,
   payload: payload,

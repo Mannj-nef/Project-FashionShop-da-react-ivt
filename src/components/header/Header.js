@@ -3,14 +3,16 @@ import { Dropdown, Menu } from "antd";
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation, matchPath } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import { actHeader } from "../../redux/actions/header/headerAction";
+import Accout from "../accountAuthor/Accout";
 import "./style.scss";
 import "antd/dist/antd.css";
 
 const Header = () => {
+  const { profile } = useSelector((state) => state.authReducer);
   const headerRef = useRef(null);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -49,6 +51,10 @@ const Header = () => {
     const header = headerRef.current;
     const headerHeight = header.scrollHeight;
     dispatch(actHeader(headerHeight));
+  }, [dispatch]);
+
+  useEffect(() => {
+    //call api check isAdmin
   }, [dispatch]);
 
   const handleToLogin = () => {
@@ -135,7 +141,7 @@ const Header = () => {
           </li>
         </ul>
         <div className="flex  justify-between items-center gap-5 ">
-          {localStorage.getItem("Email") === null ? (
+          {Object.keys(profile).length <= 0 ? (
             <button
               className="btn-nav btn-login active_btn"
               onClick={handleToLogin}
@@ -143,11 +149,7 @@ const Header = () => {
               Login
             </button>
           ) : (
-            <Dropdown overlay={menu} trigger={["hover"]}>
-              <button className="btn-nav btn-login active_btn">
-                Hello {localStorage.getItem("Role")}
-              </button>
-            </Dropdown>
+            <Accout profile={profile}></Accout>
           )}
         </div>
       </div>

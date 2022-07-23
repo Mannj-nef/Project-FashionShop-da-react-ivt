@@ -88,7 +88,7 @@ const Home = () => {
     dispatch(actGetAllProduct());
   }, [dispatch]);
 
-  const cardProduct = useCheckDisplay(8, product);
+  const cardProduct = useCheckDisplay(8, listProducts);
   const history = useHistory();
 
   const handleToColection = () => {
@@ -174,11 +174,6 @@ const Home = () => {
                   expertsData.map((item) => (
                     <Experts key={item.id} image={image2}></Experts>
                   ))}
-
-                {/* {arrImage2.length > 0 &&
-                  arrImage2.map((item, index) => (
-                    <Experts key={index} image={image2}></Experts>
-                  ))} */}
               </SlickSlider>
             </div>
           </div>

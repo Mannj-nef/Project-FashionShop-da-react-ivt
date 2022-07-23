@@ -19,7 +19,10 @@ const orderReducer = (state = initialValue, action) => {
       return { ...state, isLoading: false, detailOrder: action.payload };
     }
     case OrderTypes.SET_LOADING: {
-      return { ...state, isLoading: true };
+      return { ...state };
+    }
+    case OrderTypes.ADD_ORDER: {
+      return { ...state, isLoading: false };
     }
     default:
       return state;
