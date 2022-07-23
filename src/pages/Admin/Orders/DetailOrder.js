@@ -2,9 +2,10 @@ import { Spin, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { columnsAll } from "../../../common/table";
 import { sharinganIcon } from "../../../components/Loading";
 import { actGetOrderById } from "../../../redux/actions/orderAction";
-
+import "../style.scss";
 export default function DetailOrder() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -27,32 +28,7 @@ export default function DetailOrder() {
     console.log("abc");
   };
   const columns = [
-    {
-      title: "STT",
-      dataIndex: "id",
-      key: "id",
-    },
-
-    {
-      title: "Product name",
-      key: "productName",
-      dataIndex: "productName",
-    },
-    {
-      title: "Price",
-      key: "price",
-      dataIndex: "price",
-    },
-    {
-      title: "Quantity",
-      key: "quantity",
-      dataIndex: "quantity",
-    },
-    {
-      title: "Total amount",
-      key: "totalAmount",
-      dataIndex: "totalAmount",
-    },
+    ...columnsAll.columnDetailOrder,
     {
       title: "Actions",
       key: "actions",
@@ -61,7 +37,6 @@ export default function DetailOrder() {
         <button
           className="btn btn-danger"
           onClick={() => handleDeleteDetailOrder(record)}
-          style={{ fontSize: "1.6rem" }}
         >
           Delete
         </button>
@@ -71,27 +46,13 @@ export default function DetailOrder() {
   return (
     <>
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="loading-display">
           <Spin indicator={sharinganIcon} />
         </div>
       ) : (
-        <div style={{ paddingTop: "30px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "10px",
-            }}
-          >
-            <h1 style={{ fontSize: "30px", fontWeight: "500" }}>
-              Detail Order
-            </h1>
+        <div className="container-fluid mt-5">
+          <div className="title">
+            <h1>Detail Order</h1>
           </div>
           <Table
             columns={columns}
@@ -103,9 +64,9 @@ export default function DetailOrder() {
           <h2>Customer: {detailOrder.customer}</h2>
 
           {active ? (
-            <div style={{ display: "flex"}}>
+            <div style={{ display: "flex" }}>
               <h2>Address:</h2>
-              <input  defaultValue={detailOrder.address}></input>
+              <input defaultValue={detailOrder.address}></input>
               <button className="btn btn-primary" onClick={() => handleEdit()}>
                 Save
               </button>

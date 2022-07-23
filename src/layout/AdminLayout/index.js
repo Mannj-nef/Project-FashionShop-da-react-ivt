@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./style.scss";
-import p1 from "../../assets/admin/p1.jpg";
 import {
   SvgCategories,
   SvgNotification,
@@ -16,18 +15,40 @@ import Nav from "react-bootstrap/Nav";
 
 import Navbar from "react-bootstrap/Navbar";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import Container from "react-bootstrap/Container";
+import { Dropdown, Menu } from "antd";
 export default function AdminLayout({ children }) {
   const [show, setShow] = useState(true);
   const navigation = useRef(null);
   const header = useRef(null);
   const card = useRef(null);
   const content = useRef(null);
+  const history = useHistory();
   const [isActive, setActive] = useState(true);
 
- 
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <a target="_blank" onClick={() => handleLogout()}>
+              Log out
+            </a>
+          ),
+          key: "1",
+        },
+      ]}
+    />
+  );
+  const handleLogout = () => {
+    localStorage.removeItem("Email");
+    localStorage.removeItem("Role");
+    localStorage.removeItem("Avatar");
+
+    history.push(ROUTER_PATH.LOGIN.path);
+  };
   // eslint-disable-next-line no-unused-vars
   const handleToggleMode = () => {
     setActive(!isActive);
@@ -51,7 +72,7 @@ export default function AdminLayout({ children }) {
   };
   return (
     <>
-      
+      {localStorage.getItem("Role") === "admin" ? (
         <div className="wrapper">
           <Nav ref={navigation} className="sidebar">
             <span className="logo">
@@ -117,12 +138,14 @@ export default function AdminLayout({ children }) {
                 </div>
                 <SvgTransIcon />
                 <SvgNotification />
-                <div className="profile">
-                  <div className="avatar">
-                    <img src={p1}></img>
+                <Dropdown overlay={menu} trigger={["hover"]}>
+                  <div className="profile">
+                    <div className="avatar">
+                      <img src={localStorage.getItem("Avatar")}></img>
+                    </div>
+                    <SvgSetting />
                   </div>
-                  <SvgSetting />
-                </div>
+                </Dropdown>
               </div>
             </Navbar>
             <main className="content" ref={content}>
@@ -138,7 +161,9 @@ export default function AdminLayout({ children }) {
             </main>
           </div>
         </div>
-      
+      ) : (
+        history.push(ROUTER_PATH.HOME.path)
+      )}
     </>
   );
 }

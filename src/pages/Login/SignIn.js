@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -9,17 +9,18 @@ import Form from "../../components/form/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { VALIDATE_YUP } from "../../common/validateYup";
 import { actLogin } from "../../redux/actions/auth/authAction";
+import { actGetAllUser } from "../../redux/actions/userAction";
+import { useHistory } from "react-router-dom";
+import { ROUTER_PATH } from "../../common/routerLink";
 
 const schema = Yup.object({
   // email: VALIDATE_YUP.EMAIL,
   // password: VALIDATE_YUP.PASSWORD,
 });
-
 const FormSignIng = () => {
-  const { profile } = useSelector((state) => state.authReducer);
-  // console.log(profile);
-
+  const { listUser } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     control,
     handleSubmit,
@@ -29,10 +30,26 @@ const FormSignIng = () => {
   });
 
   const onSubmit = async (values) => {
-    // console.log("sing in", values);
+    console.log("sing in", values);
+    listUser.map((user) => {
+      if (values.email === user.email && values.password === user.password) {
+        localStorage.setItem("Email", user.email);
+        localStorage.setItem("Role", user.role);
+        localStorage.setItem("Avatar", user.avatar);
 
-    await dispatch(actLogin(values));
+        history.push(ROUTER_PATH.HOME.path);
+        console.log("login success");
+      } else {
+        console.log("login fail");
+      }
+    });
+    // await dispatch(actLogin(values));
   };
+
+  useEffect(() => {
+    dispatch(actGetAllUser());
+  }, []);
+
   return (
     <>
       <h2 className="login-title">Wellcome back</h2>

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import { actGetAllUser } from "../../../redux/actions/userAction";
 import { addUser, editUser } from "../../../apis/userApi";
+import { config, layout } from "../../../common/table";
 
 export default function ModalUser(props) {
   const { Option } = Select;
@@ -13,22 +14,15 @@ export default function ModalUser(props) {
   const [form] = Form.useForm();
 
   useEffect(() => {
+    if (!isModalVisible) return;
     if (modalTitle === "Edit") {
       form.setFieldsValue(userEdit);
-    } else if (modalTitle === "Add") {
+    } else {
       form.resetFields();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userEdit]);
+  }, [isModalVisible]);
 
-  const layout = {
-    labelCol: {
-      span: 4,
-    },
-    wrapperCol: {
-      span: 18,
-    },
-  };
   const handleSubmit = async (user) => {
     if (modalTitle === "Add") {
       await addUser(user);
@@ -55,51 +49,27 @@ export default function ModalUser(props) {
       onCancel={handleCancel}
     >
       <Form {...layout} form={form} onFinish={handleSubmit}>
-        <Form.Item
-          label="Email"
-          name={["email"]}
-          rules={[
-            {
-              required: true,
-              message: "Please input email!",
-            },
-          ]}
-        >
+        <Form.Item label="Email" name={["email"]} rules={[...config.ruleEmail]}>
           <Input />
         </Form.Item>
         <Form.Item
           label="Full Name"
           name={["fullName"]}
-          rules={[
-            {
-              required: true,
-              message: "Please input full name!",
-            },
-          ]}
+          rules={[...config.ruleFullName]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Password"
           name={["password"]}
-          rules={[
-            {
-              required: true,
-              message: "Please input password!",
-            },
-          ]}
+          rules={[...config.rulePassword]}
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name="role"
-          label="Role"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item label="Avatar" name={["avatar"]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="role" label="Role" rules={[...config.ruleRole]}>
           <Select placeholder="Select a role" allowClear>
             <Option value="admin">Admin</Option>
             <Option value="user">User</Option>

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Dropdown, Menu } from "antd";
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -6,6 +8,7 @@ import { Link, useHistory, useLocation, matchPath } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import { actHeader } from "../../redux/actions/header/headerAction";
 import "./style.scss";
+import "antd/dist/antd.css";
 
 const Header = () => {
   const headerRef = useRef(null);
@@ -13,7 +16,20 @@ const Header = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <a target="_blank" onClick={() => handleLogout()}>
+              Log out
+            </a>
+          ),
+          key: "1",
+        },
+      ]}
+    />
+  );
   useEffect(() => {
     const header = headerRef.current;
 
@@ -36,6 +52,13 @@ const Header = () => {
   }, [dispatch]);
 
   const handleToLogin = () => {
+    history.push(ROUTER_PATH.LOGIN.path);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("Email");
+    localStorage.removeItem("Role");
+    localStorage.removeItem("Avatar");
+
     history.push(ROUTER_PATH.LOGIN.path);
   };
 
@@ -91,14 +114,17 @@ const Header = () => {
               Detail
             </Link>
           </li> */}
-          <li className="navigation_item">
-            <Link
-              to={ROUTER_PATH.ADMIN.path}
-              className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
-            >
-              admin
-            </Link>
-          </li>
+          {localStorage.getItem("Role") === "admin" && (
+            <li className="navigation_item">
+              <Link
+                to={ROUTER_PATH.ADMIN.path}
+                className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
+              >
+                Admin
+              </Link>
+            </li>
+          )}
+
           <li className="navigation_item">
             <Link
               to={ROUTER_PATH.CONTACT.path}
@@ -109,12 +135,20 @@ const Header = () => {
           </li>
         </ul>
         <div className="flex  justify-between items-center gap-5 ">
-          <button
-            className="btn-nav btn-login active_btn"
-            onClick={handleToLogin}
-          >
-            Login
-          </button>
+          {localStorage.getItem("Email") === null ? (
+            <button
+              className="btn-nav btn-login active_btn"
+              onClick={handleToLogin}
+            >
+              Login
+            </button>
+          ) : (
+            <Dropdown overlay={menu} trigger={["hover"]}>
+              <button className="btn-nav btn-login active_btn">
+                Hello {localStorage.getItem("Role")}
+              </button>
+            </Dropdown>
+          )}
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import { actGetAllOrder } from "../../redux/actions/orderAction";
 import { actGetAllUser } from "../../redux/actions/userAction";
+import { columnsAll } from "../../common/table";
 
 export default function Admin() {
   const data = [
@@ -80,40 +81,7 @@ export default function Admin() {
       },
     },
   };
-  const columns = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "productName",
-      key: "productName",
-    },
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (_, record) => (
-        // eslint-disable-next-line jsx-a11y/alt-text
-        <img
-          src={record.image}
-          style={{ width: "100px", height: "100px" }}
-        ></img>
-      ),
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-    },
-    {
-      title: "Sales",
-      key: "sales",
-      dataIndex: "sales",
-    },
-  ];
+  const columns = [...columnsAll.columnPro];
   const { listOrder } = useSelector((state) => state?.orderReducer);
   const { listUser } = useSelector((state) => state?.userReducer);
   const { listProducts } = useSelector((state) => state?.productReducer);
@@ -127,7 +95,7 @@ export default function Admin() {
     totalOfOrder += order.total;
   });
   listUser.map((user) => {
-    if(user.role === "user"){
+    if (user.role === "user") {
       numOfUser++;
     }
   });
@@ -138,9 +106,9 @@ export default function Admin() {
     dispatch(actGetAllProduct());
     dispatch(actGetAllOrder());
     dispatch(actGetAllUser());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   return (
     <>
       <div className="row">

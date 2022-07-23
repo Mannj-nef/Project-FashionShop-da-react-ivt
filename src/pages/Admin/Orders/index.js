@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { Table, Space, Spin } from "antd";
+import { Table, Space, Spin, Popconfirm } from "antd";
 import { actGetAllOrder } from "../../../redux/actions/orderAction";
 import "antd/dist/antd.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +12,8 @@ import { SUCCESS_MESSAGE } from "../../../common/message";
 import { deleteOrderById } from "../../../apis/orderApi";
 import { generatePath, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../../common/routerLink";
+import { cancel, columnsAll } from "../../../common/table";
+import "../style.scss";
 export default function Orders() {
   const { listOrder, isLoading } = useSelector((state) => state?.orderReducer);
   const history = useHistory();
@@ -31,27 +33,7 @@ export default function Orders() {
   };
 
   const columns = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-    },
-
-    {
-      title: "Customer",
-      key: "customer",
-      dataIndex: "customer",
-    },
-    {
-      title: "Address",
-      key: "address",
-      dataIndex: "address",
-    },
-    {
-      title: "Total",
-      key: "total",
-      dataIndex: "total",
-    },
+    ...columnsAll.columnOrder,
     {
       title: "Actions",
       key: "actions",
@@ -61,17 +43,18 @@ export default function Orders() {
           <button
             className="btn btn-primary"
             onClick={() => handleRedirectOrder(record)}
-            style={{ fontSize: "1.6rem" }}
           >
             View
           </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => handleDeleteOrder(record)}
-            style={{ fontSize: "1.6rem" }}
+          <Popconfirm
+            title="Are you sure to delete this user?"
+            onConfirm={() => handleDeleteOrder(record)}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
           >
-            Delete
-          </button>
+            <button className="btn btn-danger">Delete</button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -84,25 +67,13 @@ export default function Orders() {
     <>
       <ToastContainer />
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="loading-display">
           <Spin indicator={sharinganIcon} />
         </div>
       ) : (
-        <div style={{ paddingTop: "30px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "10px",
-            }}
-          >
-            <h1 style={{ fontSize: "30px", fontWeight: "500" }}>Orders</h1>
+        <div className="container-fluid mt-5">
+          <div className="title">
+            <h1>Orders</h1>
           </div>
           <Table
             columns={columns}

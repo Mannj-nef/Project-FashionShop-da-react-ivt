@@ -19,7 +19,7 @@ function* fetchOrderById(action) {
   try {
     const order = yield call(getOrderById, action.payload);
     yield put({
-      type: OrderTypes.GET_ORDER_SUCCESS,
+      type: OrderTypes.GET_ORDER_BY_ID_SUCCESS,
       payload: order,
     });
   } catch (e) {

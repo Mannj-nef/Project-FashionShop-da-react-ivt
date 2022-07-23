@@ -81,7 +81,7 @@ const product = [
 ];
 
 const Home = () => {
-  const { listProducts } = useSelector((state) => state.product);
+  const { listProducts } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import axiosClient from "../untils/axiosClient";
 
 export const getProducts = async (params) => {
+  console.log(params);
   const { data } = await axiosClient.get("products", {
     params: { categoryId: params },
   });

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { Table, Space, Spin, Dropdown, Menu, Button } from "antd";
+import { Table, Space, Spin, Dropdown, Menu, Button, Popconfirm } from "antd";
 import {
   actGetAllProduct,
   actGetProductByCat,
@@ -11,22 +11,23 @@ import { deleteProductById } from "../../../apis/productApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-loading-skeleton/dist/skeleton.css";
-import "./style.scss";
 import ModalProduct from "./ModalProduct";
 import { sharinganIcon } from "../../../components/Loading";
 import { actGetAllCategory } from "../../../redux/actions/categoryAction";
 import { SUCCESS_MESSAGE } from "../../../common/message";
-
+import "../style.scss";
+import { cancel, columnsAll } from "../../../common/table";
 export default function Products() {
+  const dispatch = useDispatch();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [productEdit, setProductEdit] = useState("");
+
   const { listProducts, isLoading } = useSelector(
     (state) => state?.productReducer
   );
   const { listCategory } = useSelector((state) => state?.categoryReducer);
-
-  const dispatch = useDispatch();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
-  const [productEdit, setProductEdit] = useState("");
 
   const handleFilter = ({ key }) => {
     dispatch(actGetProductByCat(key));
@@ -43,6 +44,7 @@ export default function Products() {
       })}
     />
   );
+
   const showModalAdd = () => {
     setModalTitle("Add");
     setIsModalVisible(true);
@@ -60,38 +62,7 @@ export default function Products() {
   };
 
   const columns = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "productName",
-      key: "productName",
-    },
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (_, record) => (
-        // eslint-disable-next-line jsx-a11y/alt-text
-        <img
-          src={record.image}
-          style={{ width: "100px", height: "100px" }}
-        ></img>
-      ),
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-    },
-    {
-      title: "Sales",
-      key: "sales",
-      dataIndex: "sales",
-    },
+    ...columnsAll.columnPro,
     {
       title: "Actions",
       key: "actions",
@@ -101,17 +72,22 @@ export default function Products() {
           <button
             className="btn btn-primary"
             onClick={() => showModalEdit(record)}
-            style={{ fontSize: "1.6rem" }}
           >
             Edit
           </button>
+          <Popconfirm
+            title="Are you sure to delete this product?"
+            onConfirm={() => handleDeleteProduct(record)}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
+          >
           <button
             className="btn btn-danger"
-            onClick={() => handleDeleteProduct(record)}
-            style={{ fontSize: "1.6rem" }}
           >
             Delete
           </button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -125,25 +101,13 @@ export default function Products() {
     <>
       <ToastContainer />
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="loading-display">
           <Spin indicator={sharinganIcon} />
         </div>
       ) : (
-        <div style={{ paddingTop: "30px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "10px",
-            }}
-          >
-            <h1 style={{ fontSize: "30px", fontWeight: "500" }}>Products</h1>
+        <div className="container-fluid mt-5">
+          <div className="title">
+            <h1>Products</h1>
             <Dropdown overlay={menu}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -151,11 +115,7 @@ export default function Products() {
                 </Space>
               </a>
             </Dropdown>
-            <button
-              className="btn btn-success"
-              onClick={() => showModalAdd()}
-              style={{ fontSize: "1.6rem" }}
-            >
+            <button className="btn btn-success" onClick={() => showModalAdd()}>
               Add Product
             </button>
             <ModalProduct
