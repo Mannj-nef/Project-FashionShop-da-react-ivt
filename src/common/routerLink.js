@@ -31,8 +31,8 @@ export const ROUTER_PATH = {
   ADMIN: {
     path: "/admin",
   },
-  ANALYTICS: {
-    path: "/admin/analytics",
+  PROFILE: {
+    path: "/admin/profile",
   },
   PRODUCTS: {
     path: "/admin/products",

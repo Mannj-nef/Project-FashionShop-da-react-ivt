@@ -12,10 +12,10 @@ function* fetchProducts(action) {
     yield put({ message: e.message });
   }
 }
-function* fetchProductsByCat(action) {
+function* fetchProductsByFilter(action) {
   yield put(actSetLoading());
   try {
-    const products = yield call(getProducts, action.payload);
+    const products = yield call(getProducts, {...action.payload});
     yield put({ type: ProductTypes.GET_PRODUCT_SUCCESS, payload: products });
   } catch (e) {
     yield put({ message: e.message });
@@ -51,8 +51,8 @@ function* fetchProductsById(action) {
 function* watchAllProduct() {
   yield takeLeading(ProductTypes.GET_All_PRODUCT, fetchProducts);
 }
-function* watchAllProductByCat() {
-  yield takeLeading(ProductTypes.GET_PRODUCT_BY_CAT, fetchProductsByCat);
+function* watchAllProductByFilter() {
+  yield takeLeading(ProductTypes.GET_PRODUCT_BY_FILTER, fetchProductsByFilter);
 }
 function* watchAllProductsByGender() {
   yield takeLeading(ProductTypes.GET_PRODUCT_BY_GENDER, fetchProductsByGender);
@@ -64,7 +64,7 @@ function* watchAllProductById() {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   watchAllProduct(),
-  watchAllProductByCat(),
+  watchAllProductByFilter(),
   watchAllProductsByGender(),
   watchAllProductById(),
 ];

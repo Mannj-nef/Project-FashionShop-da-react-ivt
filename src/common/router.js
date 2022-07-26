@@ -62,7 +62,7 @@ export const userRouter = [
 
 //admin
 const Admin = lazy(() => import("../pages/Admin/Admin"));
-const Analytics = lazy(() => import("../pages/Admin/Analytics"));
+const Profile = lazy(() => import("../pages/Admin/Profile"));
 const Products = lazy(() => import("../pages/Admin/Products"));
 const Users = lazy(() => import("../pages/Admin/Users"));
 const Categories = lazy(() => import("../pages/Admin/Categories"));
@@ -75,9 +75,9 @@ export const adminRouter = [
     component: Admin,
   },
   {
-    path: ROUTER_PATH.ANALYTICS.path,
+    path: ROUTER_PATH.PROFILE.path,
     isExact: true,
-    component: Analytics,
+    component: Profile,
   },
   {
     path: ROUTER_PATH.PRODUCTS.path,

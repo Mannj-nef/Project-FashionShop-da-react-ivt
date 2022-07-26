@@ -6,7 +6,6 @@ import "antd/dist/antd.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-loading-skeleton/dist/skeleton.css";
 import { sharinganIcon } from "../../../components/Loading";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import { deleteOrderById } from "../../../apis/orderApi";

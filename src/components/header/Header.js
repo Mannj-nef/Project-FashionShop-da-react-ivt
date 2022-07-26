@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Dropdown, Menu } from "antd";
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -18,20 +17,7 @@ const Header = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const menu = (
-    <Menu
-      items={[
-        {
-          label: (
-            <a target="_blank" onClick={() => handleLogout()}>
-              Log out
-            </a>
-          ),
-          key: "1",
-        },
-      ]}
-    />
-  );
+
   useEffect(() => {
     const header = headerRef.current;
 
@@ -58,13 +44,6 @@ const Header = () => {
   }, [dispatch]);
 
   const handleToLogin = () => {
-    history.push(ROUTER_PATH.LOGIN.path);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem("Email");
-    localStorage.removeItem("Role");
-    localStorage.removeItem("Avatar");
-
     history.push(ROUTER_PATH.LOGIN.path);
   };
 
@@ -120,16 +99,14 @@ const Header = () => {
               Detail
             </Link>
           </li> */}
-          {localStorage.getItem("Role") === "admin" && (
-            <li className="navigation_item">
-              <Link
-                to={ROUTER_PATH.ADMIN.path}
-                className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
-              >
-                Admin
-              </Link>
-            </li>
-          )}
+          <li className="navigation_item">
+            <Link
+              to={ROUTER_PATH.ADMIN.path}
+              className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
+            >
+              Admin
+            </Link>
+          </li>
 
           <li className="navigation_item">
             <Link

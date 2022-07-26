@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteUserById } from "../../../apis/userApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-loading-skeleton/dist/skeleton.css";
 import { sharinganIcon } from "../../../components/Loading";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import ModalUser from "./ModalUser";
