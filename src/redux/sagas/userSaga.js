@@ -1,5 +1,5 @@
 import { call, put, takeLatest, takeLeading } from "redux-saga/effects";
-import { addUser, getUsers } from "../../apis/userApi";
+import { addUser, getUserById, getUsers } from "../../apis/userApi";
 import { UserTypes } from "../../common/types";
 import { actSetLoading } from "../actions/userAction";
 function* fetchUsers(action) {
@@ -9,6 +9,19 @@ function* fetchUsers(action) {
     yield put({
       type: UserTypes.GET_USER_SUCCESS,
       payload: users,
+    });
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
+function* fetchUserById(action) {
+  yield put(actSetLoading());
+  try {
+    const user = yield call(getUserById, action.payload);
+    yield put({
+      type: UserTypes.GET_USER_BY_ID_SUCCESS,
+      payload: user,
     });
   } catch (e) {
     yield put({ message: e.message });
@@ -33,5 +46,9 @@ function* watchCreateUser() {
   yield takeLatest(UserTypes.CREATE, createUser);
 }
 
+function* watchDetailUser() {
+  yield takeLeading(UserTypes.GET_USER_BY_ID, fetchUserById);
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [watchAllUser(), watchCreateUser()];
+export default [watchAllUser(), watchCreateUser(), watchDetailUser()];

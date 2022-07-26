@@ -6,6 +6,7 @@ import image8 from "../../assets/clothes-Image/product-t-shirt7.jpg";
 import image9 from "../../assets/clothes-Image/product-t-shirt4.2.jpg";
 import image10 from "../../assets/clothes-Image/product-t-shirt5.3.jpg";
 
+
 export const productDetail = {
   id: 1,
   imgUrl: image1,
@@ -83,31 +84,6 @@ export const productRelateds = [
   },
 ];
 
-export const buyerRatings = [
-  {
-    id: 1,
-    rating: "",
-    name: "Manh quan",
-    date: "05/01/2022",
-    title: "Absolutely love this case",
-    description: "This was exactly what I wanted, very happy love it, 5 stars",
-  },
-  {
-    id: 2,
-    rating: "",
-    name: "Mannj Nef",
-    date: "05/02/2022",
-    title: "Great leather quality",
-    description:
-      "The leather quality is great, I’ve tried others before and it all seems like fake ****",
-  },
-  {
-    id: 3,
-    rating: "",
-    name: "Giovanni V",
-    date: "04/03/2022",
-    title: "Great leather quality",
-    description:
-      "Was looking for a good-quality case for my AirPods before I finally found these ones, very happy with the purchase",
-  },
-];
+// export const buyerRatings = [
+  
+// ];

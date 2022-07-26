@@ -1,4 +1,6 @@
+import { Tag } from "antd";
 import { toast } from "react-toastify";
+import { Status } from "./types";
 
 export const layout = {
   labelCol: {
@@ -123,6 +125,12 @@ export const config = {
       message: "Please select gender!",
     },
   ],
+  ruleAddress: [
+    {
+      required: true,
+      message: "Please input address!",
+    },
+  ],
 };
 
 export const columnsAll = {
@@ -150,30 +158,35 @@ export const columnsAll = {
       title: "Name",
       dataIndex: "productName",
       key: "productName",
+      width: "30%",
     },
     {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (_, record) => (
+      render: (image) => (
         // eslint-disable-next-line jsx-a11y/alt-text
-        <img
-          src={record.image}
-          style={{ width: "100px", height: "100px" }}
-        ></img>
+        <img src={image} style={{ width: "100px", height: "100px" }}></img>
       ),
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
     },
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
       sorter: (a, b) => a.price - b.price,
+      render: (_, record) => <div>{record.price}$</div>,
     },
     {
       title: "Sales",
       key: "sales",
       dataIndex: "sales",
       sorter: (a, b) => a.sales - b.sales,
+      render: (_, record) => <div>{record.sales}%</div>,
     },
   ],
   columnUser: [
@@ -214,6 +227,30 @@ export const columnsAll = {
       dataIndex: "address",
     },
     {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      render: (status) => {
+        let color = "geekblue";
+
+        if (status === Status.PROCESSING) {
+          color = "geekblue";
+        } else if (status === Status.SHIPPING) {
+          color = "cyan";
+        } else if (status === Status.DELIVERED) {
+          color = "green";
+        } else if (status === Status.CANCELED) {
+          color = "red";
+        }
+
+        return (
+          <Tag color={color} key={status}>
+            {status}
+          </Tag>
+        );
+      },
+    },
+    {
       title: "Total",
       key: "total",
       dataIndex: "total",
@@ -234,6 +271,18 @@ export const columnsAll = {
       dataIndex: "productName",
     },
     {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (_, record) => (
+        // eslint-disable-next-line jsx-a11y/alt-text
+        <img
+          src={record.image}
+          style={{ width: "100px", height: "100px" }}
+        ></img>
+      ),
+    },
+    {
       title: "Price",
       key: "price",
       dataIndex: "price",
@@ -244,6 +293,12 @@ export const columnsAll = {
       key: "quantity",
       dataIndex: "quantity",
       sorter: (a, b) => a.quantity - b.quantity,
+    },
+    {
+      title: "Sales",
+      key: "sales",
+      dataIndex: "sales",
+      sorter: (a, b) => a.sales - b.sales,
     },
     {
       title: "Total amount",

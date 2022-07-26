@@ -4,8 +4,18 @@ export const actGetAllUser = () => ({
   type: UserTypes.GET_All_USER,
 });
 
+export const actGetUserById = (id) => ({
+  type: UserTypes.GET_USER_BY_ID,
+  payload: id,
+});
+
 export const actGetUserSuccess = (payload) => ({
   type: UserTypes.GET_USER_SUCCESS,
+  payload: payload,
+});
+
+export const actGetUserByIdSuccess = (payload) => ({
+  type: UserTypes.GET_USER_BY_ID_SUCCESS,
   payload: payload,
 });
 

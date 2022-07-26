@@ -1,66 +1,51 @@
+import { Form, Rate } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 import React from "react";
-import Form from "../../components/form/Form";
-import Input from "../../components/form/input/InputWrrapp";
-import TextArea from "../../components/form/textArea/TextArea";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { VALIDATE_YUP } from "../../common/validateYup";
+import { addRating } from "../../apis/ratingApi";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
+import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
+import { useDispatch } from "react-redux";
 
-const schema = Yup.object({
-  title: VALIDATE_YUP.TITLE,
-  description: VALIDATE_YUP.DESCRIPTION,
-});
-
-const FormReview = ({ setShowFormReview }) => {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const onSubmitFormReviews = (values) => {
-    console.log(values);
-    reset();
-    setShowFormReview(false);
+const FormReview = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const handleSubmit = async (value) => {
+    await addRating({ ...value, productId: parseInt(id) });
+    toast.success("Bình luận thành công", { autoClose: 2000 });
+    form.resetFields();
+    dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
   };
 
   return (
-    <div className="p-[50px]">
-      <h2 className="buyreName mb-3 text-4xl">{"Manh Quan"}</h2>
-      <Form handleSubmit={handleSubmit(onSubmitFormReviews)}>
-        <div className="relative pb-5">
-          <Input
-            name="title"
-            placeholder="Give your review a title"
-            control={control}
-          ></Input>
-          {errors?.title?.message && (
-            <p className="text-red-500 bottom-0  absolute">
-              {errors?.title?.message}
-            </p>
-          )}
-        </div>
-        <div className="relative pb-5">
-          <TextArea
-            name="description"
-            placeholder="Give us your review"
-            control={control}
-          ></TextArea>
-          {errors?.description?.message && (
-            <p className="text-red-500 absolute">
-              {errors?.description?.message}
-            </p>
-          )}
-        </div>
-        <div className="text-end">
-          <button className="submitRating py-[15px] px-[30px] rounded-md mt-5">
-            Submit
-          </button>
-        </div>
-      </Form>
-    </div>
+    <>
+      <ToastContainer />
+      <div className="p-[50px]">
+        <h2 className="buyreName mb-3 text-4xl">{"Manh Quan"}</h2>
+        <Form layout="vertical" onFinish={handleSubmit} form={form}>
+          <div className="relative pb-2">
+            <Form.Item name="rate" label="Rate">
+              <Rate />
+            </Form.Item>
+          </div>
+          <div className="relative pb-2">
+            <Form.Item label="Comment" name="comment">
+              <TextArea rows={4} />
+            </Form.Item>
+          </div>
+          <div className="text-end">
+            <button
+              className="submitRating py-[15px] px-[30px] rounded-md"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </Form>
+      </div>
+    </>
   );
 };
 

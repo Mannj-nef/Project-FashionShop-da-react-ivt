@@ -3,8 +3,8 @@ import { ProductTypes } from "../../common/types";
 export const actGetAllProduct = () => ({
   type: ProductTypes.GET_All_PRODUCT,
 });
-export const actGetProductByCat = (payload) => ({
-  type: ProductTypes.GET_PRODUCT_BY_CAT,
+export const actGetProductByFilter = (payload) => ({
+  type: ProductTypes.GET_PRODUCT_BY_FILTER,
   payload: payload,
 });
 

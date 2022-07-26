@@ -11,7 +11,6 @@ import {
 } from "../../../apis/categoryApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-loading-skeleton/dist/skeleton.css";
 import { sharinganIcon } from "../../../components/Loading";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import "../style.scss";
@@ -25,7 +24,6 @@ export default function Categories() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [categoryEdit, setCategoryEdit] = useState("");
-  const [isValid, setIsValid] = useState(true);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -55,10 +53,11 @@ export default function Categories() {
   };
   const handleSubmit = async (category) => {
     if (modalTitle === "Add") {
-      await listCategory.map((cat) => {
-        if (category.categoryName === cat.categoryName) {
-          console.log(category.categoryName + "&&" + cat.categoryName);
-          setIsValid(false);
+      let isValid = true;
+
+      listCategory.forEach((cate) => {
+        if (category.categoryName === cate.categoryName) {
+          isValid = false;
         }
       });
       if (isValid) {

@@ -1,3 +1,4 @@
+import { Rate } from "antd";
 import React from "react";
 
 const Reviews = ({ buyer, children }) => {
@@ -19,16 +20,12 @@ const Reviews = ({ buyer, children }) => {
           </span>
         </p>
         <div className="flex items-center my-3">
-          {children}
-          <h2 className="ml-5 font-semibold">
-            {buyer?.title || "Lorem ipsum dolor sit amet consectetur"}
-          </h2>
+          <Rate disabled defaultValue={buyer.rate}/>
         </div>
         <p className="pr-[40%]">
-          {buyer?.description ||
+          {buyer?.comment ||
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Non magni at similique impedit illo officia atque nesciunt, voluptatibus ipsa adipisci fugit qui, esse iusto placeat odio soluta nisi modi tempora."}
         </p>
-        lorem
       </div>
     </div>
   );

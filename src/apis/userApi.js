@@ -18,7 +18,10 @@ export const getUsers = async () => {
   const { data } = await axiosClient.get("users");
   return data;
 };
-
+export const getUserById = async (id) => {
+  const { data } = await axiosClient.get(`users/${id}`);
+  return data;
+};
 export const deleteUserById = (id) => {
   return axiosClient.delete(`users/${id}`);
 };

@@ -10,7 +10,6 @@ import CardProduct from "../../components/cardProduct/CardProduct";
 import "./style.scss";
 
 import useCheckDisplay from "../../hooks/useCheckDisplay";
-import { buyerRatings } from "./DataMock";
 import useClickActive from "../../hooks/useClickActive";
 import FormReview from "./FormReviews";
 import Socials from "./Socials";
@@ -22,6 +21,8 @@ import {
 import DetailProduct from "./DetailProduct";
 import Cart from "../../components/cart/Cart";
 import { actChangeWishList } from "../../redux/actions/cart/cartAction";
+import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
+import { Rate } from "antd";
 
 const Stars5 = ({ size }) => {
   return (
@@ -79,7 +80,14 @@ const Detail = () => {
     (state) => state.productReducer
   );
   const { listCart } = useSelector((state) => state.cartReducer);
-
+  const { listRatings } = useSelector((state) => state.ratingReducer);
+  let count = 0;
+  let rate = 0;
+  listRatings.map((rating) => {
+    count++;
+    rate += rating.rate;
+  });
+  let avgRate = Math.round(rate/count);
   const wishList = listCart.filter((item) => +item.id === +id);
 
   useClickActive(".product-detail__nav");
@@ -91,7 +99,9 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(actGetAllProduct());
-  }, [dispatch]);
+    dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const FormReview = FormReviewRef.current;
@@ -142,10 +152,10 @@ const Detail = () => {
           <div className="reviews-item">
             <div>
               <h2 className="reviews-title">
-                <span className="mr-5">5.0</span>
-                <Stars5 size="2.5rem" />
+                <span className="mr-5">{avgRate ? avgRate : 0}</span>
+                {avgRate ? <Rate disabled defaultValue={avgRate}/> : null}
               </h2>
-              <p>Based on 5 Reviews</p>
+              <p>Based on {count} Reviews</p>
             </div>
             <button
               className="flex items-center gap-3 py-3 px-4 shadow-lg border transition-all hover:shadow-none hover:opacity-70 hover:border-[#ccc]"
@@ -164,7 +174,7 @@ const Detail = () => {
           >
             <FormReview setShowFormReview={setShowFormReview}></FormReview>
           </div>
-          {buyerRatings.map((buyerRating) => (
+          {listRatings.map((buyerRating) => (
             <Reviews key={buyerRating.id} buyer={buyerRating}>
               <Stars5 size="2rem" />
             </Reviews>
