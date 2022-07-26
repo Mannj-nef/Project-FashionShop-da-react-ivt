@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
 import { useDispatch } from "react-redux";
 
+<<<<<<< HEAD
 const FormReview = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -17,6 +18,25 @@ const FormReview = () => {
     toast.success("Bình luận thành công", { autoClose: 2000 });
     form.resetFields();
     dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+=======
+const schema = Yup.object({
+  title: VALIDATE_YUP.TITLE,
+  description: VALIDATE_YUP.DESCRIPTION,
+});
+
+const FormReview = ({ setShowFormReview }) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmitFormReviews = (values) => {
+    console.log(values);
+    reset();
+    setShowFormReview(false);
+>>>>>>> bf9aa7a (update codes)
   };
 
   return (

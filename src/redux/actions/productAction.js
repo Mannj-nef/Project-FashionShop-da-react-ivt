@@ -8,6 +8,15 @@ export const actGetProductByFilter = (payload) => ({
   payload: payload,
 });
 
+export const actGetProductByPage = (payload) => ({
+  type: ProductTypes.GET_PRODUCT_BY_PAGE,
+  payload,
+});
+export const actGetProductByName = (payload) => ({
+  type: ProductTypes.GET_PRODUCT_BY_NAME,
+  payload,
+});
+
 export const actGetProductById = (payload) => ({
   type: ProductTypes.GET_PRODUCT_BY_ID,
   payload: payload,

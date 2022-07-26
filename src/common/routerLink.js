@@ -26,6 +26,18 @@ export const ROUTER_PATH = {
   CONTACT: {
     path: "/contact",
   },
+  USER: {
+    path: "/me",
+  },
+  PROFILE: {
+    path: "/profile",
+  },
+  PAY: {
+    path: "/pay",
+  },
+  ORDERSTATUS: {
+    path: "/order-status",
+  },
 
   // admin
   ADMIN: {

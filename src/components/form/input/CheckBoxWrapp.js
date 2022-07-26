@@ -8,7 +8,6 @@ const CheckBoxWrapp = ({ control, children, ...props }) => {
     control,
   });
 
-  console.log(field?.value);
   return (
     <label className="checkbox-wrapper flex gap-3 items-center cursor-pointer">
       <input

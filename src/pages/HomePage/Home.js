@@ -20,69 +20,77 @@ import image5 from "../../assets/image/banner10.jpg";
 import image6 from "../../assets/image/banner2.jpg";
 import image7 from "../../assets/image/banner9.jpg";
 
-import image8 from "../../assets/clothes-Image/product-t-shirt7.jpg";
-import image9 from "../../assets/clothes-Image/product-t-shirt4.2.jpg";
-import image10 from "../../assets/clothes-Image/product-t-shirt5.3.jpg";
+// import image8 from "../../assets/clothes-Image/product-t-shirt7.jpg";
+// import image9 from "../../assets/clothes-Image/product-t-shirt4.2.jpg";
+// import image10 from "../../assets/clothes-Image/product-t-shirt5.3.jpg";
 
 import { expertsData } from "./mookData";
 import { actGetAllProduct } from "../../redux/actions/productAction";
+import useTotop from "../../hooks/useTotop";
 
 const arrImage = [image1, image2, image3, image3];
 
-const product = [
-  {
-    id: 1,
-    img: image8,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 2,
-    img: image9,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 3,
-    img: image8,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 4,
-    img: image10,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 5,
-    img: image9,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 6,
-    img: image8,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 7,
-    img: image10,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-  {
-    id: 8,
-    img: image9,
-    price: "$ 70",
-    productName: "Beige V neck button cardigan",
-  },
-];
+// const product = [
+//   {
+//     id: 1,
+//     img: image8,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 2,
+//     img: image9,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 3,
+//     img: image8,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 4,
+//     img: image10,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 5,
+//     img: image9,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 6,
+//     img: image8,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 7,
+//     img: image10,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+//   {
+//     id: 8,
+//     img: image9,
+//     price: "$ 70",
+//     productName: "Beige V neck button cardigan",
+//   },
+// ];
 
 const Home = () => {
   const { listProducts } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
+
+  const handleScrollToTop = useTotop();
+  useEffect(() => {
+    handleScrollToTop();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(actGetAllProduct());

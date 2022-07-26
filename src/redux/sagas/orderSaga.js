@@ -1,9 +1,7 @@
 import { call, put, takeLeading } from "redux-saga/effects";
 import { addOrder, getOrderById, getOrders } from "../../apis/orderApi";
 import { OrderTypes } from "../../common/types";
-import { actRemoveAllCart } from "../actions/cart/cartAction";
-import { actSetLoading } from "../actions/orderAction";
-import { actAddOrder } from "../actions/orderAction";
+import { actSetLoading, actAddOrder } from "../actions/orderAction";
 function* fetchOrders(action) {
   yield put(actSetLoading());
   try {
@@ -30,12 +28,11 @@ function* fetchOrderById(action) {
 }
 
 function* fetchaddOrder(action) {
-  const data = action.payload;
   yield put(actSetLoading());
+  const data = action.payload;
   try {
     yield call(addOrder, data);
     yield put(actAddOrder());
-    // yield put(actRemoveAllCart());
   } catch (e) {
     yield put({ message: e.message });
   }

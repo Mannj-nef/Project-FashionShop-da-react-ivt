@@ -1,0 +1,79 @@
+.checkout-pay {
+    font-size: 1.6rem;
+    background-color: var(--color-light-blue);
+    padding: 50px 0;
+    min-height: 100vh;
+    color: var(--text-color);
+
+    --width: 400px;
+
+    .pay-checkout {
+        width: calc(100% - (var(--width) + 40px));
+        background-color: var(--white-color);
+        border-radius: 6px;
+        padding: 40px;
+
+        .infomation-pay {
+            margin-top: 50px;
+        }
+        .checkout-method {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--color-light-gray);
+            border: 1px solid transparent;
+        }
+        .checkout-method.active {
+            background-color: var(--color-light-blue2);
+            border: 1px solid var(--color-purple);
+        }
+        .info-title {
+            font-weight: 500;
+        }
+    }
+    .btn-submit {
+        // width: 100%;
+        margin-top: 40px;
+        border-radius: 4px;
+        padding: 15px;
+        display: block;
+        background-color: var(--color-purple);
+        color: var(--white-color);
+    }
+    .title {
+        // display: flex;
+        // gap: 20px;
+        // align-items: center;
+        font-size: 3rem;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    .pay-order {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-width: var(--width);
+        width: 100%;
+        background: var(--white-color);
+        padding: 40px;
+        border-radius: 6px;
+        box-shadow: rgba(151, 135, 162, 0.2) 0px 8px 24px 15px;
+        .order-list::-webkit-scrollbar {
+            width: 0 !important;
+            display: none;
+        }
+        .order-item {
+        }
+        .title-name {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .title-price {
+            color: var(--color-red);
+        }
+        .order-bott {
+            border-top: 1px solid var(--color-pink);
+        }
+    }
+}

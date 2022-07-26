@@ -1,8 +1,9 @@
 import { call, put, takeLeading } from "redux-saga/effects";
-import { getUser } from "../../apis/authApi";
+import { editUser, getUser } from "../../apis/authApi";
 import { AuthTypes } from "../../common/types";
 
 import {
+  actChangeProfile,
   actLoginFail,
   actLoginSuccess,
   actSetLoadingSuccess,
@@ -29,9 +30,24 @@ function* login(action) {
   }
 }
 
+function* changeProfile(action) {
+  // yield put({ type: AuthTypes.SET_LOADING });
+  try {
+    const dataUpdata = action.payload;
+    const id = dataUpdata.id;
+    const response = yield call(editUser, dataUpdata, id);
+    yield put(actChangeProfile(response.data));
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
 function* watchLogin() {
   yield takeLeading(AuthTypes.LOGIN, login);
 }
+function* watchChangeProfile() {
+  yield takeLeading(AuthTypes.CHANGE_PROFILE, changeProfile);
+}
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [watchLogin()];
+export default [watchLogin(), watchChangeProfile()];

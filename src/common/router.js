@@ -2,15 +2,19 @@ import { lazy } from "react";
 import { ROUTER_PATH } from "./routerLink";
 
 //user
-const Home = lazy(() => import("../pages/HomePage/Home"));
-const Detail = lazy(() => import("../pages/Detail/Detail"));
-const Login = lazy(() => import("../pages/Login/Login"));
-const Shop = lazy(() => import("../pages/Shop/ShopStore"));
-const MaleShop = lazy(() => import("../pages/Shop/ShopMan"));
-const FemaleShop = lazy(() => import("../pages/Shop/ShopWoman"));
-const Blog = lazy(() => import("../pages/Blog/Blog"));
-const Collection = lazy(() => import("../pages/Collection/Collection"));
-const Contact = lazy(() => import("../pages/Contact/Contact"));
+const Home = lazy(() => import("../pages/HomePage/Home.js"));
+const Detail = lazy(() => import("../pages/Detail/Detail.js"));
+const Login = lazy(() => import("../pages/Login/Login.js"));
+const Shop = lazy(() => import("../pages/Shop/ShopStore.js"));
+const MaleShop = lazy(() => import("../pages/Shop/ShopMan.js"));
+const FemaleShop = lazy(() => import("../pages/Shop/ShopWoman.js"));
+const Blog = lazy(() => import("../pages/Blog/Blog.js"));
+const Collection = lazy(() => import("../pages/Collection/Collection.js"));
+const Contact = lazy(() => import("../pages/Contact/Contact.js"));
+const Profile = lazy(() => import("../pages/Profile/Profile.js"));
+const User = lazy(() => import("../pages/User/User.js"));
+const Pay = lazy(() => import("../pages/Pay/Pay.js"));
+const OrderStatus = lazy(() => import("../pages/OrderStatus/OrderStatus.js"));
 
 export const userRouter = [
   {
@@ -57,6 +61,26 @@ export const userRouter = [
     path: ROUTER_PATH.CONTACT.path,
     isExact: true,
     component: Contact,
+  },
+  {
+    path: ROUTER_PATH.PROFILE.path,
+    isExact: true,
+    component: Profile,
+  },
+  {
+    path: ROUTER_PATH.USER.path,
+    isExact: true,
+    component: User,
+  },
+  {
+    path: ROUTER_PATH.PAY.path,
+    isExact: true,
+    component: Pay,
+  },
+  {
+    path: ROUTER_PATH.ORDERSTATUS.path,
+    isExact: true,
+    component: OrderStatus,
   },
 ];
 

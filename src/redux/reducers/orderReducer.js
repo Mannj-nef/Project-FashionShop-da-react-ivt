@@ -1,7 +1,7 @@
 import { OrderTypes } from "../../common/types";
 
 const initialValue = {
-  isLoading: false,
+  isOrderLoading: false,
   listOrder: [],
   detailOrder: {},
 };
@@ -12,17 +12,18 @@ const orderReducer = (state = initialValue, action) => {
       return {
         ...state,
         listOrder: action.payload,
-        isLoading: false,
+        isOrderLoading: false,
       };
     }
     case OrderTypes.GET_ORDER_BY_ID_SUCCESS: {
-      return { ...state, isLoading: false, detailOrder: action.payload };
+      return { ...state, isOrderLoading: false, detailOrder: action.payload };
     }
     case OrderTypes.SET_LOADING: {
-      return { ...state };
+      // console.log("loading order");
+      return { ...state, isOrderLoading: true };
     }
     case OrderTypes.ADD_ORDER: {
-      return { ...state, isLoading: false };
+      return { ...state, isOrderLoading: false };
     }
     default:
       return state;

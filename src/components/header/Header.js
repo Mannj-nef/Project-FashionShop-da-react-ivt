@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -17,7 +16,6 @@ const Header = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     const header = headerRef.current;
 
@@ -35,12 +33,8 @@ const Header = () => {
 
   useEffect(() => {
     const header = headerRef.current;
-    const headerHeight = header.scrollHeight;
+    const headerHeight = header.offsetHeight;
     dispatch(actHeader(headerHeight));
-  }, [dispatch]);
-
-  useEffect(() => {
-    //call api check isAdmin
   }, [dispatch]);
 
   const handleToLogin = () => {
@@ -57,7 +51,7 @@ const Header = () => {
     return active;
   };
 
-  console.log();
+  // console.log();
   return (
     <div ref={headerRef} className="header ">
       <div className="container flex justify-between items-center">
@@ -91,22 +85,16 @@ const Header = () => {
               Blog
             </Link>
           </li>
-          {/* <li className="navigation_item">
-            <Link
-              to={ROUTER_PATH.DETAIL.path}
-              className={handleCheckActive(ROUTER_PATH.DETAIL.path)}
-            >
-              Detail
-            </Link>
-          </li> */}
-          <li className="navigation_item">
-            <Link
-              to={ROUTER_PATH.ADMIN.path}
-              className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
-            >
-              Admin
-            </Link>
-          </li>
+          {profile?.role === "admin" && (
+            <li className="navigation_item">
+              <Link
+                to={ROUTER_PATH.ADMIN.path}
+                className={handleCheckActive(ROUTER_PATH.ADMIN.path)}
+              >
+                Admin
+              </Link>
+            </li>
+          )}
 
           <li className="navigation_item">
             <Link

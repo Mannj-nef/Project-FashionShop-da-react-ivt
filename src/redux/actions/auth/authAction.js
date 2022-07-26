@@ -24,6 +24,11 @@ export const actLoginSuccess = (payload) => {
   };
 };
 
+export const actChangeProfile = (payload) => ({
+  type: AuthTypes.CHANGE_PROFILE,
+  payload,
+});
+
 export const actLogout = () => ({
   type: AuthTypes.LOGOUT,
 });
