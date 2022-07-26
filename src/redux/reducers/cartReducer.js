@@ -21,7 +21,6 @@ const cartReducer = (state = initialValue, action) => {
       };
     }
     case CartType.REMOVE_TO_CART: {
-      console.log("remove");
       const id = action.payload;
       const products = [...state.listCart].filter(
         (cartItem) => cartItem.id !== id

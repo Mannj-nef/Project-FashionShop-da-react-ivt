@@ -1,7 +1,7 @@
 import { AuthTypes } from "../../common/types";
 
 const initialState = {
-  profile: {},
+  profile: JSON.parse(localStorage.getItem(AuthTypes.AUTH_LOCALSTORAGE)) || {},
   isLoggIn: false,
   isLoading: false,
   notif: "",
@@ -17,11 +17,22 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AuthTypes.LOGIN_SUCCESS: {
+      const data = action.payload;
+      localStorage.setItem(AuthTypes.AUTH_LOCALSTORAGE, JSON.stringify(data));
       return {
         ...state,
         isLoading: false,
         isLoggIn: true,
-        profile: action.payload,
+        profile: data,
+      };
+    }
+    case AuthTypes.CHANGE_PROFILE: {
+      const data = action.payload;
+      localStorage.setItem(AuthTypes.AUTH_LOCALSTORAGE, JSON.stringify(data));
+      return {
+        ...state,
+        isLoading: false,
+        profile: data,
       };
     }
     case AuthTypes.SET_LOADING: {
@@ -40,6 +51,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AuthTypes.LOGOUT: {
+      localStorage.removeItem(AuthTypes.AUTH_LOCALSTORAGE);
       return {
         ...state,
         isLoggIn: false,

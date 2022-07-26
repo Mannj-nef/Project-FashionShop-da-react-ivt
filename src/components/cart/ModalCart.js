@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import { FaOpencart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { actAddOrder } from "../../redux/actions/orderAction";
+import { ROUTER_PATH } from "../../common/routerLink";
 import ModalLayout from "../modalLayout/ModalLayout";
 import CartItem from "./CartItem";
 
@@ -10,12 +10,8 @@ import CartItem from "./CartItem";
 
 const ModalCart = ({ listCart }) => {
   const { profile } = useSelector((state) => state.authReducer);
-  const { isLoading } = useSelector((state) => state.orderReducer);
-
-  console.log(isLoading);
 
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const cartTotal = useMemo(
     () =>
@@ -34,15 +30,9 @@ const ModalCart = ({ listCart }) => {
 
   const handleCheckOut = () => {
     if (Object.keys(profile) <= 0) {
-      history.push("/login");
+      history.push(ROUTER_PATH.LOGIN.path);
     } else {
-      const profileClone = { ...profile };
-      delete profileClone.id;
-      const data = {
-        ...profileClone,
-        cart: listCart,
-      };
-      dispatch(actAddOrder(data));
+      history.push(ROUTER_PATH.PAY.path);
     }
   };
 
@@ -65,14 +55,7 @@ const ModalCart = ({ listCart }) => {
               <span> {priceTotal}$</span>
             </div>
             <button className="btn-pay relative" onClick={handleCheckOut}>
-              <div
-                className={`w-9 h-9 rounded-full left-1/2 translate-x-[-1/2]  border-3 animate-spin border-t-transparent absolute  ${
-                  isLoading ? "opacity-100" : "opacity-0"
-                }`}
-              ></div>
-              <span className={`${isLoading ? "opacity-0" : "opacity-100"}`}>
-                Check out
-              </span>
+              Check out
             </button>
           </div>
         </div>
@@ -81,4 +64,4 @@ const ModalCart = ({ listCart }) => {
   );
 };
 
-export default ModalCart;
+export default memo(ModalCart);

@@ -7,6 +7,13 @@ export const getProducts = async (params) => {
   return data;
 };
 
+export const getProductsByPage = async (page, limit) => {
+  const { data } = await axiosClient.get(
+    `products?_page=${page}&_limit=${limit}`
+  );
+  return data;
+};
+
 export const getProductsById = async (id) => {
   const { data } = await axiosClient.get(`products/${id}`);
   return data;

@@ -3,25 +3,28 @@ import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
 import AdminLayout from "./layout/AdminLayout";
-import Skeleton from "./components/skeleton/Skeleton";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<Skeleton height={"100vh"}/>}>
+      <Suspense fallback={<div>Loading page...</div>}>
         <Switch>
-          {userRouter.map((page, index) => (
-            <Route
-              key={index}
-              exact={page.isExact}
-              path={page.path}
-              render={() => (
-                <LayoutUser>
-                  <page.component />
-                </LayoutUser>
-              )}
-            />
-          ))}
+          {userRouter.map((page, index) => {
+            const Component = page.component;
+            return (
+              <Route
+                key={index}
+                exact={page.isExact}
+                path={page.path}
+                render={() => (
+                  <LayoutUser>
+                    <Component />
+                  </LayoutUser>
+                )}
+              />
+            );
+          })}
           {adminRouter.map((c, index) => {
             const Component = c.component;
             return (

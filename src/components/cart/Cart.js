@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaOpencart } from "react-icons/fa";
 
@@ -27,4 +27,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default memo(Cart);

@@ -70,19 +70,29 @@ const BlogNav = () => {
           <h2 className="title mt-0">BLOG CATEGORIES</h2>
           <ul className="">
             <li className="">
-              <Link className="categorie-link">Beauty</Link>
+              <Link to="#" className="categorie-link">
+                Beauty
+              </Link>
             </li>
             <li className="">
-              <Link className="categorie-link">Culture</Link>
+              <Link to="#" className="categorie-link">
+                Culture
+              </Link>
             </li>
             <li className="">
-              <Link className="categorie-link">Fashion</Link>
+              <Link to="#" className="categorie-link">
+                Fashion
+              </Link>
             </li>
             <li className="">
-              <Link className="categorie-link">Shopping</Link>
+              <Link to="#" className="categorie-link">
+                Shopping
+              </Link>
             </li>
             <li className="">
-              <Link className="categorie-link">Trends</Link>
+              <Link to="#" className="categorie-link">
+                Trends
+              </Link>
             </li>
           </ul>
         </div>

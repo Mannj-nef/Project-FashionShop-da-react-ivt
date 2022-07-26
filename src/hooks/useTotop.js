@@ -1,7 +1,7 @@
 export default function useTotop(top = 0) {
   const handleScrollToTop = () => {
     window.scrollTo({
-      top: 0,
+      top,
       behavior: "smooth",
     });
   };

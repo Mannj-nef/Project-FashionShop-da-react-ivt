@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import HighlightSlogan from "../../components/highlightSlogan/HighlightSlogan";
 import Sliders from "../../components/sliders/Sliders";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,16 +14,59 @@ import image5 from "../../assets/image/slider_nav9.jpg";
 
 import CardProduct from "../../components/cardProduct/CardProduct";
 import Paging from "../../components/paging/Paging";
-import { actGetProductByGender } from "../../redux/actions/productAction";
+import {
+  actGetProductByGender,
+  actGetProductByPage,
+} from "../../redux/actions/productAction";
 import Cart from "../../components/cart/Cart";
+import useTotop from "../../hooks/useTotop";
+import useScrollProduct from "../../hooks/useScrollProduct";
+
+const limit = 8;
 
 const ShopWoman = () => {
-  const { listProducts } = useSelector((state) => state.productReducer);
+  const { listProducts, isLoading } = useSelector(
+    (state) => state.productReducer
+  );
+
+  const { nodeRef } = useScrollProduct(isLoading);
   const dispatch = useDispatch();
 
+  const handleScrollToTop = useTotop();
   useEffect(() => {
-    dispatch(actGetProductByGender("woman"));
+    handleScrollToTop();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const data = {
+      page: 1,
+      limit,
+      gender: "woman",
+    };
+    dispatch(actGetProductByPage(data));
   }, [dispatch]);
+
+  const handleCallAllApi = () => {
+    dispatch(actGetProductByGender("woman"));
+  };
+  const handleCallPage1 = (page) => {
+    const data = {
+      page,
+      limit,
+      gender: "woman",
+    };
+    dispatch(actGetProductByPage(data));
+  };
+  const handleCallPage2 = (page) => {
+    const data = {
+      page,
+      limit,
+      gender: "woman",
+    };
+    dispatch(actGetProductByPage(data));
+  };
 
   return (
     <div className="shop-woman">
@@ -79,10 +122,14 @@ const ShopWoman = () => {
         </div>
       </div>
       {/* product */}
-      <div className="container product-top ">
+      <div ref={nodeRef} className="container product-top ">
         <CardProduct cardProduct={listProducts}></CardProduct>
         <Cart></Cart>
-        <Paging></Paging>
+        <Paging
+          handleCallAllApi={handleCallAllApi}
+          handleCallPage1={handleCallPage1}
+          handleCallPage2={handleCallPage2}
+        ></Paging>
       </div>
     </div>
   );
