@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import CardItem from "./CardItem";
 import CardItemLoading from "./CardItemLoading";
@@ -9,11 +9,13 @@ const CardProduct = ({ cardProduct }) => {
 
   return (
     <div className="card-product-wrapper">
-      {!isLoading &&
-        cardProduct?.length > 0 &&
+      {!isLoading && cardProduct?.length > 0 ? (
         cardProduct?.map((card) => (
           <CardItem key={card.id} card={card}></CardItem>
-        ))}
+        ))
+      ) : (
+        <p style={{ fontSize: "5rem" }}>Empty</p>
+      )}
       {isLoading &&
         Array(8)
           .fill(null)
@@ -24,4 +26,4 @@ const CardProduct = ({ cardProduct }) => {
   );
 };
 
-export default CardProduct;
+export default memo(CardProduct);

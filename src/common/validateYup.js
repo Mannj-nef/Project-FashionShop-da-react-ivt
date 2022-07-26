@@ -24,4 +24,7 @@ export const VALIDATE_YUP = {
     .min(2, "Must be 2 characters or more")
     .max(150, "Must be 150 characters or less")
     .trim(),
+  PHONE: Yup.string()
+    .required()
+    .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, "Invalid number of phone"),
 };

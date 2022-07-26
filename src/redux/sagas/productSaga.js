@@ -1,7 +1,15 @@
 import { call, put, takeLatest, takeLeading } from "redux-saga/effects";
-import { getProducts, getProductsById } from "../../apis/productApi";
+import {
+  getProducts,
+  getProductsById,
+  getProductsByPage,
+} from "../../apis/productApi";
 import { ProductTypes } from "../../common/types";
-import { actSetLoading } from "../actions/productAction";
+import {
+  actGetProductByName,
+  actGetProductByPage,
+  actSetLoading,
+} from "../actions/productAction";
 function* fetchProducts(action) {
   yield put(actSetLoading());
 
@@ -37,6 +45,40 @@ function* fetchProductsByGender(action) {
   }
 }
 
+function* fetchProductsByName(action) {
+  yield put(actSetLoading());
+  try {
+    const valueSearch = action.payload;
+    const products = yield call(getProducts);
+    const data = products.filter((item) =>
+      item.productName.toLowerCase().includes(valueSearch)
+    );
+    yield put(actGetProductByName(data));
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
+function* fetchProductsByPage(action) {
+  yield put(actSetLoading());
+  const page = action.payload.page;
+  const limit = action.payload.limit;
+  const gender = action.payload.gender;
+
+  try {
+    const data = yield call(getProductsByPage, page, limit);
+    if (gender) {
+      const dataGender = data.filter((item) => item.gender.includes(gender));
+
+      yield put(actGetProductByPage(dataGender));
+    } else {
+      yield put(actGetProductByPage(data));
+    }
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
 function* fetchProductsById(action) {
   yield put(actSetLoading());
   try {
@@ -46,6 +88,10 @@ function* fetchProductsById(action) {
   } catch (e) {
     yield put({ message: e.message });
   }
+}
+
+function* watchAllProductByPage() {
+  yield takeLeading(ProductTypes.GET_PRODUCT_BY_PAGE, fetchProductsByPage);
 }
 
 function* watchAllProduct() {
@@ -61,10 +107,16 @@ function* watchAllProductById() {
   yield takeLatest(ProductTypes.GET_PRODUCT_BY_ID, fetchProductsById);
 }
 
+function* watchAllProductByName() {
+  yield takeLeading(ProductTypes.GET_PRODUCT_BY_NAME, fetchProductsByName);
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   watchAllProduct(),
   watchAllProductByFilter(),
   watchAllProductsByGender(),
   watchAllProductById(),
+  watchAllProductByPage(),
+  watchAllProductByName(),
 ];

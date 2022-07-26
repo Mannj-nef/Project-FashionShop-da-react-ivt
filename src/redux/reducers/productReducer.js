@@ -30,6 +30,20 @@ const productReducer = (state = initialValue, action) => {
         isLoading: false,
       };
     }
+    case ProductTypes.GET_PRODUCT_BY_PAGE: {
+      return {
+        ...state,
+        isLoading: false,
+        listProducts: action.payload,
+      };
+    }
+    case ProductTypes.GET_PRODUCT_BY_NAME: {
+      return {
+        ...state,
+        isLoading: false,
+        listProducts: action.payload,
+      };
+    }
 
     default:
       return state;

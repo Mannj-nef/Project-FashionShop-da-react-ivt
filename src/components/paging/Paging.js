@@ -1,14 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 
 import "./style.scss";
 
-const Paging = () => {
-  const handleCallAllApi = () => {};
-
+const Paging = ({ handleCallPage1, handleCallPage2, handleCallAllApi }) => {
   return (
     <div className="paging">
-      <button className="active">1</button>
-      <button className="">2</button>
+      <button onClick={() => handleCallPage1(1)} className="active p-3">
+        1
+      </button>
+      <button onClick={() => handleCallPage2(2)} className="p-3">
+        2
+      </button>
       <span>|</span>
       <button className="" onClick={handleCallAllApi}>
         View All
@@ -17,4 +19,4 @@ const Paging = () => {
   );
 };
 
-export default Paging;
+export default memo(Paging);

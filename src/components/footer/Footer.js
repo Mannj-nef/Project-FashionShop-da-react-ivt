@@ -7,22 +7,22 @@ const socialImg = [
   {
     id: 1,
     imgUrl:
-      "https://scontent-den4-1.cdninstagram.com/v/t51.2885-15/61188999_857172707995800_60073170215336813_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=NWCuq69RABUAX8gSJkE&_nc_ht=scontent-den4-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AT_nwkTEve38IMb4ZCmAslgb1E7WJS4wEFQf5vTQ4sLKzQ&oe=62CF7653",
+      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
     id: 2,
     imgUrl:
-      "https://scontent-den4-1.cdninstagram.com/v/t51.2885-15/61472921_1292768634212677_8560339718904799741_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=RmJUvrk8xX8AX9GdlpZ&_nc_ht=scontent-den4-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AT-ElLYzAKCfbIoMrm22edikNPGYbLy4nnrpALsrJFpP9Q&oe=62CF4E6C",
+      "https://images.unsplash.com/photo-1565464027194-7957a2295fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bWFufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
     id: 3,
     imgUrl:
-      "https://scontent-den4-1.cdninstagram.com/v/t51.2885-15/61188999_857172707995800_60073170215336813_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=NWCuq69RABUAX8gSJkE&_nc_ht=scontent-den4-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AT_nwkTEve38IMb4ZCmAslgb1E7WJS4wEFQf5vTQ4sLKzQ&oe=62CF7653",
+      "https://images.unsplash.com/photo-1497340525489-441e8427c980?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGdpcmx8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   },
   {
     id: 4,
     imgUrl:
-      "https://scontent-den4-1.cdninstagram.com/v/t51.2885-15/61472921_1292768634212677_8560339718904799741_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=RmJUvrk8xX8AX9GdlpZ&_nc_ht=scontent-den4-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AT-ElLYzAKCfbIoMrm22edikNPGYbLy4nnrpALsrJFpP9Q&oe=62CF4E6C",
+      "https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Z2lybHxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60",
   },
 ];
 

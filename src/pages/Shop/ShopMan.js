@@ -1,28 +1,80 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import Sliders from "../../components/sliders/Sliders";
 import HighlightSlogan from "../../components/highlightSlogan/HighlightSlogan";
 import { useSelector, useDispatch } from "react-redux";
 import "./manStyle.scss";
 
-import { productMan } from "./mookData";
+// import { productMan } from "./mookData";
 
 import image from "../../assets/image/banner9.jpg";
 import CardProduct from "../../components/cardProduct/CardProduct";
 import useCheckDisplay from "../../hooks/useCheckDisplay";
 import Paging from "../../components/paging/Paging";
-import { actGetProductByGender } from "../../redux/actions/productAction";
+import {
+  actGetProductByGender,
+  actGetProductByPage,
+} from "../../redux/actions/productAction";
 import Cart from "../../components/cart/Cart";
+import useTotop from "../../hooks/useTotop";
+
+const limit = 8;
 
 const ShopMan = () => {
-  const { listProducts } = useSelector((state) => state.productReducer);
+  const ShopManContentRef = useRef();
+  const { listProducts, isLoading } = useSelector(
+    (state) => state.productReducer
+  );
   const dispatch = useDispatch();
+  const productMain = useCheckDisplay(4, listProducts);
+
+  const handleScrollToTop = useTotop();
+  useEffect(() => {
+    handleScrollToTop();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    dispatch(actGetProductByGender("man"));
+    const data = {
+      page: 1,
+      limit,
+      gender: "man",
+    };
+    dispatch(actGetProductByPage(data));
   }, [dispatch]);
 
-  const productMain = useCheckDisplay(4, listProducts);
+  useEffect(() => {
+    if (isLoading) {
+      const top =
+        ShopManContentRef.current.offsetTop -
+        ShopManContentRef.current.offsetHeight;
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+    }
+  }, [isLoading]);
+
+  const handleCallAllApi = () => {
+    dispatch(actGetProductByGender("man"));
+  };
+  const handleCallPage1 = (page) => {
+    const data = {
+      page,
+      limit,
+      gender: "man",
+    };
+    dispatch(actGetProductByPage(data));
+  };
+  const handleCallPage2 = (page) => {
+    const data = {
+      page,
+      limit,
+      gender: "man",
+    };
+    dispatch(actGetProductByPage(data));
+  };
 
   return (
     <div className="shop-man">
@@ -78,10 +130,14 @@ const ShopMan = () => {
           </h3>
         </div>
       </div>
-      <div className="container">
+      <div ref={ShopManContentRef} className="container">
         <CardProduct cardProduct={listProducts}></CardProduct>
         <Cart></Cart>
-        <Paging></Paging>
+        <Paging
+          handleCallAllApi={handleCallAllApi}
+          handleCallPage1={handleCallPage1}
+          handleCallPage2={handleCallPage2}
+        ></Paging>
       </div>
     </div>
   );

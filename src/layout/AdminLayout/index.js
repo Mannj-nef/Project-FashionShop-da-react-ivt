@@ -19,7 +19,9 @@ import { Link, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import Container from "react-bootstrap/Container";
 import { Dropdown, Menu } from "antd";
+import useBackPage from "../../hooks/useBackPage";
 export default function AdminLayout({ children }) {
+  useBackPage();
   const [show, setShow] = useState(true);
   const navigation = useRef(null);
   const header = useRef(null);
@@ -87,7 +89,7 @@ export default function AdminLayout({ children }) {
             <Link to={ROUTER_PATH.PROFILE.path}>
               <button>
                 <i className="fa-solid fa-address-card"></i>
-                 <h5>Profile</h5>
+                <h5>Profile</h5>
               </button>
             </Link>
           </ul>

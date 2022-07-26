@@ -2,11 +2,11 @@ import React from "react";
 import { useController } from "react-hook-form";
 import "./style.scss";
 
-const Input = ({ label, control, type, ...props }) => {
+const Input = ({ label, control, type, defaultValue, ...props }) => {
   const { field } = useController({
     name: props.name,
     control,
-    defaultValue: "",
+    defaultValue: defaultValue || "",
   });
 
   return (

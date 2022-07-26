@@ -33,7 +33,6 @@ const FormSignIng = () => {
     return new Promise((resolver) => {
       setTimeout(() => {
         resolver();
-        console.log(values);
         dispatch(actLogin(values));
         reset();
       }, 2000);

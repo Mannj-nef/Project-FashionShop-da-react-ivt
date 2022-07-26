@@ -35,6 +35,7 @@ const FormSingUp = () => {
     const valuesRegister = {
       ...values,
       fullName,
+      role: "user",
     };
 
     return new Promise((resolver) => {
@@ -99,7 +100,7 @@ const FormSingUp = () => {
           <CheckBoxWrapp name="term" control={control}>
             <span className="sub_checkbox">I agree to the term of service</span>
           </CheckBoxWrapp>
-          <p className="text-red-500 top-full  absolute pt-4 ">
+          <p className="text-red-500 -bottom-9  absolute pt-4 ">
             {errors?.term?.message}
           </p>
         </div>
@@ -109,9 +110,9 @@ const FormSingUp = () => {
               isSubmitting ? "opacity-100" : "opacity-0"
             }`}
           ></div>
-          <span className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
-            Sing up
-          </span>
+          <p className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
+            Save
+          </p>
         </button>
       </Form>
     </>
