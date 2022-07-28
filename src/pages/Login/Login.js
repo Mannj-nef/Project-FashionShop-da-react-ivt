@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
@@ -8,14 +8,32 @@ import FormSignIng from "./SignIn";
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const [widthBrowse, setWidthBrowse] = useState(0);
+  const [formControlWidth, setFormControl] = useState(0);
+  const formControlRef = useRef(null);
   const headerHeight = useSelector((state) => state.headerReducer.height);
 
+  useEffect(() => {
+    const width = window.innerWidth;
+    const formWidth = formControlRef.current.offsetWidth;
+    setWidthBrowse(width);
+    setFormControl(formWidth);
+  }, [widthBrowse, formControlWidth]);
+
   return (
-    <div className="login" style={{ marginTop: headerHeight }}>
+    <div className="login" style={{ paddingTop: headerHeight }}>
       <div className="login-conten flex">
-        <div className="flex-1 flex items-center ">
-          <div className="flex-1 p-10 ">
-            {/* Sing in */}
+        <div
+          className="login-conten-form-wrapp flex-1 flex items-center"
+          style={{
+            transform:
+              widthBrowse < 768 && isRegister
+                ? `translateX(-${formControlWidth}px)`
+                : "translateX(0)",
+          }}
+        >
+          {/* Sing in */}
+          <div ref={formControlRef} className="form-control-wrapp flex-1 p-10 ">
             <div className="form-login">
               <FormSignIng></FormSignIng>
               <button className="btn-submit flex items-center gap-3 justify-center btn-sing-in__gogogle">
@@ -40,7 +58,7 @@ const Login = () => {
             </div>
           </div>
           {/* sing up */}
-          <div className="flex-1 p-10 ">
+          <div className="form-control-wrapp flex-1 p-10 ">
             <div className="form-login">
               <FormSingUp></FormSingUp>
               <p className="check-account">

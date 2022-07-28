@@ -77,6 +77,7 @@ const cartReducer = (state = initialValue, action) => {
       };
     }
     case CartType.REMOVE_ALL_CART: {
+      localStorage.removeItem(CartType.CART_LOCALSTORAGE);
       return {
         ...state,
         listCart: [],

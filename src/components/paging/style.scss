@@ -7,16 +7,11 @@
 
     font-size: 1.6rem;
 
-    .btn {
+    .btn-paging {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid var(--black-coler);
         padding: 10px;
-        color: var(--black-coler);
-    }
-    .active {
-        color: var(--while-color);
-        border: none;
+        color: var(--text-color);
     }
 }

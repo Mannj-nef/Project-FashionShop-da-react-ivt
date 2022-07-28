@@ -14,7 +14,9 @@ import { ROUTER_PATH } from "../../../common/routerLink";
 import { cancel, columnsAll } from "../../../common/table";
 import "../style.scss";
 export default function Orders() {
-  const { listOrder, isLoading } = useSelector((state) => state?.orderReducer);
+  const { listOrder, isLoading: isOrderLoading } = useSelector(
+    (state) => state?.orderReducer
+  );
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -65,7 +67,7 @@ export default function Orders() {
   return (
     <>
       <ToastContainer />
-      {isLoading ? (
+      {isOrderLoading ? (
         <div className="loading-display">
           <Spin indicator={sharinganIcon} />
         </div>

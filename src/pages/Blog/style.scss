@@ -50,6 +50,9 @@
                     color: var(--color-gray);
                     margin-bottom: 10px;
                 }
+                .lates-time + h4 {
+                    color: var(--text-color);
+                }
             }
             .related-posts {
                 .related-title {
@@ -69,6 +72,7 @@
             }
         }
         .title {
+            color: var(--text-color);
             text-transform: uppercase;
             font-size: 2rem;
             letter-spacing: 2px;

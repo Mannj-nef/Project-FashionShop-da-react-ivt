@@ -1,7 +1,10 @@
+@import "../../styles/responsive";
+
 .detail-main {
     margin-bottom: 100px;
     font-size: 1.6rem;
     color: var(--text-color);
+    background-color: var(--white-color);
     .detail-top {
         display: flex;
         align-items: center;
@@ -9,6 +12,7 @@
         margin-bottom: 50px;
 
         .title {
+            color: var(--text-color);
             font-size: 2rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -66,6 +70,7 @@
                 gap: 10px;
             }
             .title-name {
+                color: var(--text-color);
                 margin-top: 10px;
                 font-size: 2.5rem;
                 font-weight: 500;
@@ -83,6 +88,7 @@
                 }
             }
             .desc-product {
+                color: var(--text-color);
                 margin: 20px 0;
             }
             .btn-guide,
@@ -138,11 +144,16 @@
         }
     }
     .detail-conten-reviews {
+        color: var(--text-color);
         margin: 70px 0;
         .reviews-title {
+            color: var(--text-color);
             display: flex;
             align-items: center;
             font-size: 3.5rem;
+        }
+        .buyre-name {
+            color: var(--text-color);
         }
         .reviews-item {
             display: flex;
@@ -169,6 +180,23 @@
         }
         .formRating-height {
             height: auto;
+        }
+    }
+    .title-also_like {
+        color: var(--text-color);
+    }
+    @include maxw(1023px) {
+        .detail-content {
+            flex-direction: column;
+        }
+    }
+    @include maxw(767px) {
+        .detail-image {
+            flex-direction: column-reverse;
+            .detail-sub-image {
+                display: flex;
+                gap: 10px;
+            }
         }
     }
 }
@@ -216,5 +244,8 @@
 
     .button-link:hover p {
         transform: translateY(300%);
+    }
+    @include maxw(1023px) {
+        display: none;
     }
 }

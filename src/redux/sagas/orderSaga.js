@@ -1,9 +1,13 @@
 import { call, put, takeLeading } from "redux-saga/effects";
 import { addOrder, getOrderById, getOrders } from "../../apis/orderApi";
 import { OrderTypes } from "../../common/types";
-import { actSetLoading, actAddOrder } from "../actions/orderAction";
+import {
+  actSetLoadingOrder,
+  actAddOrder,
+  actGetOrderByProfile,
+} from "../actions/orderAction";
 function* fetchOrders(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingOrder());
   try {
     const orders = yield call(getOrders);
     yield put({
@@ -15,7 +19,7 @@ function* fetchOrders(action) {
   }
 }
 function* fetchOrderById(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingOrder());
   try {
     const order = yield call(getOrderById, action.payload);
     yield put({
@@ -28,11 +32,27 @@ function* fetchOrderById(action) {
 }
 
 function* fetchaddOrder(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingOrder());
   const data = action.payload;
   try {
     yield call(addOrder, data);
     yield put(actAddOrder());
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
+function* fetchOrderByEmail(action) {
+  yield put(actSetLoadingOrder());
+  const email = action.payload.email;
+  const password = action.payload.password;
+
+  try {
+    const orders = yield call(getOrders);
+    const listOrderUser = orders.filter(
+      (item) => item.email === email && item.password === password
+    );
+    yield put(actGetOrderByProfile(listOrderUser[0].cart));
   } catch (e) {
     yield put({ message: e.message });
   }
@@ -49,5 +69,14 @@ function* watchDetailOrder() {
   yield takeLeading(OrderTypes.GET_ORDER_BY_ID, fetchOrderById);
 }
 
+function* watchDetailUserOrder() {
+  yield takeLeading(OrderTypes.GET_ORDER_BY_PROFILE, fetchOrderByEmail);
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [watchAllOrder(), watchDetailOrder(), watchAddOrder()];
+export default [
+  watchAllOrder(),
+  watchDetailOrder(),
+  watchAddOrder(),
+  watchDetailUserOrder(),
+];

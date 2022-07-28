@@ -1,3 +1,4 @@
+@import "../../styles/responsive";
 .author-avata_header {
     font-size: 1.6rem;
     .author-main_header {
@@ -19,5 +20,13 @@
     h2 {
         font-weight: 500;
         font-size: 1.8rem;
+        color: var(--text-color);
+    }
+    @include maxw(767px) {
+        .author-main_header {
+            width: 130px;
+            left: 50%;
+            transform: translateX(-50px);
+        }
     }
 }

@@ -48,7 +48,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile" style={{ marginTop: height }}>
+    <div className="profile" style={{ paddingTop: height }}>
       <div className="container">
         <SidebarProfile></SidebarProfile>
         <div className="profile-main-wrapp">

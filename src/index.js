@@ -6,9 +6,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
-import 'bootstrap/dist/css/bootstrap.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import "bootstrap/dist/css/bootstrap.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "./styles/global.scss";
 

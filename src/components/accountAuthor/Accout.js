@@ -7,6 +7,7 @@ import useClickOutSize from "../../hooks/useClickOutSize";
 import { useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import "./style.scss";
+import { actRemoveAllCart } from "../../redux/actions/cart/cartAction";
 
 const avata =
   "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGdpcmx8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -21,6 +22,7 @@ const Accout = ({ profile }) => {
 
   const handleLogout = () => {
     dispatch(actLogout());
+    dispatch(actRemoveAllCart());
   };
   const handleToProfile = () => {
     history.push(ROUTER_PATH.USER.path);
@@ -61,7 +63,7 @@ const Accout = ({ profile }) => {
           onClick={handleLogout}
         >
           <TbLogout style={{ fontSize: "2.5rem", width: "30px" }}></TbLogout>
-          <h2>Log out</h2>
+          <h2 className="title">Log out</h2>
         </div>
       </div>
     </div>

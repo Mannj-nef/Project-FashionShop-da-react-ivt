@@ -19,7 +19,6 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import Container from "react-bootstrap/Container";
 import { Dropdown, Menu } from "antd";
-
 import { AuthTypes } from "../../common/types";
 
 const role = JSON.parse(
@@ -27,7 +26,6 @@ const role = JSON.parse(
 )?.role;
 
 export default function AdminLayout({ children }) {
-  // useBackPage();
   const [show, setShow] = useState(true);
   const navigation = useRef(null);
   const ball = useRef(null);

@@ -8,10 +8,10 @@ import { ProductTypes } from "../../common/types";
 import {
   actGetProductByName,
   actGetProductByPage,
-  actSetLoading,
+  actSetLoadingProduct,
 } from "../actions/productAction";
 function* fetchProducts(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
 
   try {
     const products = yield call(getProducts);
@@ -21,9 +21,9 @@ function* fetchProducts(action) {
   }
 }
 function* fetchProductsByFilter(action) {
-  // yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
   try {
-    const products = yield call(getProducts, {...action.payload});
+    const products = yield call(getProducts, { ...action.payload });
     yield put({ type: ProductTypes.GET_PRODUCT_SUCCESS, payload: products });
   } catch (e) {
     yield put({ message: e.message });
@@ -31,7 +31,7 @@ function* fetchProductsByFilter(action) {
 }
 
 function* fetchProductsByGender(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
   try {
     const products = yield call(getProducts);
 
@@ -46,7 +46,7 @@ function* fetchProductsByGender(action) {
 }
 
 function* fetchProductsByName(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
   try {
     const valueSearch = action.payload;
     const products = yield call(getProducts);
@@ -60,7 +60,8 @@ function* fetchProductsByName(action) {
 }
 
 function* fetchProductsByPage(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
+
   const page = action.payload.page;
   const limit = action.payload.limit;
   const gender = action.payload.gender;
@@ -80,7 +81,7 @@ function* fetchProductsByPage(action) {
 }
 
 function* fetchProductsById(action) {
-  yield put(actSetLoading());
+  yield put(actSetLoadingProduct());
   try {
     const id = action.payload;
     const productDetail = yield call(getProductsById, id);

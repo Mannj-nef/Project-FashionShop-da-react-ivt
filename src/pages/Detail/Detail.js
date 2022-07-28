@@ -83,11 +83,13 @@ const Detail = () => {
   const { listRatings } = useSelector((state) => state.ratingReducer);
   let count = 0;
   let rate = 0;
+  // eslint-disable-next-line array-callback-return
   listRatings.map((rating) => {
     count++;
     rate += rating.rate;
   });
-  let avgRate = Math.round(rate/count);
+
+  let avgRate = Math.round(rate / count);
   const wishList = listCart.filter((item) => +item.id === +id);
 
   useClickActive(".product-detail__nav");
@@ -127,7 +129,7 @@ const Detail = () => {
     <>
       <div
         className="detail-main container"
-        style={{ marginTop: headerHeight + 20 }}
+        style={{ paddingTop: headerHeight + 20 }}
       >
         <div className="detail-top">
           <h2 className="title">style theory</h2>
@@ -153,7 +155,7 @@ const Detail = () => {
             <div>
               <h2 className="reviews-title">
                 <span className="mr-5">{avgRate ? avgRate : 0}</span>
-                {avgRate ? <Rate disabled defaultValue={avgRate}/> : null}
+                {avgRate ? <Rate disabled defaultValue={avgRate} /> : null}
               </h2>
               <p>Based on {count} Reviews</p>
             </div>
@@ -189,7 +191,10 @@ const Detail = () => {
           </div>
         </div>
         <div className="other-products">
-          <h2 className="" style={{ fontSize: "2.5rem", marginBottom: "30px" }}>
+          <h2
+            className="title-also_like"
+            style={{ fontSize: "2.5rem", marginBottom: "30px" }}
+          >
             You may also like
           </h2>
           <CardProduct cardProduct={cardProduct}></CardProduct>

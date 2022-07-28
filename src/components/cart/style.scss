@@ -10,8 +10,10 @@
     right: 0;
     top: 40%;
     background-color: var(--white-color);
+    color: var(--text-color);
     transition: all 0.3s linear;
     box-shadow: rgba(100, 100, 111, 0.4) -3px 7px 20px 0px;
+    z-index: 100;
     cursor: pointer;
 
     &:hover {
@@ -35,6 +37,9 @@
     width: 100%;
     background-color: var(--color-light-gray);
     z-index: 9999;
+    & > h2 {
+        color: var(--text-color);
+    }
 
     .pay-cart {
         --size: 30px;
@@ -70,10 +75,15 @@
     .cart-item {
         font-size: 1.4rem;
         .cart-item_title {
+            color: var(--text-color);
             font-size: 1.3rem;
             line-height: 1.4;
         }
+        .cart-item_title + span {
+            color: var(--text-color);
+        }
         .amount {
+            color: var(--text-color);
             background-color: var(--white-color);
             display: inline-block;
             padding: 2px;

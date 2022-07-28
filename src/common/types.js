@@ -74,6 +74,7 @@ export const OrderTypes = {
   GET_ORDER_BY_ID_SUCCESS: "GET_ORDER_BY_ID_SUCCESS",
   SET_LOADING: "SET_LOADING",
   ADD_ORDER: "ADD_ORDER",
+  GET_ORDER_BY_PROFILE: "GET_ORDER_BY_PROFILE",
 };
 
 export const RatingTypes = {
@@ -97,3 +98,6 @@ export const PaymentTypes = {
   BANK: "BANK",
 };
 
+export const LocalKey = {
+  THEME: "theme",
+};

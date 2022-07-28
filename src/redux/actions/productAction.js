@@ -38,6 +38,6 @@ export const actGetProductSuccess = (payload) => ({
   payload: payload,
 });
 
-export const actSetLoading = () => ({
+export const actSetLoadingProduct = () => ({
   type: ProductTypes.SET_LOADING,
 });
