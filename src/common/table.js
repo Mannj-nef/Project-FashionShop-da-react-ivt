@@ -1,7 +1,12 @@
 import { Tag } from "antd";
 import { toast } from "react-toastify";
-import { Status } from "./types";
-
+import { PaymentTypes, Status } from "./types";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  SyncOutlined,
+} from "@ant-design/icons";
 export const layout = {
   labelCol: {
     xs: {
@@ -35,6 +40,13 @@ export const layoutWithOutLabel = {
 };
 
 export const config = {
+  rulePhone: [
+    {
+      required: true,
+      message: "Please input your phone!",
+    },
+  ],
+
   ruleCat: [
     {
       required: true,
@@ -232,20 +244,48 @@ export const columnsAll = {
       dataIndex: "status",
       render: (status) => {
         let color = "geekblue";
-
+        let icon = "";
         if (status === Status.PROCESSING) {
-          color = "geekblue";
+          color = "processing";
+          icon = <SyncOutlined spin />;
         } else if (status === Status.SHIPPING) {
           color = "cyan";
+          icon = <ClockCircleOutlined />;
         } else if (status === Status.DELIVERED) {
-          color = "green";
+          color = "success";
+          icon = <CheckCircleOutlined />;
         } else if (status === Status.CANCELED) {
-          color = "red";
+          color = "error";
+          icon = <CloseCircleOutlined />;
         }
 
         return (
-          <Tag color={color} key={status}>
+          <Tag icon={icon} color={color} key={status}>
             {status}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Payment",
+      key: "payment",
+      dataIndex: "payment",
+      render: (payment) => {
+        let color = "geekblue";
+
+        if (payment === PaymentTypes.MOMO) {
+          color = "magenta";
+        } else if (payment === PaymentTypes.PAYPAL) {
+          color = "blue";
+        } else if (payment === PaymentTypes.VISA) {
+          color = "purple";
+        } else if (payment === PaymentTypes.BANK) {
+          color = "green";
+        }
+
+        return (
+          <Tag color={color} key={payment}>
+            {payment}
           </Tag>
         );
       },

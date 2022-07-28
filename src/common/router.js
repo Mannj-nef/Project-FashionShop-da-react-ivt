@@ -15,7 +15,14 @@ const Profile = lazy(() => import("../pages/Profile/Profile.js"));
 const User = lazy(() => import("../pages/User/User.js"));
 const Pay = lazy(() => import("../pages/Pay/Pay.js"));
 const OrderStatus = lazy(() => import("../pages/OrderStatus/OrderStatus.js"));
-
+//admin
+const Admin = lazy(() => import("../pages/Admin/Admin"));
+const ProfileAdmin = lazy(() => import("../pages/Admin/Profile"));
+const Products = lazy(() => import("../pages/Admin/Products"));
+const Users = lazy(() => import("../pages/Admin/Users"));
+const Categories = lazy(() => import("../pages/Admin/Categories"));
+const Orders = lazy(() => import("../pages/Admin/Orders"));
+const DetailOrder = lazy(() => import("../pages/Admin/Orders/DetailOrder"));
 export const userRouter = [
   {
     path: ROUTER_PATH.HOME.path,
@@ -84,14 +91,7 @@ export const userRouter = [
   },
 ];
 
-//admin
-const Admin = lazy(() => import("../pages/Admin/Admin"));
-const Profile = lazy(() => import("../pages/Admin/Profile"));
-const Products = lazy(() => import("../pages/Admin/Products"));
-const Users = lazy(() => import("../pages/Admin/Users"));
-const Categories = lazy(() => import("../pages/Admin/Categories"));
-const Orders = lazy(() => import("../pages/Admin/Orders"));
-const DetailOrder = lazy(() => import("../pages/Admin/Orders/DetailOrder"));
+
 export const adminRouter = [
   {
     path: ROUTER_PATH.ADMIN.path,
@@ -99,9 +99,9 @@ export const adminRouter = [
     component: Admin,
   },
   {
-    path: ROUTER_PATH.PROFILE.path,
+    path: ROUTER_PATH.PROFILE_ADMIN.path,
     isExact: true,
-    component: Profile,
+    component: ProfileAdmin,
   },
   {
     path: ROUTER_PATH.PRODUCTS.path,
