@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect } from "react";
 import "./style.scss";
-import { Column } from "@ant-design/plots";
+import { Column, Pie } from "@ant-design/plots";
 import { VectorMap } from "@south-paw/react-vector-maps";
 import worldLowRes from "./world.json";
 import { useSelector, useDispatch } from "react-redux";
@@ -94,6 +94,41 @@ export default function Admin() {
       },
     },
   };
+  const configPie = {
+    appendPadding: 10,
+    data,
+    angleField: "value",
+    colorField: "type",
+    radius: 1,
+    innerRadius: 0.6,
+    label: {
+      type: "inner",
+      offset: "-50%",
+      content: "{value}",
+      style: {
+        textAlign: "center",
+        fontSize: 14,
+      },
+    },
+    interactions: [
+      {
+        type: "element-selected",
+      },
+      {
+        type: "element-active",
+      },
+    ],
+    statistic: {
+      title: false,
+      content: {
+        style: {
+          whiteSpace: "pre-wrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        },
+      },
+    },
+  };
   const columns = [...columnsAll.columnPro];
   useEffect(() => {
     dispatch(actGetAllProduct());
@@ -148,14 +183,34 @@ export default function Admin() {
                 </div>
 
                 <div className="col-xl-6 col-xxl-4 mt-3 col-md-4">
-                  <Nation nationCode={"vn"} nationName={"Viet Nam"} percent={69}/>
-                  <Nation nationCode={"cn"} nationName={"Chani"} percent={69}/>
-                  <Nation nationCode={"us"} nationName={"United States"} percent={69}/>
-                  <Nation nationCode={"gr"} nationName={"Greek"} percent={69}/>
-                  <Nation nationCode={"jp"} nationName={"Japan"} percent={69}/>
-                  <Nation nationCode={"mx"} nationName={"Mexico"} percent={69}/>
-                  <Nation nationCode={"eg"} nationName={"Pharaoh"} percent={69}/>
-                  <Nation nationCode={"th"} nationName={"Thailand"} percent={69}/>
+                  <Nation
+                    nationCode={"vn"}
+                    nationName={"Viet Nam"}
+                    percent={69}
+                  />
+                  <Nation nationCode={"cn"} nationName={"Chani"} percent={69} />
+                  <Nation
+                    nationCode={"us"}
+                    nationName={"United States"}
+                    percent={69}
+                  />
+                  <Nation nationCode={"gr"} nationName={"Greek"} percent={69} />
+                  <Nation nationCode={"jp"} nationName={"Japan"} percent={69} />
+                  <Nation
+                    nationCode={"mx"}
+                    nationName={"Mexico"}
+                    percent={69}
+                  />
+                  <Nation
+                    nationCode={"eg"}
+                    nationName={"Pharaoh"}
+                    percent={69}
+                  />
+                  <Nation
+                    nationCode={"th"}
+                    nationName={"Thailand"}
+                    percent={69}
+                  />
                 </div>
               </div>
             </div>
@@ -177,13 +232,18 @@ export default function Admin() {
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-4 col-xxl-3 d-flex">
+        <div className="col-12 col-lg-4 col-xxl-3 ">
           <div className="card flex-fill w-100">
             <div className="card-header">
               <h5 className="card-title mb-0">Monthly Sales</h5>
             </div>
-            <div className="card-body d-flex w-100">
+            <div className="card-body w-100 ">
               <Column {...config} />
+            </div>
+          </div>
+          <div className="card flex-fill w-100 ">
+            <div className="card-body w-100 ">
+              <Pie {...configPie} style={{height: "330px"}}/>
             </div>
           </div>
         </div>

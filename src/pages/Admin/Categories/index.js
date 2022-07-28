@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
-import { Table, Space, Spin, Modal, Form, Input, Popconfirm } from "antd";
+import { Table, Space, Modal, Form, Input, Popconfirm } from "antd";
 import { actGetAllCategory } from "../../../redux/actions/categoryAction";
 import "antd/dist/antd.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -52,26 +52,31 @@ export default function Categories() {
     dispatch(actGetAllCategory());
   };
   const handleSubmit = async (category) => {
+    let isValid = true;
+    listCategory.forEach((cate) => {
+      if (category.categoryName === cate.categoryName) {
+        isValid = false;
+      }
+    });
     if (modalTitle === "Add") {
-      let isValid = true;
-
-      listCategory.forEach((cate) => {
-        if (category.categoryName === cate.categoryName) {
-          isValid = false;
-        }
-      });
       if (isValid) {
         await addCategory(category);
         toast.success(SUCCESS_MESSAGE.STATUS_200);
         dispatch(actGetAllCategory());
         form.resetFields();
         setIsModalVisible(false);
+      } else {
+        toast.error("Category name already exists !!!", { autoClose: 1000 });
       }
     } else {
-      await editCategory(category, categoryEdit.id);
-      toast.success(SUCCESS_MESSAGE.EDIT_SUCCESS, { autoClose: 1000 });
-      dispatch(actGetAllCategory());
-      setIsModalVisible(false);
+      if (isValid) {
+        await editCategory(category, categoryEdit.id);
+        toast.success(SUCCESS_MESSAGE.EDIT_SUCCESS, { autoClose: 1000 });
+        dispatch(actGetAllCategory());
+        setIsModalVisible(false);
+      } else {
+        toast.error("Category name already exists !!!", { autoClose: 1000 });
+      }
     }
   };
 
@@ -106,40 +111,41 @@ export default function Categories() {
   return (
     <>
       <ToastContainer />
-      <div className="loading-display">
-        <Spin indicator={sharinganIcon} spinning={isLoading} size="large" />
-      </div>
-      <div className="container-fluid mt-5">
-        <div className="title">
-          <h1>Categories</h1>
-          <button className="btn btn-success" onClick={() => showModalAdd()}>
-            Add Category
-          </button>
-          <Modal
-            title={modalTitle === "Add" ? "Add Form" : "Edit Form"}
-            visible={isModalVisible}
-            onOk={() => form.submit()}
-            onCancel={handleCancel}
-          >
-            <Form {...layout} form={form} onFinish={handleSubmit}>
-              <Form.Item
-                label="Name"
-                name={["categoryName"]}
-                rules={[...config.ruleCat]}
-              >
-                <Input />
-              </Form.Item>
-            </Form>
-          </Modal>
+      {isLoading ? (
+        sharinganIcon
+      ) : (
+        <div className="container-fluid mt-5">
+          <div className="title">
+            <h1>Categories</h1>
+            <button className="btn btn-success" onClick={() => showModalAdd()}>
+              Add Category
+            </button>
+            <Modal
+              title={modalTitle === "Add" ? "Add Form" : "Edit Form"}
+              visible={isModalVisible}
+              onOk={() => form.submit()}
+              onCancel={handleCancel}
+            >
+              <Form {...layout} form={form} onFinish={handleSubmit}>
+                <Form.Item
+                  label="Name"
+                  name={["categoryName"]}
+                  rules={[...config.ruleCat]}
+                >
+                  <Input />
+                </Form.Item>
+              </Form>
+            </Modal>
+          </div>
+          <Table
+            columns={columns}
+            dataSource={listCategory}
+            rowKey="id"
+            className="table-style"
+          />
+          ;
         </div>
-        <Table
-          columns={columns}
-          dataSource={listCategory}
-          rowKey="id"
-          className="table-style"
-        />
-        ;
-      </div>
+      )}
     </>
   );
 }

@@ -3,12 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import { adminRouter, userRouter } from "./common/router";
 import LayoutUser from "./layout/user/LayoutUser";
 import AdminLayout from "./layout/AdminLayout";
-import Login from "./pages/Login/Login";
+import { sharinganIcon } from "./components/Loading";
 
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense fallback={sharinganIcon}>
         <Switch>
           {userRouter.map((page, index) => {
             const Component = page.component;

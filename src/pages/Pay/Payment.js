@@ -2,30 +2,31 @@ import React from "react";
 import { RiVisaLine } from "react-icons/ri";
 import { FaApplePay, FaWallet } from "react-icons/fa";
 import { AiFillCreditCard } from "react-icons/ai";
+import { PaymentTypes } from "../../common/types";
 
 const paymentMethods = [
   {
     id: 1,
-    name: "momo",
+    name: PaymentTypes.MOMO,
     icon: <FaWallet />,
     image: "https://demo.megapay.vn/public/assets/images/momo_icon.png",
   },
   {
     id: 2,
-    name: "visa",
+    name: PaymentTypes.VISA,
     icon: <RiVisaLine />,
     image: "https://logowiki.net/uploads/logo/v/visa.svg",
   },
   {
     id: 3,
-    name: "ipay",
+    name: PaymentTypes.PAYPAL,
     icon: <FaApplePay />,
     image:
       "https://seeklogo.com/images/P/paypal-logo-C83095A82C-seeklogo.com.png",
   },
   {
     id: 4,
-    name: "card",
+    name: PaymentTypes.BANK,
     icon: <AiFillCreditCard />,
     image:
       "https://cdn.haitrieu.com/wp-content/uploads/2022/02/Icon-Vietcombank.png",

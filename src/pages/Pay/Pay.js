@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeft } from "react-icons/bs";
-import { actAddOrder } from "../../redux/actions/orderAction";
+import { actAddOrder, actGetAllOrder } from "../../redux/actions/orderAction";
 
 import useBackPage from "../../hooks/useBackPage";
 import { useHistory } from "react-router-dom";
@@ -19,6 +19,7 @@ import Payment from "./Payment";
 import OrderItem from "./OrderItem";
 import { actChangeProfile } from "../../redux/actions/auth/authAction";
 import { ROUTER_PATH } from "../../common/routerLink";
+import { Status } from "../../common/types";
 
 const schema = Yup.object({
   // address: VALIDATE_YUP.DESCRIPTION,
@@ -35,7 +36,6 @@ const Pay = () => {
   const { profile } = useSelector((state) => state.authReducer);
   const { isOrderLoading } = useSelector((state) => state.orderReducer);
   const dispatch = useDispatch();
-
   useBackPage();
   const {
     control,
@@ -75,6 +75,7 @@ const Pay = () => {
       delete profileClone.id;
       const data = {
         ...profileClone,
+        status: Status.PROCESSING,
         cart: listCart,
       };
       dispatch(actAddOrder(data));

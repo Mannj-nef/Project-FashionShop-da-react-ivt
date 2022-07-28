@@ -89,3 +89,11 @@ export const Status = {
   DELIVERED: "DELIVERED",
   CANCELED: "CANCELED",
 };
+
+export const PaymentTypes = {
+  MOMO: "MOMO",
+  VISA: "VISA",
+  PAYPAL: "PAYPAL",
+  BANK: "BANK",
+};
+
