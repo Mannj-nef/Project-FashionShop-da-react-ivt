@@ -56,7 +56,7 @@ const DetailProduct = ({ product, listCart }) => {
   return (
     <div className="detail-content">
       <div className="detail-image">
-        <div className="">
+        <div className="detail-sub-image">
           {product?.imageRelated?.map((image) => (
             <div key={image.id} className="w-[100px] h-[150px] mb-5">
               <img

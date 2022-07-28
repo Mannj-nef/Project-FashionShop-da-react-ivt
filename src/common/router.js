@@ -23,6 +23,8 @@ const Users = lazy(() => import("../pages/Admin/Users"));
 const Categories = lazy(() => import("../pages/Admin/Categories"));
 const Orders = lazy(() => import("../pages/Admin/Orders"));
 const DetailOrder = lazy(() => import("../pages/Admin/Orders/DetailOrder"));
+
+// user
 export const userRouter = [
   {
     path: ROUTER_PATH.HOME.path,
@@ -91,7 +93,7 @@ export const userRouter = [
   },
 ];
 
-
+// admin
 export const adminRouter = [
   {
     path: ROUTER_PATH.ADMIN.path,

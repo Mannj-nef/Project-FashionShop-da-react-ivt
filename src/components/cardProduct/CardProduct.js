@@ -9,12 +9,19 @@ const CardProduct = ({ cardProduct }) => {
 
   return (
     <div className="card-product-wrapper">
-      {!isLoading && cardProduct?.length > 0 ? (
+      {!isLoading &&
+        cardProduct?.length > 0 &&
         cardProduct?.map((card) => (
           <CardItem key={card.id} card={card}></CardItem>
-        ))
-      ) : (
-        <p style={{ fontSize: "5rem" }}>Empty</p>
+        ))}
+      {!isLoading && cardProduct?.length <= 0 && (
+        <div className=" mx-auto w-[50%] wrapp-img-no-data">
+          <img
+            className="w-full h-full object-cover rounded-lg"
+            src="https://store.vtctelecom.com.vn/Content/images/no-data.png"
+            alt=""
+          />
+        </div>
       )}
       {isLoading &&
         Array(8)

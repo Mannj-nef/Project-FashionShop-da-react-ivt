@@ -23,7 +23,7 @@ const FormReview = () => {
     <>
       <ToastContainer />
       <div className="p-[50px]">
-        <h2 className="buyreName mb-3 text-4xl">{"Manh Quan"}</h2>
+        <h2 className="buyre-name mb-3 text-4xl">{"Manh Quan"}</h2>
         <Form layout="vertical" onFinish={handleSubmit} form={form}>
           <div className="relative pb-2">
             <Form.Item name="rate" label="Rate">

@@ -1,11 +1,14 @@
+@import "../../styles/responsive";
 .shop-man {
     font-size: 1.6rem;
     margin-bottom: 100px;
+    background-color: var(--white-color);
     .shop-man-slider_slogan {
         color: var(--color-light-gray);
     }
     .shop-man-content-top {
         margin: 100px 0;
+        color: var(--text-color);
         .shop-man-content-top-image {
             border-radius: 6px;
             opacity: 0.8;
@@ -18,6 +21,7 @@
             font-size: 2rem;
         }
         .shop-man-content-top-title {
+            color: var(--text-color);
             font-weight: 500;
             line-height: 1.4;
             font-size: 6rem;
@@ -54,6 +58,14 @@
                 font-size: 4rem;
                 font-weight: 500;
             }
+        }
+    }
+    @include maxw(1023px) {
+        .shop-man-content-top {
+            flex-direction: column !important;
+        }
+        .shop-man-content-top-slogan__wrapp {
+            display: none;
         }
     }
 }

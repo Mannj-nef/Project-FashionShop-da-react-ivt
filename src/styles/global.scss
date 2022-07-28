@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./responsive";
+@import "./var";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap");
-
-@import "./var";
 
 *,
 *::before,
@@ -90,6 +91,9 @@ h6 {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+.App {
+    background-color: var(--white-color);
 }
 
 .skeleton {

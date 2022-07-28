@@ -1,3 +1,5 @@
+@import "../../styles/responsive";
+
 .profile {
     font-size: 1.6rem;
     background-color: var(--color-light-blue);
@@ -13,6 +15,7 @@
         margin-left: auto;
         width: calc(100% - (var(--siderbar-width) + 50px));
         .title {
+            color: var(--text-color);
             font-size: 2.5rem;
             font-weight: 500;
             margin-bottom: 20px;
@@ -20,6 +23,16 @@
             // display: flex;
             // align-items: center;
             // gap: 10px;
+        }
+        @include maxw(1023px) {
+            width: 100%;
+        }
+        @include maxw(767px) {
+            width: 100%;
+            .profile-main {
+                flex-direction: column;
+                overflow: hidden;
+            }
         }
     }
     .profile-main {
@@ -32,8 +45,8 @@
             border-radius: 4px;
             padding: 15px;
             display: block;
-            background-color: var(--color-purple);
-            color: var(--white-color);
+            background-color: #6a5af9;
+            color: #fff;
         }
     }
 }

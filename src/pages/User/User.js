@@ -17,7 +17,7 @@ const User = () => {
   const { profile } = useSelector((state) => state.authReducer);
 
   return (
-    <div className="user_customer " style={{ marginTop: height }}>
+    <div className="user_customer " style={{ paddingTop: height }}>
       <div className="container">
         <SidebarProfile></SidebarProfile>
         <div className="customer_right">

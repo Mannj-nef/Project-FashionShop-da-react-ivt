@@ -42,7 +42,7 @@ const Payment = ({ payment, setPayment }) => {
   return (
     <div>
       <h3 className="info-title">3. Payment method</h3>
-      <div className=" flex gap-5 mt-5">
+      <div className="payment-methods-wrapp flex gap-5 mt-5">
         {paymentMethods.map((item) => (
           <div
             key={item.id}

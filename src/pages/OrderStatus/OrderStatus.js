@@ -1,55 +1,34 @@
-import { Table } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import SidebarProfile from "../../components/sidebarProfile/SidebarProfile";
+import useBackPage from "../../hooks/useBackPage";
+import { actGetOrderByProfile } from "../../redux/actions/orderAction";
 import "./style.scss";
+import TableOrder from "./TableOrder";
 
 const OrderStatus = () => {
+  useBackPage();
   const { height } = useSelector((state) => state.headerReducer);
+  const { listOrder, isLoading } = useSelector((state) => state?.orderReducer);
+  const { profile } = useSelector((state) => state?.authReducer);
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      price: 32,
-      address: "10 Downing Street",
-      phone: "09121",
-    },
-    {
-      key: "2",
-      name: "John",
-      price: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  useEffect(() => {
+    const profileClone = { ...profile };
+    const data = {
+      email: profileClone.email,
+      password: profileClone.password,
+    };
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      phone: "phone",
-    },
-    {
-      title: "price",
-      dataIndex: "price",
-      key: "price",
-      phone: "phone",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      phone: "phone",
-    },
-  ];
+    dispatch(actGetOrderByProfile(data));
+  }, [dispatch, profile]);
 
   return (
-    <div className="order-status" style={{ marginTop: height }}>
+    <div className="order-status" style={{ paddingTop: height }}>
       <div className="container">
         <SidebarProfile></SidebarProfile>
         <div className="order-status-wrapp">
@@ -61,7 +40,7 @@ const OrderStatus = () => {
             <span>Back to me</span>
           </h2>
           <div className="order-status">
-            <Table dataSource={dataSource} columns={columns} />;
+            <TableOrder listOrder={listOrder}></TableOrder>
           </div>
         </div>
       </div>

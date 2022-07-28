@@ -1,4 +1,6 @@
+@import "../../styles/responsive";
 .shop-store {
+    background-color: var(--white-color);
     .store_nav-wrapp {
         margin: 50px 0;
         padding: 50px 0;
@@ -14,6 +16,7 @@
             background-color: var(--white-color);
         }
         .title {
+            color: var(--text-color);
             flex: 1;
             padding: 30px 0;
             font-size: 2rem;
@@ -71,6 +74,22 @@
         }
         .shop-wrapp-right {
             flex: 1;
+        }
+    }
+    @include maxw(767px) {
+        .store_nav-wrapp {
+            .title {
+                display: none;
+            }
+        }
+        .store_nav-wrapp .search-wrapp {
+            padding: 0 0 0 50px;
+        }
+        .search {
+            padding: 10px !important;
+            width: inherit !important;
+            border-radius: 10px;
+            margin: 10px 0;
         }
     }
 }

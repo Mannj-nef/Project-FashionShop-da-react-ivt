@@ -1,3 +1,4 @@
+@import "../../styles/responsive";
 .user_customer {
     font-size: 1.6rem;
     background-color: var(--color-light-blue);
@@ -12,6 +13,7 @@
     .customer_right {
         background-color: transparent;
         margin-left: auto;
+        padding-top: 50px;
         width: calc(100% - (var(--siderbar-width) + 50px));
         .title_name {
             opacity: 0.8;
@@ -47,6 +49,15 @@
                 // font-size: 5rem;
                 width: 40px;
                 height: 40px;
+            }
+        }
+        @include maxw(1023px) {
+            width: 100%;
+        }
+        @include maxw(767px) {
+            width: 100%;
+            .customer_right-body {
+                grid-template-columns: 1fr 1fr;
             }
         }
     }

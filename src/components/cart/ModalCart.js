@@ -3,6 +3,7 @@ import { FaOpencart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
+import useCalculateTotal from "../../hooks/useCalculateTotal";
 import ModalLayout from "../modalLayout/ModalLayout";
 import CartItem from "./CartItem";
 
@@ -10,21 +11,13 @@ import CartItem from "./CartItem";
 
 const ModalCart = ({ listCart }) => {
   const { profile } = useSelector((state) => state.authReducer);
+  const priceTotal = useCalculateTotal(listCart);
 
   const history = useHistory();
 
   const cartTotal = useMemo(
     () =>
       listCart.reduce((total, cartTotal) => (total += cartTotal.quantity), 0),
-    [listCart]
-  );
-
-  const priceTotal = useMemo(
-    () =>
-      listCart.reduce(
-        (total, cartTotal) => (total += cartTotal.quantity * cartTotal.price),
-        0
-      ),
     [listCart]
   );
 

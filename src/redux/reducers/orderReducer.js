@@ -18,8 +18,15 @@ const orderReducer = (state = initialValue, action) => {
     case OrderTypes.GET_ORDER_BY_ID_SUCCESS: {
       return { ...state, isOrderLoading: false, detailOrder: action.payload };
     }
+    case OrderTypes.GET_ORDER_BY_PROFILE: {
+      const data = action.payload;
+      return {
+        ...state,
+        isOrderLoading: false,
+        listOrder: data,
+      };
+    }
     case OrderTypes.SET_LOADING: {
-      // console.log("loading order");
       return { ...state, isOrderLoading: true };
     }
     case OrderTypes.ADD_ORDER: {

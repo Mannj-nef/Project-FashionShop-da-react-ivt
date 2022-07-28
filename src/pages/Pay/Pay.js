@@ -21,9 +21,12 @@ import { actChangeProfile } from "../../redux/actions/auth/authAction";
 import { ROUTER_PATH } from "../../common/routerLink";
 import { Status } from "../../common/types";
 
+import useCalculateTotal from "../../hooks/useCalculateTotal";
+import { actRemoveAllCart } from "../../redux/actions/cart/cartAction";
+
 const schema = Yup.object({
-  // address: VALIDATE_YUP.DESCRIPTION,
-  // phone: VALIDATE_YUP.PHONE,
+  address: VALIDATE_YUP.DESCRIPTION,
+  phone: VALIDATE_YUP.PHONE,
 });
 
 const Pay = () => {
@@ -36,6 +39,12 @@ const Pay = () => {
   const { profile } = useSelector((state) => state.authReducer);
   const { isOrderLoading } = useSelector((state) => state.orderReducer);
   const dispatch = useDispatch();
+  const priceTotal = useCalculateTotal(listCart);
+
+  useEffect(() => {
+    dispatch(actGetAllOrder());
+  }, [dispatch]);
+
   useBackPage();
   const {
     control,
@@ -72,13 +81,19 @@ const Pay = () => {
   const handleCheckOut = () => {
     if (ischeckout) {
       const profileClone = { ...profile };
-      delete profileClone.id;
+      // delete profileClone.id;
       const data = {
         ...profileClone,
         status: Status.PROCESSING,
         cart: listCart,
+        userId: profileClone.id,
+        status: Status.PROCESSING,
+        total: priceTotal,
       };
+      delete data.id;
       dispatch(actAddOrder(data));
+      dispatch(actRemoveAllCart());
+      console.log(data);
       alert("order thành công, đến xem thông tin đơn hàng");
       history.push(ROUTER_PATH.ORDERSTATUS.path);
     } else {
@@ -88,7 +103,7 @@ const Pay = () => {
   };
 
   return (
-    <div className="checkout-pay" style={{ marginTop: height }}>
+    <div className="checkout-pay" style={{ paddingTop: height }}>
       <div className="container ">
         <div className="relative w-full">
           <div className="pay-checkout">
@@ -149,15 +164,17 @@ const Pay = () => {
               </div>
               <div>
                 <h2>
-                  <span>Total</span>
-                  <span>{"price"}</span>
+                  <span className="mr-3">Total:</span>
+                  <span>{priceTotal}</span>
                 </h2>
               </div>
             </div>
 
             <button
               type="submit"
-              className="btn-submit w-full"
+              className={`btn-submit w-full ${
+                listCart.length <= 0 ? "pointer-events-none opacity-30" : ""
+              }`}
               onClick={handleCheckOut}
             >
               {isOrderLoading ? (

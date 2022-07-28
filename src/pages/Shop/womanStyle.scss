@@ -1,6 +1,8 @@
+@import "../../styles/responsive";
 .shop-woman {
     font-size: 1.6rem;
     color: var(--text-color);
+    background-color: var(--white-color);
 
     .woman-contail-top {
         display: flex;
@@ -56,5 +58,16 @@
     }
     .product-top {
         margin: 100px 0;
+    }
+    @include maxw(767px) {
+        .highlight-wrapp {
+            display: none;
+        }
+        .woman-contail-top {
+            display: none;
+        }
+        .banner {
+            margin-top: 50px;
+        }
     }
 }

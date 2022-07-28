@@ -1,3 +1,4 @@
+@import "../../styles/responsive";
 .login {
     font-size: 1.6rem;
     color: var(--text-color);
@@ -12,6 +13,7 @@
             margin: auto;
             // padding: 40px 0;
             .login-title {
+                color: var(--text-color);
                 font-size: 5rem;
                 font-weight: 500;
             }
@@ -27,7 +29,8 @@
             .btn-submit {
                 margin: 30px 0 20px;
                 padding: 15px;
-                color: var(--white-color);
+                // color: var(--text-color);
+                color: #fff;
                 background-color: var(--color-light-black);
                 border-radius: 4px;
                 // display: block;
@@ -103,6 +106,17 @@
             .icon {
                 font-weight: 600;
             }
+        }
+    }
+    @include maxw(767px) {
+        .login-conten-form-wrapp {
+            transition: 0.3s all linear;
+        }
+        .form-control-wrapp {
+            width: 100vw;
+        }
+        .wrappper-img {
+            display: none !important;
         }
     }
 }
