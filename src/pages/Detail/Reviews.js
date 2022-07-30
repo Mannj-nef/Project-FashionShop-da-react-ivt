@@ -1,7 +1,7 @@
 import { Rate } from "antd";
 import React from "react";
 
-const Reviews = ({ buyer, children }) => {
+const Reviews = ({ buyer }) => {
   return (
     <div className="reviews-item  border-t barder-[#ccc]">
       <div className="w-full">
@@ -13,10 +13,10 @@ const Reviews = ({ buyer, children }) => {
               marginBottom: "10px",
             }}
           >
-            {buyer?.name || "Name name name"}
+            {buyer?.fullName || "Name name name"}
           </span>
           <span style={{ fontSize: "1.3rem" }}>
-            {buyer?.date || "date date date"}
+            {buyer?.dateAdd || "date date date"}
           </span>
         </p>
         <div className="flex items-center my-3">

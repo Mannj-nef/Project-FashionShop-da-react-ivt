@@ -7,6 +7,12 @@ export const getRatings = async (params) => {
   return data;
 };
 
+export const getRatingsByPage = async (page, limit) => {
+  const { data } = await axiosClient.get(
+    `ratings?_page=${page}&_limit=${limit}`
+  );
+  return data;
+};
 
 export const addRating = (rating) => {
   return axiosClient.post(`ratings`, { ...rating });

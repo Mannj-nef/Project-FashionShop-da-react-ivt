@@ -64,9 +64,12 @@ const cartReducer = (state = initialValue, action) => {
       const wishList = action.payload.wishList;
       const listCartClone = [...state.listCart];
 
-      const index = listCartClone.findIndex((cartItem) => +cartItem.id === +id);
+      const index = listCartClone.findIndex(
+        (cartItem) => +cartItem?.id === +id
+      );
+      console.log(listCartClone);
+      console.log(+id);
       listCartClone[index].wishList = wishList;
-
       localStorage.setItem(
         CartType.CART_LOCALSTORAGE,
         JSON.stringify(listCartClone)

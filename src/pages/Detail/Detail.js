@@ -21,8 +21,9 @@ import {
 import DetailProduct from "./DetailProduct";
 import Cart from "../../components/cart/Cart";
 import { actChangeWishList } from "../../redux/actions/cart/cartAction";
-import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
+import { actGetRatingByPage } from "../../redux/actions/ratingAction";
 import { Rate } from "antd";
+import useScrollProduct from "../../hooks/useScrollProduct";
 
 const Stars5 = ({ size }) => {
   return (
@@ -70,6 +71,7 @@ const btnLinkSocials = [
 const Detail = () => {
   const [showFormReview, setShowFormReview] = useState(false);
   const [formReviewHeight, setFormReviewHeight] = useState(0);
+  const [limitRating, setLimitRating] = useState(2);
 
   const { id } = useParams();
   const FormReviewRef = useRef();
@@ -80,14 +82,21 @@ const Detail = () => {
     (state) => state.productReducer
   );
   const { listCart } = useSelector((state) => state.cartReducer);
-  const { listRatings } = useSelector((state) => state.ratingReducer);
+  const { listRatings, isLoading, lastData } = useSelector(
+    (state) => state.ratingReducer
+  );
+
+  const { nodeRef } = useScrollProduct(isLoading);
+
   let count = 0;
   let rate = 0;
   // eslint-disable-next-line array-callback-return
-  listRatings.map((rating) => {
-    count++;
-    rate += rating.rate;
-  });
+  Array.isArray(listRatings) &&
+    listRatings.length >= 0 &&
+    listRatings.map((rating) => {
+      count++;
+      rate += rating.rate;
+    });
 
   let avgRate = Math.round(rate / count);
   const wishList = listCart.filter((item) => +item.id === +id);
@@ -101,9 +110,17 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(actGetAllProduct());
-    dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+  }, [dispatch]);
+
+  useEffect(() => {
+    const data = {
+      page: 1,
+      limit: limitRating,
+    };
+    dispatch(actGetRatingByPage(data));
+    dispatch(actGetAllProduct());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [limitRating]);
 
   useEffect(() => {
     const FormReview = FormReviewRef.current;
@@ -122,7 +139,8 @@ const Detail = () => {
   };
 
   const handleLoadMore = () => {
-    console.log("load more");
+    if (lastData) return;
+    setLimitRating((page) => page + 2);
   };
 
   return (
@@ -150,7 +168,7 @@ const Detail = () => {
         {/* detail product */}
         <DetailProduct product={product} listCart={listCart}></DetailProduct>
 
-        <div className="detail-conten-reviews">
+        <div ref={nodeRef} className="detail-conten-reviews">
           <div className="reviews-item">
             <div>
               <h2 className="reviews-title">
@@ -176,14 +194,20 @@ const Detail = () => {
           >
             <FormReview setShowFormReview={setShowFormReview}></FormReview>
           </div>
-          {listRatings.map((buyerRating) => (
-            <Reviews key={buyerRating.id} buyer={buyerRating}>
-              <Stars5 size="2rem" />
-            </Reviews>
-          ))}
+          {Array.isArray(listRatings) &&
+            listRatings.length >= 0 &&
+            listRatings.map((buyerRating) => (
+              <Reviews key={buyerRating.id} buyer={buyerRating}>
+                <Stars5 size="2rem" />
+              </Reviews>
+            ))}
           <div className="text-center">
             <button
-              className="btn-load-reviews hover:opacity-80"
+              className={`btn-load-reviews  ${
+                lastData
+                  ? "pointer-events-none, opacity-30 cursor-not-allowed "
+                  : "hover:opacity-80 "
+              }`}
               onClick={handleLoadMore}
             >
               Load More Reviews
