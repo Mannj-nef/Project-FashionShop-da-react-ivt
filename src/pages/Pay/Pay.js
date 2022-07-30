@@ -99,13 +99,12 @@ const Pay = () => {
   const handleCheckOut = () => {
     if (ischeckout) {
       const profileClone = { ...profile };
-      // delete profileClone.id;
       const data = {
         ...profileClone,
         status: Status.PROCESSING,
         cart: listCart,
         userId: profileClone.id,
-        status: Status.PROCESSING,
+        dateAdd: new Date().getTime(),
         total: priceTotal,
         dateAdd: new Date().getTime(),
       };
@@ -116,6 +115,7 @@ const Pay = () => {
       console.log(data);
       alert("order thành công, đến xem thông tin đơn hàng");
       history.push(ROUTER_PATH.ORDERSTATUS.path);
+      dispatch(actRemoveAllCart());
     } else {
       toast.info("Nhập thông tin đi bạn ");
     }

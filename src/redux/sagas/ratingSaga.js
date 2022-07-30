@@ -1,8 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { call, put, takeLeading } from "redux-saga/effects";
-import { getRatings } from "../../apis/ratingApi";
+import { getRatings, getRatingsByPage } from "../../apis/ratingApi";
 import { RatingTypes } from "../../common/types";
-import { actSetLoading } from "../actions/ratingAction";
+import {
+  actGetRatingByPage,
+  actSetLastRating,
+  actSetLoading,
+} from "../actions/ratingAction";
 
 function* fetchRatingByFilter(action) {
   yield put(actSetLoading());
@@ -13,9 +17,31 @@ function* fetchRatingByFilter(action) {
     yield put({ message: e.message });
   }
 }
+function* fetchRatingByPage(action) {
+  yield put(actSetLoading());
+  const page = action.payload.page;
+  const limit = action.payload.limit;
+  try {
+    const ratings = yield call(getRatingsByPage, page, limit);
+    const ratingsAll = yield call(getRatings);
+
+    if (ratings.length === ratingsAll.length) {
+      yield put(actSetLastRating(ratingsAll));
+      return;
+    }
+
+    yield put(actGetRatingByPage(ratings));
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
 
 function* watchAllRatingByFilter() {
   yield takeLeading(RatingTypes.GET_RATING_BY_FILTER, fetchRatingByFilter);
 }
 
-export default [watchAllRatingByFilter()];
+function* watchAllRatingByPage() {
+  yield takeLeading(RatingTypes.GET_RATING_BY_PAGE, fetchRatingByPage);
+}
+
+export default [watchAllRatingByFilter(), watchAllRatingByPage()];

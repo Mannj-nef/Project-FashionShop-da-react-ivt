@@ -5,7 +5,7 @@ import useTotop from "../../hooks/useTotop";
 import ChooseColor from "./ChooseColor";
 import { useDispatch } from "react-redux";
 
-import image2 from "../../assets/image/slider_nav2.jpg";
+import image2 from "../../assets/image/size-img.jpg";
 import image3 from "../../assets/image/slider_nav5.jpg";
 import {
   actAddCart,

@@ -44,8 +44,8 @@ function* fetchaddOrder(action) {
   yield put(actSetLoadingOrder());
   const data = action.payload;
   try {
-    yield call(addOrder, data);
-    yield put(actAddOrder());
+    const response = yield call(addOrder, data);
+    yield put(actAddOrder(response));
   } catch (e) {
     yield put({ message: e.message });
   }
@@ -61,7 +61,12 @@ function* fetchOrderByEmail(action) {
     const listOrderUser = orders.filter(
       (item) => item.email === email && item.password === password
     );
-    yield put(actGetOrderByProfile(listOrderUser[0].cart));
+    const data = listOrderUser.map((item) => {
+      console.log(item);
+      return item.cart;
+    });
+    console.log(data, "data");
+    yield put(actGetOrderByProfile(listOrderUser));
   } catch (e) {
     yield put({ message: e.message });
   }

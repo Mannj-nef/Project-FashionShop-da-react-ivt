@@ -17,7 +17,6 @@ const OrderStatus = () => {
   const { listOrder } = useSelector((state) => state?.orderReducer);
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(listOrder);
   useEffect(() => {
     dispatch(actGetOrderByFilter({ userId: id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps

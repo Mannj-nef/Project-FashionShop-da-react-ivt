@@ -1,3 +1,4 @@
+@import "../../styles/responsive";
 .Blog {
     background-color: var(--color-pink);
     font-size: 1.6rem;
@@ -85,6 +86,14 @@
         }
         .blog-slogan {
             color: var(--text-color);
+        }
+    }
+    @include maxw(767px) {
+        .blog-wrapp {
+            flex-direction: column;
+            .blog-main {
+                width: 100%;
+            }
         }
     }
 }

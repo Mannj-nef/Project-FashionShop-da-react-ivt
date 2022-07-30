@@ -6,32 +6,38 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { actGetAllProduct } from "../../redux/actions/productAction";
 
 const FormReview = () => {
+  const { profile } = useSelector((state) => state.authReducer);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const handleSubmit = async (value) => {
-    await addRating({ ...value, productId: parseInt(id) });
+    delete profile.id;
+    const date = new Date().toLocaleDateString();
+    const data = {
+      ...value,
+      productId: parseInt(id),
+      dateAdd: date,
+      ...profile,
+    };
+    await addRating(data);
     toast.success("Bình luận thành công", { autoClose: 2000 });
     form.resetFields();
     dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+    dispatch(actGetAllProduct());
   };
 
   return (
     <>
       <ToastContainer />
       <div className="p-[50px]">
-        <h2 className="buyre-name mb-3 text-4xl">{"Manh Quan"}</h2>
-        <Form
-          layout="vertical"
-          onFinish={handleSubmit}
-          form={form}
-          initialValues={{
-            rate: 5,
-          }}
-        >
+        <h2 className="buyre-name mb-3 text-4xl">
+          {profile.fullName || "full name"}
+        </h2>
+        <Form layout="vertical" onFinish={handleSubmit} form={form}>
           <div className="relative pb-2">
             <Form.Item name="rate" label="Rate">
               <Rate />
