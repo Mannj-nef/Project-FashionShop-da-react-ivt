@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import { columnsAll } from "../../../common/table";
 import { sharinganIcon } from "../../../components/Loading";
 import { actGetOrderById } from "../../../redux/actions/orderAction";
-import { actGetUserById } from "../../../redux/actions/userAction";
 import { Steps } from "antd";
 import "../style.scss";
-import { Status } from "../../../common/types";
+import {  Status } from "../../../common/types";
 import { editOrder } from "../../../apis/orderApi";
 import { toast, ToastContainer } from "react-toastify";
+
 export default function DetailOrder() {
   const { id } = useParams();
   const { Step } = Steps;
@@ -18,16 +18,13 @@ export default function DetailOrder() {
   const { detailOrder, isLoading } = useSelector(
     (state) => state?.orderReducer
   );
-  const { detailUser } = useSelector((state) => state?.userReducer);
   const listCart = detailOrder.cart;
   useEffect(() => {
     dispatch(actGetOrderById(id));
-    dispatch(actGetUserById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     dispatch(actGetOrderById(id));
-    dispatch(actGetUserById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailOrder]);
   const handleStatus = () => {
@@ -80,7 +77,7 @@ export default function DetailOrder() {
               <h4 className="fw-bold"> {detailOrder.fullName}</h4>
             </div>
             <p>Invoice Id: #{id}</p>
-            <p>Email: {detailUser.email}</p>
+            <p>Email: {detailOrder.email}</p>
             <p>Address: {detailOrder.address}</p>
             <p>Phone: {detailOrder?.phone}</p>
             <p>Date order: {dateOrder}</p>

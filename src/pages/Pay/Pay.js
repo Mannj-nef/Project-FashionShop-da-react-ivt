@@ -11,7 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { VALIDATE_YUP } from "../../common/validateYup";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Info from "./Info";
 import "./style.scss";
 import Delivery from "./Delivery";
@@ -23,6 +24,7 @@ import { Status } from "../../common/types";
 
 import useCalculateTotal from "../../hooks/useCalculateTotal";
 import { actRemoveAllCart } from "../../redux/actions/cart/cartAction";
+import { editProduct, getProductsById } from "../../apis/productApi";
 
 const schema = Yup.object({
   address: VALIDATE_YUP.DESCRIPTION,
@@ -40,10 +42,11 @@ const Pay = () => {
   const { isOrderLoading } = useSelector((state) => state.orderReducer);
   const dispatch = useDispatch();
   const priceTotal = useCalculateTotal(listCart);
-
   useEffect(() => {
     dispatch(actGetAllOrder());
-  }, [dispatch]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useBackPage();
   const {
@@ -57,7 +60,7 @@ const Pay = () => {
 
   const onSubmit = async (values) => {
     if (delivery === "" || payment === "") {
-      alert("làm ơn chọn Delivery và Payment");
+      toast.warning("Hãy chọn phương thức thanh toán và giao hàng");
       return;
     }
 
@@ -71,10 +74,25 @@ const Pay = () => {
       setTimeout(() => {
         resolver();
         dispatch(actChangeProfile(data));
-        alert("thành công");
+        toast.success("Thành công");
         setIsCheckout(true);
         reset();
       }, 2000);
+    });
+  };
+  const handleUpdateProduct = async () => {
+    await listCart.forEach((cart) => {
+      let product = getProductsById(cart.id);
+      product.then((pro) => {
+        editProduct(
+          {
+            ...pro,
+            quantity: pro.quantity - cart.quantity,
+            sold: pro.sold ? pro.sold + cart.quantity : 0 + cart.quantity,
+          },
+          cart.id
+        );
+      });
     });
   };
 
@@ -89,21 +107,24 @@ const Pay = () => {
         userId: profileClone.id,
         status: Status.PROCESSING,
         total: priceTotal,
+        dateAdd: new Date().getTime(),
       };
       delete data.id;
       dispatch(actAddOrder(data));
+      handleUpdateProduct();
       dispatch(actRemoveAllCart());
       console.log(data);
       alert("order thành công, đến xem thông tin đơn hàng");
       history.push(ROUTER_PATH.ORDERSTATUS.path);
     } else {
-      alert("cần cập nhật thông tin");
+      toast.info("Nhập thông tin đi bạn ");
     }
     setIsCheckout(false);
   };
 
   return (
     <div className="checkout-pay" style={{ paddingTop: height }}>
+      <ToastContainer />
       <div className="container ">
         <div className="relative w-full">
           <div className="pay-checkout">

@@ -64,11 +64,9 @@ export default function ModalUser(props) {
           name={["password"]}
           rules={[...config.rulePassword]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
-        <Form.Item label="Avatar" name={["avatar"]}>
-          <Input />
-        </Form.Item>
+
         <Form.Item name="role" label="Role" rules={[...config.ruleRole]}>
           <Select placeholder="Select a role" allowClear>
             <Option value="admin">Admin</Option>

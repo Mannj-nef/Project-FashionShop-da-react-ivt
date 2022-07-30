@@ -19,7 +19,7 @@ export default function CardAnalytics(props) {
         <h1 className="mt-1 mb-3">{value}</h1>
         <div className="mb-0">
           <span className="text-danger">{percent}%</span>
-          <span className="text-muted"> Since last week</span>
+          <span className="text-muted"> Since last month</span>
         </div>
       </div>
     </div>

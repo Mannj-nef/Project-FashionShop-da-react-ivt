@@ -29,7 +29,7 @@ export default function Admin() {
   let revenueQ3 = 0;
   let revenueQ4 = 0;
 
-  listOrder.map((order) => {
+  listOrder.forEach((order) => {
     let dateOrder = new Date(order.dateAdd).getMonth() + 1;
     numOfOrder++;
     totalOfOrder += order.total;
@@ -43,12 +43,12 @@ export default function Admin() {
       revenueQ4 += order.total;
     }
   });
-  listUser.map((user) => {
+  listUser.forEach((user) => {
     if (user.role === "user") {
       numOfUser++;
     }
   });
-  listProducts.map((products) => {
+  listProducts.forEach((products) => {
     numOfProduct++;
   });
   const data = [
@@ -196,21 +196,7 @@ export default function Admin() {
                   />
                   <Nation nationCode={"gr"} nationName={"Greek"} percent={69} />
                   <Nation nationCode={"jp"} nationName={"Japan"} percent={69} />
-                  <Nation
-                    nationCode={"mx"}
-                    nationName={"Mexico"}
-                    percent={69}
-                  />
-                  <Nation
-                    nationCode={"eg"}
-                    nationName={"Pharaoh"}
-                    percent={69}
-                  />
-                  <Nation
-                    nationCode={"th"}
-                    nationName={"Thailand"}
-                    percent={69}
-                  />
+                 
                 </div>
               </div>
             </div>

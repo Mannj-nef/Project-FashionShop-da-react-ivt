@@ -8,6 +8,11 @@ export const actGetOrderById = (id) => ({
   type: OrderTypes.GET_ORDER_BY_ID,
   payload: id,
 });
+export const actGetOrderByFilter = (payload) => ({
+  type: OrderTypes.GET_ORDER_BY_FILTER,
+  payload: payload,
+});
+
 export const actGetOrderByProfile = (payload) => ({
   type: OrderTypes.GET_ORDER_BY_PROFILE,
   payload,

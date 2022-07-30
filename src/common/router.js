@@ -15,6 +15,8 @@ const Profile = lazy(() => import("../pages/Profile/Profile.js"));
 const User = lazy(() => import("../pages/User/User.js"));
 const Pay = lazy(() => import("../pages/Pay/Pay.js"));
 const OrderStatus = lazy(() => import("../pages/OrderStatus/OrderStatus.js"));
+const DetailOrderUser = lazy(() => import("../pages/OrderStatus/DetailOrder"));
+
 //admin
 const Admin = lazy(() => import("../pages/Admin/Admin"));
 const ProfileAdmin = lazy(() => import("../pages/Admin/Profile"));
@@ -90,6 +92,11 @@ export const userRouter = [
     path: ROUTER_PATH.ORDERSTATUS.path,
     isExact: true,
     component: OrderStatus,
+  },
+  {
+    path: ROUTER_PATH.DETAIL_ORDER_USER.path,
+    isExact: true,
+    component: DetailOrderUser,
   },
 ];
 

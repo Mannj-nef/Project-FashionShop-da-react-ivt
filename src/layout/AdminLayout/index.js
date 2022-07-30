@@ -14,7 +14,7 @@ import {
 import Nav from "react-bootstrap/Nav";
 
 import Navbar from "react-bootstrap/Navbar";
-
+import DarkMode from "../../components/toggleDarkMode/DarkMode"
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import Container from "react-bootstrap/Container";
@@ -28,9 +28,6 @@ const role = JSON.parse(
 export default function AdminLayout({ children }) {
   const [show, setShow] = useState(true);
   const navigation = useRef(null);
-  const ball = useRef(null);
-  const [isActive, setIsActive] = useState(false);
-  const dMode = JSON.parse(localStorage.getItem("Dark_Mode"));
   const history = useHistory();
   const menu = (
     <Menu
@@ -46,38 +43,22 @@ export default function AdminLayout({ children }) {
       ]}
     />
   );
-  const darkTheme = {
-    background: "rgb(17, 25, 54)",
-    color: "#fff",
-  };
+ 
   const handleLogout = () => {
     localStorage.removeItem(AuthTypes.AUTH_LOCALSTORAGE);
     history.push(ROUTER_PATH.LOGIN.path);
   };
   // eslint-disable-next-line no-unused-vars
-  const handleToggleMode = () => {
-    setIsActive(!isActive);
-    if (isActive) {
-      localStorage.setItem("Dark_Mode", true);
-      ball.current.style = "transform: translateX(24px)";
-    } else {
-      localStorage.removeItem("Dark_Mode");
-      ball.current.style = "transform: translateX(0px)";
-    }
-  };
+  
   const handleToggleSider = () => {
     setShow(!show);
     if (show) {
-      navigation.current.classList.add("d-none");
+      navigation.current.style = "margin-left: -200px";
     } else {
-      navigation.current.classList.remove("d-none");
+      navigation.current.style = "margin-left: 0px";
     }
   };
-  // console.log();
-  // if(JSON.parse(localStorage.getItem(AuthTypes.AUTH_LOCALSTORAGE)).role !== "admin"){
-  //   <Redirect to="/login" />
-  // }
-  // console.log();
+  
   return (
     <>
       {role === "admin" ? (
@@ -141,20 +122,13 @@ export default function AdminLayout({ children }) {
             <Navbar
               expand=""
               className="navbar-style"
-              style={dMode && darkTheme}
             >
               <a className="sidebar-toggle" onClick={() => handleToggleSider()}>
                 <i className="fa-solid fa-bars align-self-center"></i>
               </a>
               <div className="form-profile">
-                <div className="dark-mode" onClick={() => handleToggleMode()}>
-                  <input type="checkbox" className="checkbox" id="chk" />
-                  <label>
-                    <i className="fas fa-moon"></i>
-                    <i className="fas fa-sun"></i>
-                    <div className="ball" ref={ball}></div>
-                  </label>
-                </div>
+                
+                <DarkMode />
                 <SvgTransIcon />
                 <SvgNotification />
                 <Dropdown overlay={menu} trigger={["hover"]}>

@@ -20,6 +20,12 @@
             cursor: pointer;
             color: var(--text-color);
         }
+        .title-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 2.5rem;
+        }
         .order-status {
             background-color: var(--white-color);
         }

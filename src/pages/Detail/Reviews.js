@@ -20,12 +20,9 @@ const Reviews = ({ buyer, children }) => {
           </span>
         </p>
         <div className="flex items-center my-3">
-          <Rate disabled defaultValue={buyer.rate}/>
+          <Rate disabled defaultValue={buyer.rate} />
         </div>
-        <p className="pr-[40%]">
-          {buyer?.comment ||
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Non magni at similique impedit illo officia atque nesciunt, voluptatibus ipsa adipisci fugit qui, esse iusto placeat odio soluta nisi modi tempora."}
-        </p>
+        <p className="pr-[40%]">{buyer?.comment} </p>
       </div>
     </div>
   );
