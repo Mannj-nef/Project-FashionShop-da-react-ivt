@@ -24,7 +24,14 @@ const FormReview = () => {
       <ToastContainer />
       <div className="p-[50px]">
         <h2 className="buyre-name mb-3 text-4xl">{"Manh Quan"}</h2>
-        <Form layout="vertical" onFinish={handleSubmit} form={form}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          form={form}
+          initialValues={{
+            rate: 5,
+          }}
+        >
           <div className="relative pb-2">
             <Form.Item name="rate" label="Rate">
               <Rate />

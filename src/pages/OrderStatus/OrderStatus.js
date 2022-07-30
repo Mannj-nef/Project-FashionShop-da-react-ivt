@@ -3,29 +3,25 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
+import { AuthTypes } from "../../common/types";
 import SidebarProfile from "../../components/sidebarProfile/SidebarProfile";
 import useBackPage from "../../hooks/useBackPage";
-import { actGetOrderByProfile } from "../../redux/actions/orderAction";
+import { actGetOrderByFilter } from "../../redux/actions/orderAction";
 import "./style.scss";
 import TableOrder from "./TableOrder";
 
+const id = JSON.parse(localStorage.getItem(AuthTypes.AUTH_LOCALSTORAGE)).id;
 const OrderStatus = () => {
   useBackPage();
   const { height } = useSelector((state) => state.headerReducer);
-  const { listOrder, isLoading } = useSelector((state) => state?.orderReducer);
-  const { profile } = useSelector((state) => state?.authReducer);
+  const { listOrder } = useSelector((state) => state?.orderReducer);
   const history = useHistory();
   const dispatch = useDispatch();
-
+  console.log(listOrder);
   useEffect(() => {
-    const profileClone = { ...profile };
-    const data = {
-      email: profileClone.email,
-      password: profileClone.password,
-    };
-
-    dispatch(actGetOrderByProfile(data));
-  }, [dispatch, profile]);
+    dispatch(actGetOrderByFilter({ userId: id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="order-status" style={{ paddingTop: height }}>

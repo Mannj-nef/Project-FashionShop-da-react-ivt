@@ -27,7 +27,7 @@ export default function ModalProduct(props) {
 
   const handleSubmit = async (product) => {
     if (modalTitle === "Add") {
-      await addProduct({...product,dateAdd: new Date().getTime()});
+      await addProduct({ ...product, dateAdd: new Date().getTime(), sold: 0 });
       toast.success(SUCCESS_MESSAGE.STATUS_200);
       dispatch(actGetAllProduct());
       form.resetFields();
@@ -69,7 +69,7 @@ export default function ModalProduct(props) {
           name={["quantity"]}
           rules={[...config.ruleQuantity]}
         >
-          <InputNumber min={1} max={1000} />
+          <InputNumber min={1} max={10000000} />
         </Form.Item>
         <Form.Item name="gender" label="Gender" rules={[...config.ruleGender]}>
           <Select placeholder="Please select gender">
@@ -156,6 +156,12 @@ export default function ModalProduct(props) {
             </>
           )}
         </Form.List>
+        <Form.Item name={["sold"]} label="Sold">
+          <Input disabled />
+        </Form.Item>
+        <Form.Item name={["dateAdd"]} label="Date add">
+          <Input disabled />
+        </Form.Item>
       </Form>
     </Modal>
   );

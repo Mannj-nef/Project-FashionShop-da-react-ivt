@@ -143,6 +143,12 @@ export const config = {
       message: "Please input address!",
     },
   ],
+  ruleRate: [
+    {
+      required: true,
+      message: "Please choose star!",
+    },
+  ],
 };
 
 export const columnsAll = {
@@ -194,11 +200,10 @@ export const columnsAll = {
       render: (_, record) => <div>{record.price}$</div>,
     },
     {
-      title: "Sales",
-      key: "sales",
-      dataIndex: "sales",
-      sorter: (a, b) => a.sales - b.sales,
-      render: (_, record) => <div>{record.sales}%</div>,
+      title: "Sold",
+      key: "sold",
+      dataIndex: "sold",
+      sorter: (a, b) => a.sold - b.sold,
     },
   ],
   columnUser: [
@@ -250,7 +255,7 @@ export const columnsAll = {
           icon = <SyncOutlined spin />;
         } else if (status === Status.SHIPPING) {
           color = "cyan";
-          icon = <ClockCircleOutlined />;
+          icon = <ClockCircleOutlined spin/>;
         } else if (status === Status.DELIVERED) {
           color = "success";
           icon = <CheckCircleOutlined />;
@@ -295,6 +300,9 @@ export const columnsAll = {
       key: "total",
       dataIndex: "total",
       sorter: (a, b) => a.total - b.total,
+      render: (_, record) => (
+        <div>{record.total}$</div>
+      ),
     },
   ],
   columnDetailOrder: [
@@ -327,6 +335,10 @@ export const columnsAll = {
       key: "price",
       dataIndex: "price",
       sorter: (a, b) => a.price - b.price,
+      render: (_, record) => (
+        // eslint-disable-next-line jsx-a11y/alt-text
+        <div>{record.price}$</div>
+      ),
     },
     {
       title: "Quantity",
@@ -334,18 +346,13 @@ export const columnsAll = {
       dataIndex: "quantity",
       sorter: (a, b) => a.quantity - b.quantity,
     },
-    {
-      title: "Sales",
-      key: "sales",
-      dataIndex: "sales",
-      sorter: (a, b) => a.sales - b.sales,
-    },
-    {
-      title: "Total amount",
-      key: "totalAmount",
-      dataIndex: "totalAmount",
-      sorter: (a, b) => a.totalAmount - b.totalAmount,
-    },
+    // {
+    //   title: "Sales",
+    //   key: "sales",
+    //   dataIndex: "sales",
+    //   sorter: (a, b) => a.sales - b.sales,
+    // },
+    
   ],
 };
 

@@ -4,7 +4,7 @@ import Flag from "react-world-flags";
 export default function Nation(props) {
   const { nationCode, nationName, percent } = props;
   return (
-    <div className="d-flex align-items-center mb-2" style={{ gap: "10px" }}>
+    <div className="d-flex align-items-center mb-4 mt-4" style={{ gap: "10px" }}>
       <Flag code={nationCode} style={{ height: "20px",width: "30px" }} />
       <div className="d-flex w-100 ">
         <div>{nationName}</div>

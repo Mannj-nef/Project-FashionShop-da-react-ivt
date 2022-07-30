@@ -48,6 +48,7 @@ const Info = ({ control, errors }) => {
             id="phone"
             placeholder="Enter your phone number"
             control={control}
+            defaultValue={profile.phone}
             label="Phone number"
           ></Input>
           {errors?.phone?.message && (
@@ -63,6 +64,8 @@ const Info = ({ control, errors }) => {
             placeholder="Enter your address"
             control={control}
             label="Address"
+            defaultValue={profile.address}
+
           ></Input>
           {errors?.address?.message && (
             <p className="text-red-500 top-full  absolute">

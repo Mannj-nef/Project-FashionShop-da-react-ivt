@@ -38,6 +38,9 @@ export const ROUTER_PATH = {
   ORDERSTATUS: {
     path: "/order-status",
   },
+  DETAIL_ORDER_USER: {
+    path: "/order-status/detail/:id",
+  },
 
   // admin
   ADMIN: {

@@ -18,6 +18,15 @@ function* fetchOrders(action) {
     yield put({ message: e.message });
   }
 }
+function* fetchOrderByFilter(action) {
+  yield put(actSetLoadingOrder());
+  try {
+    const orders = yield call(getOrders, { ...action.payload });
+    yield put({ type: OrderTypes.GET_ORDER_SUCCESS, payload: orders });
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
 function* fetchOrderById(action) {
   yield put(actSetLoadingOrder());
   try {
@@ -65,6 +74,9 @@ function* watchAddOrder() {
 function* watchAllOrder() {
   yield takeLeading(OrderTypes.GET_All_ORDER, fetchOrders);
 }
+function* watchOrderByFilter() {
+  yield takeLeading(OrderTypes.GET_ORDER_BY_FILTER, fetchOrderByFilter);
+}
 function* watchDetailOrder() {
   yield takeLeading(OrderTypes.GET_ORDER_BY_ID, fetchOrderById);
 }
@@ -79,4 +91,5 @@ export default [
   watchDetailOrder(),
   watchAddOrder(),
   watchDetailUserOrder(),
+  watchOrderByFilter(),
 ];
