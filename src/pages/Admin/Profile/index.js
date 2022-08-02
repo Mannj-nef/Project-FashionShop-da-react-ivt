@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Form, Input, Tabs, Select, Button } from "antd";
+import { Form, Input, Tabs, Button } from "antd";
 import React, { useEffect } from "react";
 import { config } from "../../../common/table";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Profile() {
   const { TabPane } = Tabs;
-  const { Option } = Select;
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { detailUser } = useSelector((state) => state?.userReducer);
@@ -42,17 +41,6 @@ export default function Profile() {
     toast.success("Change password success", { autoClose: 1000 });
     dispatch(actGetUserById(id));
   };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="84">+84</Option>
-      </Select>
-    </Form.Item>
-  );
 
   useEffect(() => {
     dispatch(actGetUserById(id));
@@ -99,9 +87,6 @@ export default function Profile() {
                   layout="vertical"
                   onFinish={handleEditProfile}
                   form={form}
-                  initialValues={{
-                    prefix: "84",
-                  }}
                 >
                   <Form.Item label="Email" name={["email"]}>
                     <Input disabled />
@@ -126,7 +111,6 @@ export default function Profile() {
                     rules={[...config.rulePhone]}
                   >
                     <Input
-                      addonBefore={prefixSelector}
                       style={{
                         width: "100%",
                       }}
@@ -186,9 +170,9 @@ export default function Profile() {
                     <Input.Password />
                   </Form.Item>
                   <Form.Item>
-                    <button className="btn btn-primary" type="submit">
+                    <Button type="primary">
                       Change
-                    </button>
+                    </Button>
                   </Form.Item>
                 </Form>
               </TabPane>

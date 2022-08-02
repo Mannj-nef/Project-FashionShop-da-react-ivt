@@ -13,8 +13,9 @@ import {
   actChangeWishList,
 } from "../../redux/actions/cart/cartAction";
 import { modalAction } from "../../redux/actions/modal";
+import { Rate } from "antd";
 
-const DetailProduct = ({ product, listCart }) => {
+const DetailProduct = ({ product, listCart, rate, count }) => {
   const imageDetailRef = useRef();
   const handleScrollToTop = useTotop();
   const [gender, setIsMale] = useState("male");
@@ -81,12 +82,13 @@ const DetailProduct = ({ product, listCart }) => {
       </div>
       <div className="detail-main-info">
         <div className="reviews">
-          {Array(5)
+          {/* {Array(5)
             .fill(null)
             .map((statr, index) => (
               <AiFillStar key={index} className="text-yellow-400"></AiFillStar>
-            ))}
-          <span className="ml-5">150 Reviews</span>
+            ))} */}
+          <Rate value={rate} disabled />
+          <span className="ml-5">{count} Reviews</span>
         </div>
         <h2 className="title-name text-line-2 ">{product?.productName}</h2>
         <p className="price">

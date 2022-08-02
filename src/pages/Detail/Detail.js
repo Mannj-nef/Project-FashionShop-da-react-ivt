@@ -21,7 +21,7 @@ import {
 import DetailProduct from "./DetailProduct";
 import Cart from "../../components/cart/Cart";
 import { actChangeWishList } from "../../redux/actions/cart/cartAction";
-import { actGetRatingByPage } from "../../redux/actions/ratingAction";
+import { actGetRatingByFilter, actGetRatingByPage } from "../../redux/actions/ratingAction";
 import { Rate } from "antd";
 import useScrollProduct from "../../hooks/useScrollProduct";
 
@@ -93,7 +93,7 @@ const Detail = () => {
   // eslint-disable-next-line array-callback-return
   Array.isArray(listRatings) &&
     listRatings.length >= 0 &&
-    listRatings.map((rating) => {
+    listRatings.forEach((rating) => {
       count++;
       rate += rating.rate;
     });
@@ -110,14 +110,16 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(actGetAllProduct());
-  }, [dispatch]);
+    dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const data = {
       page: 1,
       limit: limitRating,
     };
-    dispatch(actGetRatingByPage(data));
+    // dispatch(actGetRatingByPage(data));
     dispatch(actGetAllProduct());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limitRating]);
@@ -166,14 +168,14 @@ const Detail = () => {
           </div>
         </div>
         {/* detail product */}
-        <DetailProduct product={product} listCart={listCart}></DetailProduct>
+        <DetailProduct product={product} listCart={listCart} rate={avgRate} count={count}></DetailProduct>
 
         <div ref={nodeRef} className="detail-conten-reviews">
           <div className="reviews-item">
             <div>
               <h2 className="reviews-title">
                 <span className="mr-5">{avgRate ? avgRate : 0}</span>
-                {avgRate ? <Rate disabled defaultValue={avgRate} /> : null}
+                {avgRate && <Rate disabled value={avgRate} /> }
               </h2>
               <p>Based on {count} Reviews</p>
             </div>

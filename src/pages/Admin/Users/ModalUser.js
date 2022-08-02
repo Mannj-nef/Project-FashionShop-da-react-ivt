@@ -73,6 +73,17 @@ export default function ModalUser(props) {
             <Option value="user">User</Option>
           </Select>
         </Form.Item>
+        <div className="d-none">
+          <Form.Item name={["address"]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name={["phone"]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name={["avatar"]}>
+            <Input />
+          </Form.Item>
+        </div>
       </Form>
     </Modal>
   );

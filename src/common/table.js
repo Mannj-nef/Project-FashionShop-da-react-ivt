@@ -255,7 +255,7 @@ export const columnsAll = {
           icon = <SyncOutlined spin />;
         } else if (status === Status.SHIPPING) {
           color = "cyan";
-          icon = <ClockCircleOutlined spin/>;
+          icon = <ClockCircleOutlined spin />;
         } else if (status === Status.DELIVERED) {
           color = "success";
           icon = <CheckCircleOutlined />;
@@ -300,9 +300,7 @@ export const columnsAll = {
       key: "total",
       dataIndex: "total",
       sorter: (a, b) => a.total - b.total,
-      render: (_, record) => (
-        <div>{record.total}$</div>
-      ),
+      render: (_, record) => <div>{record.total}$</div>,
     },
   ],
   columnDetailOrder: [
@@ -352,10 +350,19 @@ export const columnsAll = {
     //   dataIndex: "sales",
     //   sorter: (a, b) => a.sales - b.sales,
     // },
-    
   ],
 };
-
+export const itemsFilter = [
+  { label: Status.PROCESSING, key: Status.PROCESSING },
+  { label: Status.SHIPPING, key: Status.SHIPPING },
+  { label: Status.DELIVERED, key: Status.DELIVERED },
+  { label: Status.CANCELED, key: Status.CANCELED },
+];
+export const itemsShow = [
+  { label: "5 items", key: 5 },
+  { label: "10 items", key: 10 },
+  { label: "20 items", key: 20 },
+];
 export const cancel = () => {
   toast.error("Delete error", { autoClose: 1000 });
 };

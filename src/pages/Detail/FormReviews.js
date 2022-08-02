@@ -14,6 +14,7 @@ const FormReview = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+  
   const handleSubmit = async (value) => {
     delete profile.id;
     const date = new Date().toLocaleDateString();
@@ -37,7 +38,14 @@ const FormReview = () => {
         <h2 className="buyre-name mb-3 text-4xl">
           {profile.fullName || "full name"}
         </h2>
-        <Form layout="vertical" onFinish={handleSubmit} form={form}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          form={form}
+          initialValues={{
+            rate: 5,
+          }}
+        >
           <div className="relative pb-2">
             <Form.Item name="rate" label="Rate">
               <Rate />
