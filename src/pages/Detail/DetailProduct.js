@@ -25,8 +25,11 @@ const DetailProduct = ({ product, listCart, rate, count }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
+    const productClone = { ...product };
+    const quantity = 1;
     const cartItem = {
-      ...product,
+      ...productClone,
+      quantity,
       valueColor,
       valueSize,
     };
@@ -44,7 +47,6 @@ const DetailProduct = ({ product, listCart, rate, count }) => {
   };
 
   const handleAddWidhList = (id) => {
-    console.log("check login");
     handleScrollToTop();
     dispatch(actChangeWishList({ wishList: true, id }));
   };

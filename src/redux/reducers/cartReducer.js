@@ -67,13 +67,14 @@ const cartReducer = (state = initialValue, action) => {
       const index = listCartClone.findIndex(
         (cartItem) => +cartItem?.id === +id
       );
-      console.log(listCartClone);
-      console.log(+id);
-      listCartClone[index].wishList = wishList;
-      localStorage.setItem(
-        CartType.CART_LOCALSTORAGE,
-        JSON.stringify(listCartClone)
-      );
+
+      if (listCartClone[index]) {
+        listCartClone[index].wishList = wishList;
+        localStorage.setItem(
+          CartType.CART_LOCALSTORAGE,
+          JSON.stringify(listCartClone)
+        );
+      }
       return {
         ...state,
         listCart: listCartClone,

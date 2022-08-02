@@ -22,6 +22,8 @@ const OrderStatus = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(listOrder);
+
   return (
     <div className="order-status" style={{ paddingTop: height }}>
       <div className="container">
