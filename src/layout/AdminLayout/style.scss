@@ -1,6 +1,6 @@
 .wrapper {
     align-items: stretch;
-    background: #222e3c;
+    background: var(--color-light-black);
     display: flex;
     width: 100%;
     font-size: 1.6rem;
@@ -12,8 +12,8 @@
     }
 
     .hr-style {
-        border: 2px solid #fff;
-        color: #fff;
+        border: 2px solid #ffff;
+        color: #ffff;
         margin-top: 10px;
     }
 
@@ -59,7 +59,7 @@
     }
 
     .main {
-        background: #f5f7fb;
+        background: var(--color-light-gray);
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
         display: flex;
@@ -71,19 +71,18 @@
 
         
         .navbar-style {
-            background: #ffffff;
+            background: var(--white-color);
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            
         }
 
         .content {
             direction: ltr;
             flex: 1;
             padding: 1.5rem 1.5rem 0.75rem;
-            background: #f5f7fb;
+            background: var(--color-light-gray);
 
             .card {
-                background: #ffffff;
+                background: var(--white-color);
                 border-radius: 10px;
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 margin-bottom: 30px;
@@ -97,7 +96,7 @@
             height: 26px;
             width: 26px;
             margin-left: 10px;
-
+            color: var(--black-color);
             .fa-solid {
                 width: 24px;
                 font-size: 30px;

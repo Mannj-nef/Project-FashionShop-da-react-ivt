@@ -25,7 +25,7 @@ import { sharinganIcon } from "../../../components/Loading";
 import { actGetAllCategory } from "../../../redux/actions/categoryAction";
 import { SUCCESS_MESSAGE } from "../../../common/message";
 import "../style.scss";
-import { cancel, columnsAll } from "../../../common/table";
+import { cancel, columnsAll, itemsShow } from "../../../common/table";
 export default function Products() {
   const dispatch = useDispatch();
   const { listProducts, isLoading } = useSelector(
@@ -43,19 +43,10 @@ export default function Products() {
   };
   const handleFilterShow = ({ key }) => {
     dispatch(actGetAllProduct());
-    dispatch(actGetAllCategory());
+    // dispatch(actGetAllCategory());
     setShow(key);
   };
-  const menuShow = (
-    <Menu
-      onClick={handleFilterShow}
-      items={[
-        { label: "5 items", key: 5 },
-        { label: "10 items", key: 10 },
-        { label: "20 items", key: 20 },
-      ]}
-    />
-  );
+  const menuShow = <Menu onClick={handleFilterShow} items={itemsShow} />;
   const menu = (
     <Menu
       onClick={handleFilter}
@@ -111,7 +102,6 @@ export default function Products() {
   };
   const handleInputSearch = (e) => {
     setSearchValue(e.target.value);
-    // dispatch(actGetProductByCat({ q: searchValue }));
   };
   useEffect(() => {
     dispatch(actGetAllProduct());
@@ -128,43 +118,44 @@ export default function Products() {
 
       <div className="container-fluid mt-5">
         <h1>Products</h1>
-        <div className="col-12 pb-4 mt-2">
-          <Dropdown overlay={menuShow} className="col-sm">
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                <Button>Show</Button>
-              </Space>
-            </a>
-          </Dropdown>
-          <Dropdown overlay={menu} className="col-sm">
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                <Button>Categories</Button>
-              </Space>
-            </a>
-          </Dropdown>
-          <Input
-            autoFocus
-            defaultValue={searchValue}
-            placeholder="default size"
-            prefix={<SearchOutlined />}
-            style={{ width: "30%" }}
-            className="col-sm"
-            onChange={(e) => handleInputSearch(e)}
-          />
+        <div className="row pb-4 mt-2">
+          <div className="col-xl-12">
+            <Dropdown overlay={menuShow}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <Button type="primary">Show</Button>
+                </Space>
+              </a>
+            </Dropdown>
+            <Dropdown overlay={menu}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <Button type="primary">Categories</Button>
+                </Space>
+              </a>
+            </Dropdown>
+            <Input
+              autoFocus
+              defaultValue={searchValue}
+              placeholder="Input search value"
+              prefix={<SearchOutlined />}
+              style={{ width: "30%" }}
+              onChange={(e) => handleInputSearch(e)}
+            />
 
-          <button
-            className="btn btn-success float-right col-sm"
-            onClick={() => showModalAdd()}
-          >
-            Add Product
-          </button>
-          <ModalProduct
-            modalTitle={modalTitle}
-            isModalVisible={isModalVisible}
-            setIsModalVisible={setIsModalVisible}
-            productEdit={productEdit}
-          />
+            <button
+              className="btn btn-success float-right "
+              onClick={() => showModalAdd()}
+            >
+              Add Product
+            </button>
+            <ModalProduct
+              modalTitle={modalTitle}
+              isModalVisible={isModalVisible}
+              setIsModalVisible={setIsModalVisible}
+              productEdit={productEdit}
+            />
+          </div>
         </div>
         {isLoading ? (
           <div className="loading-display">

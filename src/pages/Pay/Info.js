@@ -65,7 +65,6 @@ const Info = ({ control, errors }) => {
             control={control}
             label="Address"
             defaultValue={profile.address}
-
           ></Input>
           {errors?.address?.message && (
             <p className="text-red-500 top-full  absolute">

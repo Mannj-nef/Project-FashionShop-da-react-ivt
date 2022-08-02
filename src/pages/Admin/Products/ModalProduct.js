@@ -156,11 +156,11 @@ export default function ModalProduct(props) {
             </>
           )}
         </Form.List>
-        <Form.Item name={["sold"]} label="Sold">
-          <Input disabled />
+        <Form.Item name={["sold"]} className="d-none">
+          <Input type={"hidden"} />
         </Form.Item>
-        <Form.Item name={["dateAdd"]} label="Date add">
-          <Input disabled />
+        <Form.Item name={["dateAdd"]} className="d-none">
+          <Input type={"hidden"} />
         </Form.Item>
       </Form>
     </Modal>

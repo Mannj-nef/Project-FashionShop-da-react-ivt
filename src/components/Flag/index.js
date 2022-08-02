@@ -7,7 +7,7 @@ export default function Nation(props) {
     <div className="d-flex align-items-center mb-4 mt-4" style={{ gap: "10px" }}>
       <Flag code={nationCode} style={{ height: "20px",width: "30px" }} />
       <div className="d-flex w-100 ">
-        <div>{nationName}</div>
+        <div style={{color: "var(--black-color)"}}>{nationName}</div>
         <div className="ms-auto text-gray-500">
           <span data-animation="number">{percent}</span>%
         </div>

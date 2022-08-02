@@ -72,6 +72,7 @@ const Pay = () => {
     };
     return new Promise((resolver) => {
       setTimeout(() => {
+        console.log(data);
         resolver();
         dispatch(actChangeProfile(data));
         toast.success("Thành công");

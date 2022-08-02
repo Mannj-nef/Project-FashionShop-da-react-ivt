@@ -6,7 +6,7 @@ import { VectorMap } from "@south-paw/react-vector-maps";
 import worldLowRes from "./world.json";
 import { useSelector, useDispatch } from "react-redux";
 import CardAnalytics from "../../components/CardAnalytics";
-import { actGetAllProduct } from "../../redux/actions/productAction";
+import { actGetProductByFilter } from "../../redux/actions/productAction";
 import { Table } from "antd";
 import "antd/dist/antd.css";
 import { actGetAllOrder } from "../../redux/actions/orderAction";
@@ -21,36 +21,68 @@ export default function Admin() {
   const dispatch = useDispatch();
 
   let numOfOrder = 0;
+  let numOfOrderPre = 0;
   let totalOfOrder = 0;
+  let totalOfOrderPre = 0;
   let numOfUser = 0;
   let numOfProduct = 0;
   let revenueQ1 = 0;
   let revenueQ2 = 0;
   let revenueQ3 = 0;
   let revenueQ4 = 0;
+  let percentOrder = 0;
+  let percentTotal = 0;
+  let nowMoth = new Date().getMonth() + 1;
 
-  listOrder.forEach((order) => {
-    let dateOrder = new Date(order.dateAdd).getMonth() + 1;
-    numOfOrder++;
-    totalOfOrder += order.total;
-    if (dateOrder > 0 && dateOrder <= 3) {
-      revenueQ1 += order.total;
-    } else if (dateOrder > 3 && dateOrder <= 6) {
-      revenueQ2 += order.total;
-    } else if (dateOrder > 6 && dateOrder <= 9) {
-      revenueQ3 += order.total;
-    } else if (dateOrder > 9 && dateOrder <= 12) {
-      revenueQ4 += order.total;
+  const calculateOrder = () => {
+    listOrder.forEach((order) => {
+      let monthOrder = new Date(order.dateAdd).getMonth() + 1;
+      if (monthOrder === nowMoth) {
+        numOfOrder++;
+        totalOfOrder += order.total;
+      } else if (monthOrder === nowMoth - 1) {
+        numOfOrderPre++;
+        totalOfOrderPre += order.total;
+      }
+      if (monthOrder > 0 && monthOrder <= 3) {
+        revenueQ1 += order.total;
+      } else if (monthOrder > 3 && monthOrder <= 6) {
+        revenueQ2 += order.total;
+      } else if (monthOrder > 6 && monthOrder <= 9) {
+        revenueQ3 += order.total;
+      } else if (monthOrder > 9 && monthOrder <= 12) {
+        revenueQ4 += order.total;
+      }
+    });
+    if (numOfOrder >= numOfOrderPre) {
+      percentOrder = (numOfOrder / numOfOrderPre) * 100;
+    } else {
+      percentOrder = -(100 - ((numOfOrder / numOfOrderPre) * 100));
     }
-  });
-  listUser.forEach((user) => {
-    if (user.role === "user") {
-      numOfUser++;
+    if (totalOfOrder >= totalOfOrderPre) {
+      percentTotal = (totalOfOrder / totalOfOrderPre) * 100;
+    } else {
+      percentTotal = -((totalOfOrder / totalOfOrderPre) * 100);
     }
-  });
-  listProducts.forEach((products) => {
-    numOfProduct++;
-  });
+
+    percentOrder = percentOrder.toFixed(2);
+    percentTotal = percentTotal.toFixed(2);
+  };
+  const calculateUser = () => {
+    listUser.forEach((user) => {
+      if (user.role === "user") {
+        numOfUser++;
+      }
+    });
+  };
+  const calculateProduct = () => {
+    listProducts.forEach((products) => {
+      numOfProduct++;
+    });
+  };
+  calculateOrder();
+  calculateUser();
+  calculateProduct();
   const data = [
     {
       type: "Quý 1",
@@ -131,7 +163,7 @@ export default function Admin() {
   };
   const columns = [...columnsAll.columnPro];
   useEffect(() => {
-    dispatch(actGetAllProduct());
+    dispatch(actGetProductByFilter({ _sort: "sold", _order: "desc" }));
     dispatch(actGetAllOrder());
     dispatch(actGetAllUser());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,6 +185,7 @@ export default function Admin() {
                   title={"Order"}
                   icon={<i className="fa-solid fa-cart-shopping"></i>}
                   value={numOfOrder}
+                  percent={percentOrder}
                 />
               </div>
               <div className="col-sm-6">
@@ -160,6 +193,7 @@ export default function Admin() {
                   title={"Earning"}
                   icon={<i className="fa-solid fa-dollar-sign"></i>}
                   value={totalOfOrder + "$"}
+                  percent={percentTotal}
                 />
                 <CardAnalytics
                   title={"Customer"}
@@ -178,7 +212,7 @@ export default function Admin() {
                   <VectorMap
                     {...worldLowRes}
                     style={{ height: "252px", width: "100%" }}
-                    checkedLayers={["us", "us"]}
+                    checkedLayers={["us", "jp", "vn", "cn", "th"]}
                   />
                 </div>
 
@@ -186,17 +220,20 @@ export default function Admin() {
                   <Nation
                     nationCode={"vn"}
                     nationName={"Viet Nam"}
-                    percent={69}
+                    percent={77}
                   />
-                  <Nation nationCode={"cn"} nationName={"Chani"} percent={69} />
+                  <Nation nationCode={"cn"} nationName={"Chani"} percent={32} />
                   <Nation
                     nationCode={"us"}
                     nationName={"United States"}
-                    percent={69}
+                    percent={19}
                   />
-                  <Nation nationCode={"gr"} nationName={"Greek"} percent={69} />
-                  <Nation nationCode={"jp"} nationName={"Japan"} percent={69} />
-                 
+                  <Nation
+                    nationCode={"th"}
+                    nationName={"Thailand"}
+                    percent={30}
+                  />
+                  <Nation nationCode={"jp"} nationName={"Japan"} percent={12} />
                 </div>
               </div>
             </div>
@@ -229,7 +266,7 @@ export default function Admin() {
           </div>
           <div className="card flex-fill w-100 ">
             <div className="card-body w-100 ">
-              <Pie {...configPie} style={{height: "330px"}}/>
+              <Pie {...configPie} style={{ height: "330px" }} />
             </div>
           </div>
         </div>
