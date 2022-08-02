@@ -12,7 +12,7 @@ export default function useCheckDisplay(number, listDataProduct) {
     if (listDataProduct && listDataProduct.length > 0) {
       let newCardProduct = [];
       for (let index = 0; index < number; index++) {
-        newCardProduct.push(listDataProduct[index]);
+        newCardProduct.push(listDataProduct.reverse()[index]);
       }
       setProductList(newCardProduct);
     }

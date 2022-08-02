@@ -21,24 +21,28 @@ import {
 import DetailProduct from "./DetailProduct";
 import Cart from "../../components/cart/Cart";
 import { actChangeWishList } from "../../redux/actions/cart/cartAction";
-import { actGetRatingByFilter, actGetRatingByPage } from "../../redux/actions/ratingAction";
+import {
+  actGetRatingByFilter,
+  actGetRatingByPage,
+} from "../../redux/actions/ratingAction";
 import { Rate } from "antd";
 import useScrollProduct from "../../hooks/useScrollProduct";
+import useTotop from "../../hooks/useTotop";
 
-const Stars5 = ({ size }) => {
-  return (
-    <>
-      {Array(5)
-        .fill(null)
-        .map((star, index) => (
-          <AiFillStar
-            key={index}
-            style={{ fontSize: size, display: "inline-block" }}
-          ></AiFillStar>
-        ))}
-    </>
-  );
-};
+// const Stars5 = ({ size }) => {
+//   return (
+//     <>
+//       {Array(5)
+//         .fill(null)
+//         .map((star, index) => (
+//           <AiFillStar
+//             key={index}
+//             style={{ fontSize: size, display: "inline-block" }}
+//           ></AiFillStar>
+//         ))}
+//     </>
+//   );
+// };
 
 const btnLinkSocials = [
   {
@@ -72,17 +76,24 @@ const Detail = () => {
   const [showFormReview, setShowFormReview] = useState(false);
   const [formReviewHeight, setFormReviewHeight] = useState(0);
   const [limitRating, setLimitRating] = useState(2);
+  const [isWidthList, setIsWidthList] = useState(false);
 
   const { id } = useParams();
   const FormReviewRef = useRef();
   const dispatch = useDispatch();
+
+  const handleScrollToTop = useTotop();
+  useEffect(() => {
+    handleScrollToTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const headerHeight = useSelector((state) => state.headerReducer.height);
   const { product, listProducts } = useSelector(
     (state) => state.productReducer
   );
   const { listCart } = useSelector((state) => state.cartReducer);
-  const { listRatings, isLoading, lastData } = useSelector(
+  const { listRatings, isLoading } = useSelector(
     (state) => state.ratingReducer
   );
 
@@ -93,13 +104,20 @@ const Detail = () => {
   // eslint-disable-next-line array-callback-return
   Array.isArray(listRatings) &&
     listRatings.length >= 0 &&
-    listRatings.forEach((rating) => {
+    listRatings.map((rating) => {
       count++;
       rate += rating.rate;
     });
 
   let avgRate = Math.round(rate / count);
-  const wishList = listCart.filter((item) => +item.id === +id);
+
+  useEffect(() => {
+    listCart.forEach((item) => {
+      if (+item.id === +id && item.wishList === true) {
+        setIsWidthList(true);
+      }
+    });
+  }, [id, listCart]);
 
   useClickActive(".product-detail__nav");
   const cardProduct = useCheckDisplay(4, listProducts);
@@ -111,15 +129,10 @@ const Detail = () => {
   useEffect(() => {
     dispatch(actGetAllProduct());
     dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const data = {
-      page: 1,
-      limit: limitRating,
-    };
-    // dispatch(actGetRatingByPage(data));
     dispatch(actGetAllProduct());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limitRating]);
@@ -131,18 +144,12 @@ const Detail = () => {
   }, [formReviewHeight, showFormReview]);
 
   const handleCheckLikeHear = () => {
-    dispatch(
-      actChangeWishList({ wishList: !wishList[0]?.wishList || false, id })
-    );
+    dispatch(actChangeWishList({ wishList: !isWidthList, id }));
+    setIsWidthList(false);
   };
 
   const handleShowCart = () => {
     dispatch(modalAction.actShowModal());
-  };
-
-  const handleLoadMore = () => {
-    if (lastData) return;
-    setLimitRating((page) => page + 2);
   };
 
   return (
@@ -155,7 +162,7 @@ const Detail = () => {
           <h2 className="title">style theory</h2>
           <div className="detail_mail-btns">
             <button
-              className={`btn-hear ${wishList[0]?.wishList && "active-hear"}`}
+              className={`btn-hear ${isWidthList && "active-hear"}`}
               onClick={handleCheckLikeHear}
             >
               <AiOutlineHeart className="cursor-pointer text-4xl "></AiOutlineHeart>
@@ -168,14 +175,19 @@ const Detail = () => {
           </div>
         </div>
         {/* detail product */}
-        <DetailProduct product={product} listCart={listCart} rate={avgRate} count={count}></DetailProduct>
+        <DetailProduct
+          product={product}
+          listCart={listCart}
+          rate={avgRate}
+          count={count}
+        ></DetailProduct>
 
         <div ref={nodeRef} className="detail-conten-reviews">
           <div className="reviews-item">
             <div>
               <h2 className="reviews-title">
                 <span className="mr-5">{avgRate ? avgRate : 0}</span>
-                {avgRate && <Rate disabled value={avgRate} /> }
+                {avgRate ? <Rate disabled value={avgRate} /> : null}
               </h2>
               <p>Based on {count} Reviews</p>
             </div>
@@ -200,11 +212,11 @@ const Detail = () => {
             listRatings.length >= 0 &&
             listRatings.map((buyerRating) => (
               <Reviews key={buyerRating.id} buyer={buyerRating}>
-                <Stars5 size="2rem" />
+                {/* <Stars5 size="2rem" /> */}
               </Reviews>
             ))}
           <div className="text-center">
-            <button
+            {/* <button
               className={`btn-load-reviews  ${
                 lastData
                   ? "pointer-events-none, opacity-30 cursor-not-allowed "
@@ -213,7 +225,7 @@ const Detail = () => {
               onClick={handleLoadMore}
             >
               Load More Reviews
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="other-products">

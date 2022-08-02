@@ -8,13 +8,15 @@ import { useParams } from "react-router-dom";
 import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetAllProduct } from "../../redux/actions/productAction";
+import { config } from "../../common/table";
 
-const FormReview = () => {
+const FormReview = ({ setShowFormReview }) => {
   const { profile } = useSelector((state) => state.authReducer);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  
+
   const handleSubmit = async (value) => {
     delete profile.id;
     const date = new Date().toLocaleDateString();
@@ -24,11 +26,17 @@ const FormReview = () => {
       dateAdd: date,
       ...profile,
     };
-    await addRating(data);
-    toast.success("Bình luận thành công", { autoClose: 2000 });
-    form.resetFields();
-    dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
-    dispatch(actGetAllProduct());
+    if (value.rate === 0) {
+      toast.error("Bình luận không thành công", { autoClose: 2000 });
+      return;
+    } else {
+      await addRating(data);
+      toast.success("Bình luận thành công", { autoClose: 2000 });
+      form.resetFields();
+      setShowFormReview(false);
+      dispatch(actGetRatingByFilter({ productId: parseInt(id) }));
+      dispatch(actGetAllProduct());
+    }
   };
 
   return (
@@ -47,7 +55,7 @@ const FormReview = () => {
           }}
         >
           <div className="relative pb-2">
-            <Form.Item name="rate" label="Rate">
+            <Form.Item name="rate" label="Rate" rules={[...config.ruleRate]}>
               <Rate />
             </Form.Item>
           </div>

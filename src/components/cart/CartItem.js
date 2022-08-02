@@ -12,9 +12,20 @@ const CartItem = ({ cartDetail }) => {
     if (cartDetail.quantity >= 10) return;
     cartDetail.quantity++;
     dispatch(actChangeQuantityCart({ id: id, quantity: cartDetail.quantity }));
+
+    // if (quantytiCart >= 10) return;
+    // setQuantityCart((pre) => pre + 1);
+    // dispatch(actChangeQuantityCart({ id: id, quantity: quantytiCart }));
   };
 
   const handleDecrease = (id) => {
+    // setQuantityCart((pre) => pre - 1);
+    // dispatch(actChangeQuantityCart({ id: id, quantity: quantytiCart }));
+
+    // if (quantytiCart <= 0) {
+    //   dispatch(actRemoveToCart(id));
+    //   return;
+    // }
     cartDetail.quantity--;
     dispatch(actChangeQuantityCart({ id: id, quantity: cartDetail.quantity }));
 
@@ -47,7 +58,7 @@ const CartItem = ({ cartDetail }) => {
             -
           </span>
           <span className="amount amount-quantity select-none">
-            {cartDetail.quantity}
+            {cartDetail?.quantity}
           </span>
           <span
             className="amount select-none"
