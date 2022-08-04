@@ -79,6 +79,7 @@ export const OrderTypes = {
 };
 
 export const RatingTypes = {
+  GET_RATINGS: "GET_RATINGS",
   GET_RATING_BY_FILTER: "GET_RATING_BY_FILTER",
   GET_RATING_SUCCESS: "GET_RATING_SUCCESS",
   GET_RATING_BY_PAGE: "GET_RATING_BY_PAGE",

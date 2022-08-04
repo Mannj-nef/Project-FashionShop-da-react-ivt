@@ -9,12 +9,15 @@ import useBackPage from "../../hooks/useBackPage";
 import { actGetOrderByFilter } from "../../redux/actions/orderAction";
 import "./style.scss";
 import TableOrder from "./TableOrder";
+import {sharinganIcon} from "../../components/Loading";
 
 const id = JSON.parse(localStorage.getItem(AuthTypes.AUTH_LOCALSTORAGE)).id;
 const OrderStatus = () => {
   useBackPage();
   const { height } = useSelector((state) => state.headerReducer);
-  const { listOrder } = useSelector((state) => state?.orderReducer);
+  const { listOrder, isOrderLoading } = useSelector(
+    (state) => state?.orderReducer
+  );
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,7 +40,11 @@ const OrderStatus = () => {
             <span>Back to me</span>
           </h2>
           <div className="order-status">
-            <TableOrder listOrder={listOrder}></TableOrder>
+            {isOrderLoading ? (
+              sharinganIcon
+            ) : (
+              <TableOrder listOrder={listOrder}></TableOrder>
+            )}
           </div>
         </div>
       </div>

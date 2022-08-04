@@ -13,7 +13,9 @@ export const getRatingsByPage = async (page, limit) => {
   );
   return data;
 };
-
+export const deleteRatingById = (id) => {
+	return axiosClient.delete(`ratings/${id}`);
+};
 export const addRating = (rating) => {
   return axiosClient.post(`ratings`, { ...rating });
 };

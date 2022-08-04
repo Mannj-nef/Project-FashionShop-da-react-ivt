@@ -4,7 +4,10 @@ export const actGetRatingByFilter = (payload) => ({
   type: RatingTypes.GET_RATING_BY_FILTER,
   payload: payload,
 });
-
+export const actGetRatings = (payload) => ({
+  type: RatingTypes.GET_RATINGS,
+  payload: payload,
+});
 export const actGetRatingSuccess = (payload) => ({
   type: RatingTypes.GET_RATING_SUCCESS,
   payload: payload,

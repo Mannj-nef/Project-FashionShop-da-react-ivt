@@ -8,6 +8,16 @@ import {
   actSetLoading,
 } from "../actions/ratingAction";
 
+function* fetchRatings(action) {
+  yield put(actSetLoading());
+  try {
+    const ratings = yield call(getRatings);
+    yield put({ type: RatingTypes.GET_RATING_SUCCESS, payload: ratings });
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
 function* fetchRatingByFilter(action) {
   yield put(actSetLoading());
   try {
@@ -36,6 +46,9 @@ function* fetchRatingByPage(action) {
   }
 }
 
+function* watchAllRating() {
+  yield takeLeading(RatingTypes.GET_RATINGS, fetchRatings);
+}
 function* watchAllRatingByFilter() {
   yield takeLeading(RatingTypes.GET_RATING_BY_FILTER, fetchRatingByFilter);
 }
@@ -44,4 +57,8 @@ function* watchAllRatingByPage() {
   yield takeLeading(RatingTypes.GET_RATING_BY_PAGE, fetchRatingByPage);
 }
 
-export default [watchAllRatingByFilter(), watchAllRatingByPage()];
+export default [
+  watchAllRatingByFilter(),
+  watchAllRatingByPage(),
+  watchAllRating(),
+];

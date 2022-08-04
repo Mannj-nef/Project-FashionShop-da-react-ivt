@@ -1,4 +1,5 @@
-import { Tag } from "antd";
+/* eslint-disable jsx-a11y/alt-text */
+import { Rate, Tag } from "antd";
 import { toast } from "react-toastify";
 import { PaymentTypes, Status } from "./types";
 import {
@@ -7,6 +8,7 @@ import {
   CloseCircleOutlined,
   SyncOutlined,
 } from "@ant-design/icons";
+
 export const layout = {
   labelCol: {
     xs: {
@@ -173,20 +175,21 @@ export const columnsAll = {
       sorter: (a, b) => a.id - b.id,
     },
     {
-      title: "Name",
-      dataIndex: "productName",
-      key: "productName",
-      width: "30%",
-    },
-    {
       title: "Image",
       dataIndex: "image",
       key: "image",
       render: (image) => (
         // eslint-disable-next-line jsx-a11y/alt-text
-        <img src={image} style={{ width: "100px", height: "100px" }}></img>
+        <img src={image} style={{ width: "80px", height: "80px" }}></img>
       ),
     },
+    {
+      title: "Name",
+      dataIndex: "productName",
+      key: "productName",
+      width: "30%",
+    },
+
     {
       title: "Quantity",
       dataIndex: "quantity",
@@ -206,12 +209,58 @@ export const columnsAll = {
       sorter: (a, b) => a.sold - b.sold,
     },
   ],
+  columnProSort: [
+    
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => (
+        // eslint-disable-next-line jsx-a11y/alt-text
+        <img src={image} style={{ width: "80px", height: "80px" }}></img>
+      ),
+    },
+    {
+      title: "Name",
+      dataIndex: "productName",
+      key: "productName",
+      width: "30%",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      render: (_, record) => <div>{record.price}$</div>,
+    },
+    {
+      title: "Sold",
+      key: "sold",
+      dataIndex: "sold",
+    },
+  ],
   columnUser: [
     {
       title: "Id",
       dataIndex: "id",
       key: "id",
       sorter: (a, b) => a.id - b.id,
+    },
+    {
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
+      render: (_, record) =>
+        record.avatar ? (
+          <img
+            src={record.avatar}
+            style={{ width: "80px", height: "80px" }}
+          ></img>
+        ) : (
+          <img
+            src="https://allimages.sgp1.digitaloceanspaces.com/photographercomvn/2020/08/1596889687_145_Anh-avatar-dep-va-doc-dao-lam-hinh-dai-dien.jpg"
+            style={{ width: "80px", height: "80px" }}
+          ></img>
+        ),
     },
     {
       title: "Email",
@@ -350,6 +399,35 @@ export const columnsAll = {
     //   dataIndex: "sales",
     //   sorter: (a, b) => a.sales - b.sales,
     // },
+  ],
+  columnRat: [
+    {
+      title: "Rating Id",
+      dataIndex: "id",
+      key: "id",
+      sorter: (a, b) => a.id - b.id,
+    },
+    {
+      title: "Product Id",
+      dataIndex: "productId",
+      key: "productId",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Comment",
+      dataIndex: "comment",
+      key: "comment",
+    },
+    {
+      title: "Star",
+      dataIndex: "rate",
+      key: "rate",
+      render: (_, record) => <Rate disabled value={record.rate} />,
+    },
   ],
 };
 export const itemsFilter = [

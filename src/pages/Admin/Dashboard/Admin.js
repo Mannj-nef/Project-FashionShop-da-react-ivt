@@ -1,19 +1,20 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable array-callback-return */
 import React, { useEffect } from "react";
-import "./style.scss";
-import { Column, Pie } from "@ant-design/plots";
+import "../style.scss";
 import { VectorMap } from "@south-paw/react-vector-maps";
-import worldLowRes from "./world.json";
+import worldLowRes from "../world.json";
 import { useSelector, useDispatch } from "react-redux";
-import CardAnalytics from "../../components/CardAnalytics";
-import { actGetProductByFilter } from "../../redux/actions/productAction";
+import CardAnalytics from "../../../components/CardAnalytics";
+import { actGetProductByFilter } from "../../../redux/actions/productAction";
 import { Table } from "antd";
 import "antd/dist/antd.css";
-import { actGetAllOrder } from "../../redux/actions/orderAction";
-import { actGetAllUser } from "../../redux/actions/userAction";
-import { columnsAll } from "../../common/table";
-import Nation from "../../components/Flag";
-
+import { actGetAllOrder } from "../../../redux/actions/orderAction";
+import { actGetAllUser } from "../../../redux/actions/userAction";
+import { columnsAll } from "../../../common/table";
+import Nation from "../../../components/Flag";
+import Chart from "./chart";
+import PieChart from "./pie";
 export default function Admin() {
   const { listOrder } = useSelector((state) => state?.orderReducer);
   const { listUser } = useSelector((state) => state?.userReducer);
@@ -26,10 +27,7 @@ export default function Admin() {
   let totalOfOrderPre = 0;
   let numOfUser = 0;
   let numOfProduct = 0;
-  let revenueQ1 = 0;
-  let revenueQ2 = 0;
-  let revenueQ3 = 0;
-  let revenueQ4 = 0;
+
   let percentOrder = 0;
   let percentTotal = 0;
   let nowMoth = new Date().getMonth() + 1;
@@ -44,20 +42,11 @@ export default function Admin() {
         numOfOrderPre++;
         totalOfOrderPre += order.total;
       }
-      if (monthOrder > 0 && monthOrder <= 3) {
-        revenueQ1 += order.total;
-      } else if (monthOrder > 3 && monthOrder <= 6) {
-        revenueQ2 += order.total;
-      } else if (monthOrder > 6 && monthOrder <= 9) {
-        revenueQ3 += order.total;
-      } else if (monthOrder > 9 && monthOrder <= 12) {
-        revenueQ4 += order.total;
-      }
     });
     if (numOfOrder >= numOfOrderPre) {
       percentOrder = (numOfOrder / numOfOrderPre) * 100;
     } else {
-      percentOrder = -(100 - ((numOfOrder / numOfOrderPre) * 100));
+      percentOrder = -(100 - (numOfOrder / numOfOrderPre) * 100);
     }
     if (totalOfOrder >= totalOfOrderPre) {
       percentTotal = (totalOfOrder / totalOfOrderPre) * 100;
@@ -83,85 +72,36 @@ export default function Admin() {
   calculateOrder();
   calculateUser();
   calculateProduct();
-  const data = [
+
+  const columns = [
     {
-      type: "Quý 1",
-      value: revenueQ1,
+      title: "Top",
+      dataIndex: "top",
+      key: "top",
+      render: (_, record) => (
+        // eslint-disable-next-line jsx-a11y/alt-text
+        <>
+          {record.id === listProducts[0].id ? (
+            <img
+              src="https://media.istockphoto.com/vectors/ranking-icon-vector-id1216125006?k=20&m=1216125006&s=170667a&w=0&h=0v83rnj98q85fhXrugFBiu00_4T49oWxzO6EwkbVoTk="
+              style={{ width: "80px", height: "80px" }}
+            ></img>
+          ) : record.id === listProducts[1].id ? (
+            <img
+              src="https://thumbs.dreamstime.com/b/award-winner-icon-winner-flat-icon-win-medal-icon-award-illustration-reward-sign-symbol-winner-vector-achievement-sign-second-142719056.jpg"
+              style={{ width: "80px", height: "80px" }}
+            ></img>
+          ) : record.id === listProducts[2].id ? (
+            <img
+              src="https://us.123rf.com/450wm/nerthuz/nerthuz1902/nerthuz190200248/117855494-top-3-on-podium-isolated.jpg?ver=6"
+              style={{ width: "80px", height: "80px" }}
+            ></img>
+          ) : null}
+        </>
+      ),
     },
-    {
-      type: "Quý 2",
-      value: revenueQ2,
-    },
-    {
-      type: "Quý 3",
-      value: revenueQ3,
-    },
-    {
-      type: "Quý 4",
-      value: revenueQ4,
-    },
+    ...columnsAll.columnProSort,
   ];
-
-  const config = {
-    data,
-    xField: "type",
-    yField: "value",
-    seriesField: "",
-
-    label: {
-      content: (originData) => {
-        const val = parseFloat(originData.value);
-
-        if (val < 0.05) {
-          return (val * 100).toFixed(1) + "%";
-        }
-      },
-      offset: 10,
-    },
-    legend: false,
-    xAxis: {
-      label: {
-        autoHide: true,
-        autoRotate: false,
-      },
-    },
-  };
-  const configPie = {
-    appendPadding: 10,
-    data,
-    angleField: "value",
-    colorField: "type",
-    radius: 1,
-    innerRadius: 0.6,
-    label: {
-      type: "inner",
-      offset: "-50%",
-      content: "{value}",
-      style: {
-        textAlign: "center",
-        fontSize: 14,
-      },
-    },
-    interactions: [
-      {
-        type: "element-selected",
-      },
-      {
-        type: "element-active",
-      },
-    ],
-    statistic: {
-      title: false,
-      content: {
-        style: {
-          whiteSpace: "pre-wrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        },
-      },
-    },
-  };
-  const columns = [...columnsAll.columnPro];
   useEffect(() => {
     dispatch(actGetProductByFilter({ _sort: "sold", _order: "desc" }));
     dispatch(actGetAllOrder());
@@ -250,7 +190,7 @@ export default function Admin() {
                 dataSource={listProducts}
                 rowKey="id"
                 className="table-style"
-                pagination={{ defaultPageSize: 5 }}
+                pagination={{ defaultPageSize: 6 }}
               />
             </div>
           </div>
@@ -261,12 +201,12 @@ export default function Admin() {
               <h5 className="card-title mb-0">Monthly Sales</h5>
             </div>
             <div className="card-body w-100 ">
-              <Column {...config} />
+              <Chart />
             </div>
           </div>
           <div className="card flex-fill w-100 ">
             <div className="card-body w-100 ">
-              <Pie {...configPie} style={{ height: "330px" }} />
+              <PieChart />
             </div>
           </div>
         </div>

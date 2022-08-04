@@ -14,7 +14,7 @@ import {
 import Nav from "react-bootstrap/Nav";
 
 import Navbar from "react-bootstrap/Navbar";
-import DarkMode from "../../components/toggleDarkMode/DarkMode"
+import DarkMode from "../../components/toggleDarkMode/DarkMode";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import Container from "react-bootstrap/Container";
@@ -43,13 +43,13 @@ export default function AdminLayout({ children }) {
       ]}
     />
   );
- 
+
   const handleLogout = () => {
     localStorage.removeItem(AuthTypes.AUTH_LOCALSTORAGE);
     history.push(ROUTER_PATH.LOGIN.path);
   };
   // eslint-disable-next-line no-unused-vars
-  
+
   const handleToggleSider = () => {
     setShow(!show);
     if (show) {
@@ -58,7 +58,7 @@ export default function AdminLayout({ children }) {
       navigation.current.style = "margin-left: 0px";
     }
   };
-  
+
   return (
     <>
       {role === "admin" ? (
@@ -115,19 +115,24 @@ export default function AdminLayout({ children }) {
                   <h5>Orders</h5>
                 </button>
               </Link>
+              <Link to={ROUTER_PATH.RATINGS.path}>
+                <button>
+                  <i
+                    className="fa-solid fa-star-half-stroke"
+                    style={{ width: "24px" }}
+                  ></i>
+                  <h5>Ratings</h5>
+                </button>
+              </Link>
             </ul>
             <hr className="hr-style"></hr>
           </Nav>
           <div className="main">
-            <Navbar
-              expand=""
-              className="navbar-style"
-            >
+            <Navbar expand="" className="navbar-style">
               <a className="sidebar-toggle" onClick={() => handleToggleSider()}>
                 <i className="fa-solid fa-bars align-self-center"></i>
               </a>
               <div className="form-profile">
-                
                 <DarkMode />
                 <SvgTransIcon />
                 <SvgNotification />

@@ -18,13 +18,14 @@ const OrderStatus = lazy(() => import("../pages/OrderStatus/OrderStatus.js"));
 const DetailOrderUser = lazy(() => import("../pages/OrderStatus/DetailOrder"));
 
 //admin
-const Admin = lazy(() => import("../pages/Admin/Admin"));
+const Admin = lazy(() => import("../pages/Admin/Dashboard/Admin"));
 const ProfileAdmin = lazy(() => import("../pages/Admin/Profile"));
 const Products = lazy(() => import("../pages/Admin/Products"));
 const Users = lazy(() => import("../pages/Admin/Users"));
 const Categories = lazy(() => import("../pages/Admin/Categories"));
 const Orders = lazy(() => import("../pages/Admin/Orders"));
 const DetailOrder = lazy(() => import("../pages/Admin/Orders/DetailOrder"));
+const Ratings = lazy(() => import("../pages/Admin/Ratings/"));
 
 // user
 export const userRouter = [
@@ -136,5 +137,10 @@ export const adminRouter = [
     path: ROUTER_PATH.DETAIL_ORDER.path,
     isExact: true,
     component: DetailOrder,
+  },
+  {
+    path: ROUTER_PATH.RATINGS.path,
+    isExact: true,
+    component: Ratings,
   },
 ];

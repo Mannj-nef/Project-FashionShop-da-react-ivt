@@ -72,10 +72,9 @@ export default function ModalProduct(props) {
           <InputNumber min={1} max={10000000} />
         </Form.Item>
         <Form.Item name="gender" label="Gender" rules={[...config.ruleGender]}>
-          <Select placeholder="Please select gender">
+          <Select placeholder="Please select gender" mode="multiple">
             <Option value="male">Male</Option>
             <Option value="female">Female</Option>
-            <Option value="both">Both</Option>
           </Select>
         </Form.Item>
         <Form.Item name="size" label="Size" rules={[...config.ruleSize]}>
