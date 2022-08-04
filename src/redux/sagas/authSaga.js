@@ -20,9 +20,14 @@ function* login(action) {
     const account = userAll.filter(
       (item) => item.email === email && item.password === passWord
     );
+    console.log(email);
+    console.log(passWord);
+    console.log(userAll);
     if (account.length > 0) {
+      // console.log(1);
       yield put(actLoginSuccess(...account));
     } else {
+      // console.log(0);
       yield put(actLoginFail(...account));
     }
   } catch (error) {

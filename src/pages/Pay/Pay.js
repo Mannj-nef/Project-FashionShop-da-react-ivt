@@ -44,7 +44,6 @@ const Pay = () => {
   const priceTotal = useCalculateTotal(listCart);
   useEffect(() => {
     dispatch(actGetAllOrder());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,7 +71,6 @@ const Pay = () => {
     };
     return new Promise((resolver) => {
       setTimeout(() => {
-        console.log(data);
         resolver();
         dispatch(actChangeProfile(data));
         toast.success("Thành công");
@@ -107,13 +105,11 @@ const Pay = () => {
         userId: profileClone.id,
         dateAdd: new Date().getTime(),
         total: priceTotal,
-        dateAdd: new Date().getTime(),
       };
       delete data.id;
       dispatch(actAddOrder(data));
       handleUpdateProduct();
       dispatch(actRemoveAllCart());
-      console.log(data);
       alert("order thành công, đến xem thông tin đơn hàng");
       history.push(ROUTER_PATH.ORDERSTATUS.path);
       dispatch(actRemoveAllCart());

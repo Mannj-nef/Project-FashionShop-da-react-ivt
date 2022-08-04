@@ -21,14 +21,17 @@ export default function DetailOrder() {
   const { detailOrder } = useSelector((state) => state?.orderReducer);
   const listCart = detailOrder.cart;
   const history = useHistory();
+
+  console.log(detailOrder);
+  console.log(listCart);
   useEffect(() => {
     dispatch(actGetOrderById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    dispatch(actGetOrderById(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [detailOrder]);
+  // useEffect(() => {
+  //   dispatch(actGetOrderById(id));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [detailOrder]);
   const handleStatus = () => {
     if (detailOrder.status === Status.PROCESSING) {
       return 1;

@@ -8,24 +8,14 @@ import {
 const CartItem = ({ cartDetail }) => {
   const dispatch = useDispatch();
 
+  // console.log(cartDetail);
   const handleIncrease = (id) => {
     if (cartDetail.quantity >= 10) return;
     cartDetail.quantity++;
     dispatch(actChangeQuantityCart({ id: id, quantity: cartDetail.quantity }));
-
-    // if (quantytiCart >= 10) return;
-    // setQuantityCart((pre) => pre + 1);
-    // dispatch(actChangeQuantityCart({ id: id, quantity: quantytiCart }));
   };
 
   const handleDecrease = (id) => {
-    // setQuantityCart((pre) => pre - 1);
-    // dispatch(actChangeQuantityCart({ id: id, quantity: quantytiCart }));
-
-    // if (quantytiCart <= 0) {
-    //   dispatch(actRemoveToCart(id));
-    //   return;
-    // }
     cartDetail.quantity--;
     dispatch(actChangeQuantityCart({ id: id, quantity: cartDetail.quantity }));
 
