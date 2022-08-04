@@ -29,6 +29,8 @@ const FormReview = ({ setShowFormReview }) => {
     if (value.rate === 0) {
       toast.error("Bình luận không thành công", { autoClose: 2000 });
       return;
+    } else if (Object.keys(profile).length <= 0) {
+      toast.error("Bạn cần đăng nhập", { autoClose: 2000 });
     } else {
       await addRating(data);
       toast.success("Bình luận thành công", { autoClose: 2000 });

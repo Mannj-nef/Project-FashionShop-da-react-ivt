@@ -17,6 +17,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AuthTypes.LOGIN_SUCCESS: {
+      console.log("login");
       const data = action.payload;
       localStorage.setItem(AuthTypes.AUTH_LOCALSTORAGE, JSON.stringify(data));
       return {
@@ -42,12 +43,11 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AuthTypes.LOGIN_FAIL: {
-      console.log("tai khoan k ton tai");
       return {
         ...state,
         isLoggIn: false,
         isLoading: false,
-        notif: "tai khoan k ton tai",
+        notif: "login failed",
       };
     }
     case AuthTypes.LOGOUT: {

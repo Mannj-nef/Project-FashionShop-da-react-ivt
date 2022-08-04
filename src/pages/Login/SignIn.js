@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CheckBoxWrapp from "../../components/form/input/CheckBoxWrapp";
 import Input from "../../components/form/input/InputWrrapp";
@@ -42,11 +44,15 @@ const FormSignIng = () => {
   useEffect(() => {
     if (isLoggIn) {
       history.goBack();
+    } else {
+      // toast.error("Bình luận không thành công", { autoClose: 2000 });
     }
   }, [history, isLoggIn]);
 
   return (
     <>
+      <ToastContainer />
+
       <h2 className="login-title">Wellcome back</h2>
       <p className="title-sup">Wellcome back! Please enter your details</p>
       <Form handleSubmit={handleSubmit(onSubmit)}>

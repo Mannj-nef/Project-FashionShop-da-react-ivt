@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 import { FaOpencart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ROUTER_PATH } from "../../common/routerLink";
 import useCalculateTotal from "../../hooks/useCalculateTotal";
