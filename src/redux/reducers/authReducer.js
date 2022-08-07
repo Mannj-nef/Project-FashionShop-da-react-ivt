@@ -17,7 +17,6 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AuthTypes.LOGIN_SUCCESS: {
-      console.log("login");
       const data = action.payload;
       localStorage.setItem(AuthTypes.AUTH_LOCALSTORAGE, JSON.stringify(data));
       return {

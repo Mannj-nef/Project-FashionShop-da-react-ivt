@@ -21,7 +21,6 @@ const orderReducer = (state = initialValue, action) => {
     case OrderTypes.GET_ORDER_BY_PROFILE: {
       const data = action.payload;
 
-      // console.log(data, "order reducer");
       return {
         ...state,
         isOrderLoading: false,
@@ -33,7 +32,6 @@ const orderReducer = (state = initialValue, action) => {
     }
     case OrderTypes.ADD_ORDER: {
       const data = action.payload;
-      console.log(data);
       return { ...state, isOrderLoading: false };
     }
     default:

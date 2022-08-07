@@ -25,7 +25,6 @@ const DetailProduct = ({ product, listCart, rate, count }) => {
 
   const dispatch = useDispatch();
 
-  console.log(product);
   const handleAddToCart = () => {
     const productClone = { ...product };
     const quantity = 1;

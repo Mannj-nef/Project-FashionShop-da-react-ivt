@@ -8,7 +8,6 @@ import {
 const CartItem = ({ cartDetail }) => {
   const dispatch = useDispatch();
 
-  // console.log(cartDetail);
   const handleIncrease = (id) => {
     if (cartDetail.quantity >= 10) return;
     cartDetail.quantity++;

@@ -45,6 +45,14 @@ const productReducer = (state = initialValue, action) => {
       };
     }
 
+    case ProductTypes.GET_PRODUCT_BY_FILTER_PRICE: {
+      return {
+        ...state,
+        isLoading: false,
+        listProducts: action.payload,
+      };
+    }
+
     default:
       return state;
   }

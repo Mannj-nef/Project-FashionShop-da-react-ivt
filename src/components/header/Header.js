@@ -54,7 +54,6 @@ const Header = () => {
     return active;
   };
 
-  // console.log();
   return (
     <div ref={headerRef} className="header ">
       <div className="container header-responsive flex justify-between items-center">

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,12 +8,14 @@ import { ROUTER_PATH } from "../../common/routerLink";
 import Cart from "../../components/cart/Cart";
 import Paging from "../../components/paging/Paging";
 import Sliders from "../../components/sliders/Sliders";
+import useClickOutSize from "../../hooks/useClickOutSize";
 import useScrollProduct from "../../hooks/useScrollProduct";
 import useTotop from "../../hooks/useTotop";
 import {
   actGetAllProduct,
   actGetProductByName,
   actGetProductByPage,
+  actGetProductByFilterPrice,
 } from "../../redux/actions/productAction";
 import CardProduct from "./../../components/cardProduct/CardProduct";
 // import { product as dataProduct } from "./mookData";
@@ -30,6 +32,7 @@ const limit = 8;
 
 const ShopStore = () => {
   const [bgImg, setBgImg] = useState("bg-slider-shop");
+  const [dropdownPriceValue, setDropdownPriceValue] = useState("Price");
   const [valueInput, setValueInput] = useState("");
   const handleScrollToTop = useTotop();
 
@@ -39,6 +42,12 @@ const ShopStore = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const {
+    show,
+    setShow,
+    nodeRef: dropdownSelectRef,
+  } = useClickOutSize(".dropdown-select");
+
   const { nodeRef } = useScrollProduct(isLoading);
 
   useEffect(() => {
@@ -47,11 +56,11 @@ const ShopStore = () => {
       limit,
     };
     dispatch(actGetProductByPage(pagination));
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     handleScrollToTop();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,7 +74,7 @@ const ShopStore = () => {
     return () => clearInterval(timmer);
   }, []);
 
-  const handleClick = (e) => {
+  const handleClickShopPage = (e) => {
     const gender = e.target.textContent.toLowerCase();
     let location;
 
@@ -80,6 +89,13 @@ const ShopStore = () => {
         break;
     }
     history.push(location);
+  };
+
+  const handleClickFilterPrice = (e) => {
+    const value = e.target.textContent;
+
+    setDropdownPriceValue(value);
+    dispatch(actGetProductByFilterPrice(value));
   };
 
   const handleSearch = (e) => {
@@ -115,17 +131,37 @@ const ShopStore = () => {
         <div className="container store_nav">
           <h2 className="title">Shop</h2>
           <div className="directional ">
-            <p className="cursor-pointer" onClick={handleClick}>
+            <p className="cursor-pointer" onClick={handleClickShopPage}>
               Man
             </p>
-            <p className="cursor-pointer" onClick={handleClick}>
+            <p className="cursor-pointer" onClick={handleClickShopPage}>
               Women
             </p>
-            <p className="cursor-pointer" onClick={handleClick}>
+            <p className="cursor-pointer" onClick={handleClickShopPage}>
               Kids
             </p>
           </div>
+
           <div className="search-wrapp">
+            <div className="dropdown-filter relative">
+              <div
+                ref={dropdownSelectRef}
+                className="dropdown-select"
+                onClick={() => setShow(!show)}
+              >
+                <p className="dropdown-price">{dropdownPriceValue}</p>
+              </div>
+              {show && (
+                <ul className="dropdown-list top-full absolute">
+                  <li>
+                    <p onClick={handleClickFilterPrice}>Ascending</p>
+                  </li>
+                  <li>
+                    <p onClick={handleClickFilterPrice}>Decrease</p>
+                  </li>
+                </ul>
+              )}
+            </div>
             <div className="relative">
               <form onSubmit={handleSearch}>
                 <input
@@ -141,7 +177,7 @@ const ShopStore = () => {
                 ></BiSearch>
               </form>
             </div>
-            <AiOutlineHeart className="icon-hear cursor-pointer"></AiOutlineHeart>
+            {/* <AiOutlineHeart className="icon-hear cursor-pointer"></AiOutlineHeart> */}
           </div>
         </div>
       </div>

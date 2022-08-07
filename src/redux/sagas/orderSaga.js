@@ -62,10 +62,8 @@ function* fetchOrderByEmail(action) {
       (item) => item.email === email && item.password === password
     );
     const data = listOrderUser.map((item) => {
-      console.log(item);
       return item.cart;
     });
-    console.log(data, "data");
     yield put(actGetOrderByProfile(listOrderUser));
   } catch (e) {
     yield put({ message: e.message });

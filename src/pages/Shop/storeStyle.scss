@@ -33,9 +33,27 @@
             flex: 1;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 20px;
             padding: 0 50px;
-            justify-content: end;
+
+            .dropdown-filter {
+                width: 130px;
+                cursor: pointer;
+                border-radius: 6px;
+                color: var(--color-pink);
+                background-color: currentColor;
+
+                .dropdown-list {
+                    width: 100%;
+                    left: 0;
+                    background-color: currentColor;
+                }
+                & p {
+                    padding: 10px 10px;
+                    color: var(--text-color);
+                }
+            }
             .search {
                 background-color: var(--color-pink);
                 padding: 10px;

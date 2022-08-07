@@ -6,6 +6,7 @@ import {
 } from "../../apis/productApi";
 import { ProductTypes } from "../../common/types";
 import {
+  actGetProductByFilterPrice,
   actGetProductByName,
   actGetProductByPage,
   actSetLoadingProduct,
@@ -91,6 +92,36 @@ function* fetchProductsById(action) {
   }
 }
 
+function* fetchProductFilterPrice(action) {
+  yield put(actSetLoadingProduct());
+  try {
+    const value = action.payload;
+    const increase = "Ascending";
+    const reduced = "Decrease";
+    const productDetail = yield call(getProducts);
+    let productsFilter = [...productDetail];
+
+    if (value === increase) {
+      productsFilter.sort((a, b) => {
+        const aPrice = a.price;
+        const bPrice = b.price;
+
+        return aPrice - bPrice;
+      });
+    } else if (value === reduced) {
+      productsFilter.sort((a, b) => {
+        const aPrice = a.price;
+        const bPrice = b.price;
+
+        return bPrice - aPrice;
+      });
+    }
+    yield put(actGetProductByFilterPrice(productsFilter));
+  } catch (e) {
+    yield put({ message: e.message });
+  }
+}
+
 function* watchAllProductByPage() {
   yield takeLeading(ProductTypes.GET_PRODUCT_BY_PAGE, fetchProductsByPage);
 }
@@ -111,6 +142,12 @@ function* watchAllProductById() {
 function* watchAllProductByName() {
   yield takeLeading(ProductTypes.GET_PRODUCT_BY_NAME, fetchProductsByName);
 }
+function* watchAllProductFilterPrice() {
+  yield takeLeading(
+    ProductTypes.GET_PRODUCT_BY_FILTER_PRICE,
+    fetchProductFilterPrice
+  );
+}
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
@@ -120,4 +157,5 @@ export default [
   watchAllProductById(),
   watchAllProductByPage(),
   watchAllProductByName(),
+  watchAllProductFilterPrice(),
 ];

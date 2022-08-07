@@ -22,8 +22,6 @@ export default function DetailOrder() {
   const listCart = detailOrder.cart;
   const history = useHistory();
 
-  console.log(detailOrder);
-  console.log(listCart);
   useEffect(() => {
     dispatch(actGetOrderById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps

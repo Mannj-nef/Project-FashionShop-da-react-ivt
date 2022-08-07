@@ -7,6 +7,8 @@ import "./style.scss";
 const CardProduct = ({ cardProduct }) => {
   const { isLoading } = useSelector((state) => state.productReducer);
 
+  console.log(isLoading);
+
   return (
     <div className="card-product-wrapper">
       {!isLoading &&

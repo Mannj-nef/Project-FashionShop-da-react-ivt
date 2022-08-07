@@ -47,7 +47,6 @@ const Home = () => {
 
   const cardProduct = useCheckDisplay(8, listProducts);
 
-  console.log(cardProduct);
   const history = useHistory();
 
   const handleToColection = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BiCommentEdit } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,10 +21,7 @@ import {
 import DetailProduct from "./DetailProduct";
 import Cart from "../../components/cart/Cart";
 import { actChangeWishList } from "../../redux/actions/cart/cartAction";
-import {
-  actGetRatingByFilter,
-  actGetRatingByPage,
-} from "../../redux/actions/ratingAction";
+import { actGetRatingByFilter } from "../../redux/actions/ratingAction";
 import { Rate } from "antd";
 import useScrollProduct from "../../hooks/useScrollProduct";
 import useTotop from "../../hooks/useTotop";
@@ -75,18 +72,12 @@ const btnLinkSocials = [
 const Detail = () => {
   const [showFormReview, setShowFormReview] = useState(false);
   const [formReviewHeight, setFormReviewHeight] = useState(0);
-  const [limitRating, setLimitRating] = useState(2);
+  const limitRating = useRef(2);
   const [isWidthList, setIsWidthList] = useState(false);
 
   const { id } = useParams();
   const FormReviewRef = useRef();
   const dispatch = useDispatch();
-
-  const handleScrollToTop = useTotop();
-  useEffect(() => {
-    handleScrollToTop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const headerHeight = useSelector((state) => state.headerReducer.height);
   const { product, listProducts } = useSelector(
@@ -98,6 +89,14 @@ const Detail = () => {
   );
 
   const { nodeRef } = useScrollProduct(isLoading);
+
+  const handleScrollToTop = useTotop();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleScrollToTop(0);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [handleScrollToTop, product]);
 
   let count = 0;
   let rate = 0;
