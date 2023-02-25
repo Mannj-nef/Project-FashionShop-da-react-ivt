@@ -9,6 +9,9 @@ import CheckBoxWrapp from "../../components/form/input/CheckBoxWrapp";
 import Input from "../../components/form/input/InputWrrapp";
 import { useDispatch } from "react-redux";
 import { actRegiter } from "../../redux/actions/userAction";
+import { useHistory } from "react-router-dom";
+import { ROUTER_PATH } from "../../common/routerLink";
+import { toast } from "react-toastify";
 
 const schema = Yup.object({
   email: VALIDATE_YUP.EMAIL,
@@ -19,6 +22,7 @@ const schema = Yup.object({
 
 const FormSingUp = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     control,
     handleSubmit,
@@ -41,7 +45,9 @@ const FormSingUp = () => {
     return new Promise((resolver) => {
       setTimeout(() => {
         resolver();
+
         dispatch(actRegiter(valuesRegister));
+        toast.success("Đăng kí thành công");
         reset();
       }, 2000);
     });
