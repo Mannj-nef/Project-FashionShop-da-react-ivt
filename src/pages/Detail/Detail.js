@@ -26,21 +26,6 @@ import { Rate } from "antd";
 import useScrollProduct from "../../hooks/useScrollProduct";
 import useTotop from "../../hooks/useTotop";
 
-// const Stars5 = ({ size }) => {
-//   return (
-//     <>
-//       {Array(5)
-//         .fill(null)
-//         .map((star, index) => (
-//           <AiFillStar
-//             key={index}
-//             style={{ fontSize: size, display: "inline-block" }}
-//           ></AiFillStar>
-//         ))}
-//     </>
-//   );
-// };
-
 const btnLinkSocials = [
   {
     id: 1,
@@ -92,11 +77,9 @@ const Detail = () => {
 
   const handleScrollToTop = useTotop();
   useEffect(() => {
-    const timer = setTimeout(() => {
-      handleScrollToTop(0);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [handleScrollToTop, product]);
+    handleScrollToTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let count = 0;
   let rate = 0;
