@@ -3,14 +3,15 @@ import { RiVisaLine } from "react-icons/ri";
 import { FaApplePay, FaWallet } from "react-icons/fa";
 import { AiFillCreditCard } from "react-icons/ai";
 import { PaymentTypes } from "../../common/types";
+import PaymentCoin from "./PaymentCoin";
 
 const paymentMethods = [
-  {
-    id: 1,
-    name: PaymentTypes.MOMO,
-    icon: <FaWallet />,
-    image: "https://demo.megapay.vn/public/assets/images/momo_icon.png",
-  },
+  // {
+  //   id: 1,
+  //   name: PaymentTypes.MOMO,
+  //   icon: <FaWallet />,
+  //   image: "https://demo.megapay.vn/public/assets/images/momo_icon.png",
+  // },
   {
     id: 2,
     name: PaymentTypes.VISA,
@@ -62,6 +63,7 @@ const Payment = ({ payment, setPayment }) => {
             </div>
           </div>
         ))}
+        <PaymentCoin />
       </div>
     </div>
   );
